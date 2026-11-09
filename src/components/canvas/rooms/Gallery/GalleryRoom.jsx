@@ -7,7 +7,6 @@ import { Observer } from 'gsap/all';
 import { useScene } from '../../../../context/SceneContext';
 
 gsap.registerPlugin(Observer);
-import { useAchievements } from '../../../../context/AchievementsContext';
 import PaperMaterial from './PaperMaterial';
 import GalleryClouds from './GalleryClouds';
 import { useAudio } from '../../../../context/AudioManager';
@@ -87,7 +86,6 @@ const RIGHT_CROP_AMOUNT = 0.2;
 
 const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const { openOverlay, isTeleporting } = useScene();
-    const { showTutorial, unlockAchievement, hidePopup } = useAchievements();
     const { globalVolume, isMuted } = useAudio();
     const effectiveVolume = isMuted ? 0 : AUDIO_SETTINGS.volume * globalVolume;
 
@@ -105,12 +103,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const [selectedCard, setSelectedCard] = useState(null);
     const [globalIsAnimating, setGlobalIsAnimating] = useState(false);
     const cardRefs = useRef([]);
-
-    useEffect(() => {
-        if (isExiting || isTeleporting) {
-            hidePopup();
-        }
-    }, [isExiting, isTeleporting, hidePopup]);
 
     // Setup Paint Transition
     const { onBeforeCompile, animatePaint, resetPaint, uniformsData, updateRoomOrigin } = usePaintMaterial();
@@ -152,9 +144,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const handleCardClick = async (clickedIndex) => {
         if (globalIsAnimating || isTransitioning) return;
 
-        // Unlock inspect achievement
-        unlockAchievement('gallery_inspect');
-
         if (selectedCard === clickedIndex) {
             setGlobalIsAnimating(true);
             await cardRefs.current[clickedIndex].closeCard();
@@ -191,10 +180,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             hasSignaledReady.current = true;
             onReady?.();
 
-            // Wait for the DoorSection 1.5s camera fly-in to finish before showing tutorial
-            setTimeout(() => {
-                if (!isWarmup) showTutorial('gallery_inspect');
-            }, 2000);
         }
     });
 
