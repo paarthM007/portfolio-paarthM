@@ -61,7 +61,7 @@
         width: 100%;
         height: 100%;
         pointer-events: none;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 55' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L50 0 L49 5.5 L50 11 L48.5 19 L50 27.5 L49 36 L50 44 L48.5 49.5 L50 55 L45 54 L40 55 L35 53 L30 55 L25 54 L20 55 L15 53 L10 55 L5 54 L0 55 L1 49.5 L0 44 L1.5 36 L0 27.5 L1 19 L0 11 L1.5 5.5 L0 0 Z' fill='none' stroke='%231a1a1a' stroke-width='1.5'/%3E%3C/svg%3E");
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 55' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L50 0 L49 5.5 L50 11 L48.5 19 L50 27.5 L49 36 L50 44 L48.5 49.5 L50 55 L45 54 L40 55 L35 53 L30 55 L25 54 L20 55 L15 53 L10 55 L5 54 L0 55 L1 49.5 L0 44 L1.5 36 L0 27.5 L1 19 L0 11 L1.5 5.5 L0 0 Z' fill='none' stroke='%23354A45' stroke-width='1.5'/%3E%3C/svg%3E");
         background-size: 100% 100%;
     }
 
@@ -80,7 +80,7 @@
         width: 22px;
         height: 22px;
         fill: none;
-        stroke: #1a1a1a;
+        stroke: #354A45;
         stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -167,7 +167,7 @@
             display: block;
             height: 2px;
             width: 100%;
-            background: #1a1a1a;
+            background: #354A45;
             border-radius: 2px;
         }
     }
@@ -202,7 +202,7 @@
         height: 100%;
         padding: 20px;
         padding-bottom: 30px;
-        background: #ffffff;
+        background: #FFFDF7;
 
         &::before {
             content: '';
@@ -237,7 +237,7 @@
         align-items: center;
         margin-bottom: 16px;
         padding-bottom: 12px;
-        border-bottom: 2px dashed #ccc;
+        border-bottom: 2px dashed #D7CDBB;
 
         h3 {
             margin: 0;
@@ -245,7 +245,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #1a1a1a;
+            color: #354A45;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -265,7 +265,7 @@
                 width: 18px;
                 height: 18px;
                 fill: none;
-                stroke: #1a1a1a;
+                stroke: #354A45;
                 stroke-width: 2.5;
                 stroke-linecap: round;
             }
@@ -359,7 +359,7 @@
         font-family: 'Cabin Sketch', cursive, sans-serif;
         font-size: 1.2rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: #354A45;
         pointer-events: none;
         z-index: 4;
         text-transform: uppercase;
@@ -368,24 +368,27 @@
         text-align: center;
         // Text outline for better readability
         text-shadow:
-            -1px -1px 0 #fff,
-            1px -1px 0 #fff,
-            -1px 1px 0 #fff,
-            1px 1px 0 #fff;
+            -1px -1px 0 #FFFDF7,
+            1px -1px 0 #FFFDF7,
+            -1px 1px 0 #FFFDF7,
+            1px 1px 0 #FFFDF7;
 
         &.about {
             top: 28%;
             left: 26%;
+            color: #B88735;
         }
 
         &.gallery {
             top: 94%;
             left: 26%;
+            color: #4F7F78;
         }
 
         &.contact {
             top: 14%;
             left: 76%;
+            color: #B96F5A;
         }
 
 
@@ -414,7 +417,7 @@
         }
 
         &.active {
-            filter: drop-shadow(0 0 4px rgba(200, 50, 50, 0.5));
+            filter: drop-shadow(0 0 4px rgba(95, 142, 136, 0.55));
         }
     }
 
@@ -459,7 +462,7 @@
         position: relative;
         width: 100%;
         padding: 18px 16px 20px;
-        background: #ffffff;
+        background: #FFFDF7;
         overflow: hidden;
 
         // Paper texture
@@ -486,7 +489,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 10;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L100 0 L98 10 L100 20 L97 35 L100 50 L98 65 L100 80 L97 90 L100 100 L90 97 L80 100 L70 96 L60 100 L50 97 L40 100 L30 96 L20 100 L10 97 L0 100 L2 90 L0 80 L3 65 L0 50 L2 35 L0 20 L3 10 L0 0 Z' fill='none' stroke='%231a1a1a' stroke-width='0.5'/%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L100 0 L98 10 L100 20 L97 35 L100 50 L98 65 L100 80 L97 90 L100 100 L90 97 L80 100 L70 96 L60 100 L50 97 L40 100 L30 96 L20 100 L10 97 L0 100 L2 90 L0 80 L3 65 L0 50 L2 35 L0 20 L3 10 L0 0 Z' fill='none' stroke='%23354A45' stroke-width='0.5'/%3E%3C/svg%3E");
             background-size: 100% 100%;
         }
 
@@ -503,7 +506,7 @@
         align-items: center;
         margin-bottom: 12px;
         padding-bottom: 8px;
-        border-bottom: 2px dashed #bbb;
+        border-bottom: 2px dashed #D7CDBB;
         position: relative;
         z-index: 1;
 
@@ -512,7 +515,7 @@
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            color: #1a1a1a;
+            color: #354A45;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -531,7 +534,7 @@
             svg {
                 width: 14px;
                 height: 14px;
-                stroke: #1a1a1a;
+                stroke: #354A45;
                 stroke-width: 2.5;
                 fill: none;
                 stroke-linecap: round;
@@ -565,7 +568,7 @@
                 justify-content: space-between;
                 font-family: 'Patrick Hand', cursive, sans-serif;
                 font-size: 14px;
-                color: #1a1a1a;
+                color: #354A45;
                 font-weight: 600;
             }
 
@@ -573,7 +576,7 @@
                 appearance: none;
                 width: 100%;
                 height: 4px;
-                background: #ccc;
+                background: #D7CDBB;
                 border-radius: 2px;
                 outline: none;
                 cursor: pointer;
@@ -583,7 +586,7 @@
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
-                    background: #1a1a1a;
+                    background: #354A45;
                     cursor: pointer;
                     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
                 }
@@ -592,7 +595,7 @@
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
-                    background: #1a1a1a;
+                    background: #354A45;
                     cursor: pointer;
                     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
                     border: none;
@@ -633,11 +636,11 @@
     gap: 24px;
     padding: 16px 24px;
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #1a1a1a;
+    border: 2px solid #354A45;
     border-radius: 12px;
-    box-shadow: 3px 3px 0 #1a1a1a;
+    box-shadow: 3px 3px 0 #354A45;
     font-size: 14px;
-    color: #1a1a1a;
+    color: #354A45;
     pointer-events: auto;
     animation: hintFadeIn 0.5s ease-out;
 
@@ -658,11 +661,11 @@
     gap: 24px;
     padding: 16px 24px;
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #1a1a1a;
+    border: 2px solid #354A45;
     border-radius: 12px;
-    box-shadow: 3px 3px 0 #1a1a1a;
+    box-shadow: 3px 3px 0 #354A45;
     font-size: 14px;
-    color: #1a1a1a;
+    color: #354A45;
     pointer-events: auto;
     animation: corridorHintFadeIn 0.5s ease-out, corridorHintFadeOut 0.5s ease-out 3.5s forwards;
 
@@ -759,11 +762,11 @@
     max-width: min(90vw, 34rem);
     padding: 0.8rem 1.15rem;
     transform: translateX(-50%);
-    border: 1px solid rgba(113, 201, 223, 0.34);
+    border: 1px solid rgba(95, 142, 136, 0.42);
     border-radius: 999px;
-    background: rgba(15, 27, 43, 0.82);
-    color: #edf5ff;
-    box-shadow: 0 12px 34px rgba(22, 40, 65, 0.16);
+    background: rgba(255, 253, 247, 0.96);
+    color: #354A45;
+    box-shadow: 0 12px 34px rgba(53, 74, 69, 0.16);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     font-family: 'Inter', sans-serif;
@@ -779,8 +782,8 @@
         height: 0.42rem;
         flex: 0 0 auto;
         border-radius: 50%;
-        background: #71c9df;
-        box-shadow: 0 0 12px rgba(113, 201, 223, 0.55);
+        background: #D9A94E;
+        box-shadow: 0 0 12px rgba(217, 169, 78, 0.45);
     }
 
     @media (max-width: 600px) {
