@@ -232,10 +232,10 @@ const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
             {/* === INFINITE SKY WITH CLOUDS + STORY MILESTONES === */}
             <InfiniteSkyManager scrollProgressRef={scrollPosition} />
 
-            {/* === SKY BACKDROP === */}
+            {/* === LIGHT-BLUE SKY BACKDROP === */}
             <mesh position={[0, 0, -200]}>
-                <planeGeometry args={[300, 150]} />
-                <meshBasicMaterial color="#B88957" side={THREE.DoubleSide} />
+                <planeGeometry args={[600, 300]} />
+                <meshBasicMaterial color="#A9DDF7" side={THREE.DoubleSide} depthWrite={false} />
             </mesh>
         </group>
     );
