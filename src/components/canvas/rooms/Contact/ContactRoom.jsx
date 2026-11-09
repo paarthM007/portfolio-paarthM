@@ -349,10 +349,15 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     return (
         <group ref={groupRef} position={[0, -0.7, -5]}>
 
-            {/* Light-blue sky backdrop spanning the full Contact scene */}
-            <mesh position={[0, 8, -36]}>
-                <planeGeometry args={[400, 220]} />
-                <meshBasicMaterial color="#A9DDF7" side={THREE.DoubleSide} toneMapped={false} depthWrite={false} />
+            {/* Full-scene light-blue sky dome; rendered behind all Contact room objects */}
+            <mesh position={[0, 0, 0]} renderOrder={-1000}>
+                <sphereGeometry args={[180, 32, 24]} />
+                <meshBasicMaterial
+                    color="#A9DDF7"
+                    side={THREE.BackSide}
+                    toneMapped={false}
+                    depthWrite={false}
+                />
             </mesh>
 
             {/* ☁️ CLOUDS */}
