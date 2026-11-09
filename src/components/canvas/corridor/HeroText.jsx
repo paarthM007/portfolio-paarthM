@@ -136,7 +136,7 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
             {/* PAARTH Letters - Rubik Scribble font with fade-in animation */}
             {letters.map((letter, i) => (
                 <Text
-                    key={letter.char}
+                    key={`${letter.char}-${i}`}
                     ref={(el) => (letterRefs.current[i] = el)}
                     position={[letter.baseX, 0.2, 0]}
                     fontSize={0.76}

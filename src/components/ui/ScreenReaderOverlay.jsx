@@ -28,9 +28,9 @@ const PROJECTS = [
         url: 'https://github.com/paarthM007/sail_spares_optimizer'
     },
     {
-        title: 'System Design Notes',
-        description: 'Visual notes on scaling, rate limiting, consistent hashing, key-value stores, URL shorteners, crawlers and notification systems.',
-        url: 'https://github.com/paarthM007/system-design-notes'
+        title: 'Password Generator',
+        description: 'A lightweight interactive tool built with HTML, CSS and JavaScript for generating secure passwords.',
+        url: 'https://github.com/paarthM007/Password-Generator'
     }
 ];
 

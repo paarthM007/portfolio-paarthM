@@ -392,9 +392,9 @@ const AWARDS_DATA = {
         layout: 'certificate_grid',
         title: 'Selected Engineering Projects',
         items: [
-            { label: 'AnomalyShield — Multi-Tenant ML WAF', date: '2026', image: '/textures/portfolio/anomalyshield.svg', url: 'https://github.com/paarthM007/WAFproject' },
-            { label: 'Supply Chain Disruption Oracle', date: '2026', image: '/textures/portfolio/scdo.svg', url: 'https://github.com/paarthM007/SCDO' },
-            { label: '2D Heat Conduction Solver', date: '2026', image: '/textures/portfolio/heat-conduction.svg', url: 'https://hmt-project-paarth-mandelia.vercel.app' },
+            { label: 'AnomalyShield — Multi-Tenant ML WAF', date: '2026', image: '/textures/portfolio/anomalyshield.webp', url: 'https://github.com/paarthM007/WAFproject' },
+            { label: 'Supply Chain Disruption Oracle', date: '2026', image: '/textures/portfolio/scdo.webp', url: 'https://github.com/paarthM007/SCDO' },
+            { label: '2D Heat Conduction Solver', date: '2026', image: '/textures/portfolio/heat-conduction.webp', url: 'https://hmt-project-paarth-mandelia.vercel.app' },
         ],
         platformConfig: { label: 'PROJECTS', color: '#1a1a1a', icon: '⚙️' }
     },
@@ -403,10 +403,10 @@ const AWARDS_DATA = {
         layout: 'certificate_grid',
         title: 'Competitive Programming',
         items: [
-            { label: 'LeetCode Knight — 1904 rating (Top 5%)', date: '2026', image: '/textures/portfolio/achievement-coding.svg' },
-            { label: 'Codeforces Specialist — maximum rating 1429', date: '2026', image: '/textures/portfolio/achievement-coding.svg', url: 'https://codeforces.com/profile/Paarth_Mandelia' },
-            { label: 'CodeChef 3-Star — 1775 rating', date: '2026', image: '/textures/portfolio/achievement-coding.svg' },
-            { label: '700+ problems solved across platforms', date: '2026', image: '/textures/portfolio/achievement-coding.svg' },
+            { label: 'LeetCode Knight — 1904 rating (Top 5%)', date: '2026', image: '/textures/portfolio/achievement-coding.webp' },
+            { label: 'Codeforces Specialist — maximum rating 1429', date: '2026', image: '/textures/portfolio/achievement-coding.webp', url: 'https://codeforces.com/profile/Paarth_Mandelia' },
+            { label: 'CodeChef 3-Star — 1775 rating', date: '2026', image: '/textures/portfolio/achievement-coding.webp' },
+            { label: '700+ problems solved across platforms', date: '2026', image: '/textures/portfolio/achievement-coding.webp' },
         ],
         platformConfig: { label: 'RATINGS', color: '#1a1a1a', icon: '⌘' }
     },
@@ -415,10 +415,10 @@ const AWARDS_DATA = {
         layout: 'certificate_grid',
         title: 'Academics & Entrance Examinations',
         items: [
-            { label: 'B.Tech Mechanical Engineering — IIT Patna', date: '2024–2028', image: '/textures/portfolio/achievement-academic.svg' },
-            { label: 'Current CGPA — 8.67', date: 'IIT Patna', image: '/textures/portfolio/achievement-academic.svg' },
-            { label: 'JEE Advanced — CRL 9624', date: 'May 2024', image: '/textures/portfolio/achievement-academic.svg' },
-            { label: 'JEE Main — 98.63 percentile', date: 'April 2024', image: '/textures/portfolio/achievement-academic.svg' },
+            { label: 'B.Tech Mechanical Engineering — IIT Patna', date: '2024–2028', image: '/textures/portfolio/achievement-academic.webp' },
+            { label: 'Current CGPA — 8.67', date: 'IIT Patna', image: '/textures/portfolio/achievement-academic.webp' },
+            { label: 'JEE Advanced — CRL 9624', date: 'May 2024', image: '/textures/portfolio/achievement-academic.webp' },
+            { label: 'JEE Main — 98.63 percentile', date: 'April 2024', image: '/textures/portfolio/achievement-academic.webp' },
         ],
         platformConfig: { label: 'ACADEMICS', color: '#1a1a1a', icon: '🎓' }
     },
@@ -427,10 +427,10 @@ const AWARDS_DATA = {
         layout: 'certificate_grid',
         title: 'Leadership & Campus Contributions',
         items: [
-            { label: 'Junior-Year Student Representative — DAPC, Mechanical Engineering; representing 90+ students', date: '2026', image: '/textures/portfolio/achievement-leadership.svg' },
-            { label: 'Web Developer — Student Technical Council; highest contributor (2026)', date: '2026', image: '/textures/portfolio/achievement-leadership.svg' },
-            { label: 'Sub-Coordinator — Market Division, Trading & Investment Club', date: 'IIT Patna', image: '/textures/portfolio/achievement-leadership.svg' },
-            { label: 'Sponsorship & Marketing contributions — E-Cell IIT Patna', date: 'IIT Patna', image: '/textures/portfolio/achievement-leadership.svg' },
+            { label: 'Junior-Year Student Representative — DAPC, Mechanical Engineering; representing 90+ students', date: '2026', image: '/textures/portfolio/achievement-leadership.webp' },
+            { label: 'Web Developer — Student Technical Council; highest contributor (2026)', date: '2026', image: '/textures/portfolio/achievement-leadership.webp' },
+            { label: 'Sub-Coordinator — Market Division, Trading & Investment Club', date: 'IIT Patna', image: '/textures/portfolio/achievement-leadership.webp' },
+            { label: 'Sponsorship & Marketing contributions — E-Cell IIT Patna', date: 'IIT Patna', image: '/textures/portfolio/achievement-leadership.webp' },
         ],
         platformConfig: { label: 'LEADERSHIP', color: '#1a1a1a', icon: '🤝' }
     }
@@ -464,12 +464,12 @@ const AwardsMilestone = ({ z, scrollProgressRef }) => {
     const sotyHideDelayRef = useRef();
 
     // Load textures
-    const sotyTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-leadership.svg');
-    const sotdTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-coding.svg');
-    const sotmTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-academic.svg');
-    const sotyPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTY.webp' : '/textures/portfolio/achievement-leadership.svg');
-    const sotdPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTD.webp' : '/textures/portfolio/achievement-coding.svg');
-    const sotmPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTM.webp' : '/textures/portfolio/achievement-academic.svg');
+    const sotyTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-leadership.webp');
+    const sotdTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-coding.webp');
+    const sotmTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-academic.webp');
+    const sotyPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTY.webp' : '/textures/portfolio/achievement-leadership.webp');
+    const sotdPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTD.webp' : '/textures/portfolio/achievement-coding.webp');
+    const sotmPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTM.webp' : '/textures/portfolio/achievement-academic.webp');
     const buttonTexture = useLoader(THREE.TextureLoader, '/textures/about/button.webp');
     const buttonPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/button.webp' : '/textures/about/button_painted.webp');
 
@@ -781,8 +781,8 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
     const freelanceRef = useRef();
 
     // Load textures
-    const uoTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/iit-patna.svg');
-    const freelanceTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/engineering-journey.svg');
+    const uoTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/iit-patna.webp');
+    const freelanceTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/engineering-journey.webp');
 
     // Texture settings
     uoTexture.colorSpace = THREE.SRGBColorSpace;
@@ -933,20 +933,20 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
 // === EDYTUJ WYSOKOŚĆ TUTAJ (zmień wartość 'y' dla każdego balona) ===
 const BALLOON_CONFIG = [
     // Core programming languages and implementation strengths
-    { texture: '/textures/portfolio/skills/cpp.svg', paintedTexture: '/textures/portfolio/skills/cpp.svg', label: 'C++ / C', size: 'large', x: -2.5, y: 2, z: 0.3, phase: 0 },
-    { texture: '/textures/portfolio/skills/python.svg', paintedTexture: '/textures/portfolio/skills/python.svg', label: 'Python / ML', size: 'large', x: 2.5, y: 2.5, z: 0.2, phase: 1.5 },
-    { texture: '/textures/portfolio/skills/go.svg', paintedTexture: '/textures/portfolio/skills/go.svg', label: 'Go / Backend', size: 'large', x: 0, y: 3, z: 0.5, phase: 3 },
+    { texture: '/textures/portfolio/skills/cpp.webp', paintedTexture: '/textures/portfolio/skills/cpp.webp', label: 'C++ / C', size: 'large', x: -2.5, y: 2, z: 0.3, phase: 0 },
+    { texture: '/textures/portfolio/skills/python.webp', paintedTexture: '/textures/portfolio/skills/python.webp', label: 'Python / ML', size: 'large', x: 2.5, y: 2.5, z: 0.2, phase: 1.5 },
+    { texture: '/textures/portfolio/skills/go.webp', paintedTexture: '/textures/portfolio/skills/go.webp', label: 'Go / Backend', size: 'large', x: 0, y: 3, z: 0.5, phase: 3 },
 
     // Frameworks, data and applied AI
-    { texture: '/textures/portfolio/skills/javascript.svg', paintedTexture: '/textures/portfolio/skills/javascript.svg', label: 'JavaScript / React', size: 'medium', x: -4, y: 1, z: -0.3, phase: 0.8 },
-    { texture: '/textures/portfolio/skills/data.svg', paintedTexture: '/textures/portfolio/skills/data.svg', label: 'SQL / NumPy / Pandas', size: 'medium', x: 4, y: 1.5, z: -0.2, phase: 2.2 },
-    { texture: '/textures/portfolio/skills/ai.svg', paintedTexture: '/textures/portfolio/skills/ai.svg', label: 'RAG / LangGraph', size: 'medium', x: 0, y: 0.5, z: -0.4, phase: 4 },
+    { texture: '/textures/portfolio/skills/javascript.webp', paintedTexture: '/textures/portfolio/skills/javascript.webp', label: 'JavaScript / React', size: 'medium', x: -4, y: 1, z: -0.3, phase: 0.8 },
+    { texture: '/textures/portfolio/skills/data.webp', paintedTexture: '/textures/portfolio/skills/data.webp', label: 'SQL / NumPy / Pandas', size: 'medium', x: 4, y: 1.5, z: -0.2, phase: 2.2 },
+    { texture: '/textures/portfolio/skills/ai.webp', paintedTexture: '/textures/portfolio/skills/ai.webp', label: 'RAG / LangGraph', size: 'medium', x: 0, y: 0.5, z: -0.4, phase: 4 },
 
     // Infrastructure, systems and problem solving
-    { texture: '/textures/portfolio/skills/cloud.svg', paintedTexture: '/textures/portfolio/skills/cloud.svg', label: 'GCP / Docker', size: 'small', x: -5.5, y: 2.5, z: -0.8, phase: 1.2 },
-    { texture: '/textures/portfolio/skills/systems.svg', paintedTexture: '/textures/portfolio/skills/systems.svg', label: 'OS / Networks', size: 'small', x: 5.5, y: 3, z: -0.7, phase: 2.8 },
-    { texture: '/textures/portfolio/skills/flutter.svg', paintedTexture: '/textures/portfolio/skills/flutter.svg', label: 'Dart / Flutter', size: 'small', x: -3, y: 4.5, z: -0.5, phase: 3.5 },
-    { texture: '/textures/portfolio/skills/algorithms.svg', paintedTexture: '/textures/portfolio/skills/algorithms.svg', label: 'DSA / Algorithms', size: 'small', x: 3.5, y: 4, z: -0.6, phase: 4.5 },
+    { texture: '/textures/portfolio/skills/cloud.webp', paintedTexture: '/textures/portfolio/skills/cloud.webp', label: 'GCP / Docker', size: 'small', x: -5.5, y: 2.5, z: -0.8, phase: 1.2 },
+    { texture: '/textures/portfolio/skills/systems.webp', paintedTexture: '/textures/portfolio/skills/systems.webp', label: 'OS / Networks', size: 'small', x: 5.5, y: 3, z: -0.7, phase: 2.8 },
+    { texture: '/textures/portfolio/skills/flutter.webp', paintedTexture: '/textures/portfolio/skills/flutter.webp', label: 'Dart / Flutter', size: 'small', x: -3, y: 4.5, z: -0.5, phase: 3.5 },
+    { texture: '/textures/portfolio/skills/algorithms.webp', paintedTexture: '/textures/portfolio/skills/algorithms.webp', label: 'DSA / Algorithms', size: 'small', x: 3.5, y: 4, z: -0.6, phase: 4.5 },
 ];
 
 // Size multipliers for balloon categories
@@ -1001,7 +1001,7 @@ const SkillBalloon = ({ config, revealFactorRef, spreadFactorRef, timeRef }) => 
     };
     
     const filename = config.texture.split('/').pop();
-    const aspect = filename.endsWith('.svg') ? 1.0 : (legacyAspects[filename] || legacyAspects['default_small_medium']);
+    const aspect = filename.endsWith('.webp') ? 1.0 : (legacyAspects[filename] || legacyAspects['default_small_medium']);
     const baseHeight = SIZE_MULTIPLIERS[config.size];
 
     const outerGroupRef = useRef();
