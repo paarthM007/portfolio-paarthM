@@ -46,7 +46,8 @@ const CorridorSegment = ({
                 id: `gallery-${segmentIndex}`,
                 roomId: 'gallery',
                 relativeZ: -18,
-                side: 'right',
+                // DoorSection's side convention is mirrored from the viewer's approach direction.
+                side: 'left',
                 label: 'THE GALLERY',
                 icon: '◈',
                 color: '#B88957'
