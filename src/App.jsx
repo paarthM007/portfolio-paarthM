@@ -4,8 +4,6 @@ import { Preload, useTexture, Text, PerformanceMonitor } from '@react-three/drei
 import * as THREE from 'three';
 import Preloader from './components/dom/Preloader';
 import PaperTransition from './components/dom/PaperTransition';
-import { AudioProvider, useAudio } from './context/AudioManager';
-import { initAudio } from './utils/audioManager';
 import { PerformanceProvider, usePerformance } from './context/PerformanceContext';
 import { SceneProvider, useScene } from './context/SceneContext';
 import NavigationUI from './components/ui/NavigationUI';
@@ -76,23 +74,6 @@ if (isLowEnd) {
 
 const FONT_URL = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff';
 
-// Helper component to handle global audio enable on interaction
-const GlobalAudioEnabler = () => {
-  const { enableAudio } = useAudio();
-  useEffect(() => {
-    const handleInteraction = () => enableAudio();
-    window.addEventListener('click', handleInteraction, { once: true });
-    window.addEventListener('touchstart', handleInteraction, { once: true });
-    window.addEventListener('keydown', handleInteraction, { once: true });
-    return () => {
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('touchstart', handleInteraction);
-      window.removeEventListener('keydown', handleInteraction);
-    };
-  }, [enableAudio]);
-  return null;
-};
-
 // Scene background using corridor wall texture (static, no animation)
 const PaperSceneBackground = () => {
   const { scene } = useThree();
@@ -136,11 +117,6 @@ function AppContent() {
   // Use Performance Context
   const { settings, downgradeTier, tier } = usePerformance();
 
-  // Force initialize audio in the background on mount
-  useEffect(() => {
-    initAudio();
-  }, []);
-
   const handleSceneReady = useCallback(() => {
     requestAnimationFrame(() => {
       setSceneReady(true);
@@ -148,10 +124,8 @@ function AppContent() {
   }, []);
 
   return (
-    <AudioProvider>
-      <SceneProvider>
+    <SceneProvider>
         <DocumentMetaBridge />
-        <GlobalAudioEnabler />
         <div className="app">
           {/* Full screen 3D Canvas */}
           <div className="canvas-wrapper">
@@ -212,8 +186,7 @@ function AppContent() {
             onComplete={() => setIsLoaded(true)}
           />
         </div>
-      </SceneProvider>
-    </AudioProvider>
+    </SceneProvider>
   );
 }
 
