@@ -8,6 +8,7 @@ import '../shaders/RevealMaterial'; // Registers alpha-discard reveal shader
 import { useScene } from '../../../context/SceneContext';
 import { useAudio } from '../../../context/AudioManager';
 import { isTouchDevice } from '../../../utils/deviceDetect';
+import { SCENE_PALETTE } from '../../../config/scenePalette';
 
 // Constants from CorridorSegment
 const WALL_X_OUTER = 3.5;
@@ -67,7 +68,7 @@ const DoorSection = ({
     label,
     roomId, // Room ID used by the scene context
     icon,
-    color = '#5F8E88',
+    color = SCENE_PALETTE.teal,
     onEnter,
     autoCloseDelay = 3000,
     enterDistance = 8, // Default fly-through distance
@@ -964,7 +965,7 @@ const DoorSection = ({
                     scale={[0.5, 0.5, 1]}
                 >
                     <planeGeometry args={[1, 0.5]} />
-                    <meshBasicMaterial color="#e0e0e0"
+                    <meshBasicMaterial color={SCENE_PALETTE.paper}
                         map={arrowTexture}
                         transparent={true}
                         alphaTest={0.1}
@@ -987,7 +988,7 @@ const DoorSection = ({
                     scale={[-0.5, 0.5, 1]}
                 >
                     <planeGeometry args={[1, 0.5]} />
-                    <meshBasicMaterial color="#e0e0e0"
+                    <meshBasicMaterial color={SCENE_PALETTE.paper}
                         map={arrowTexture}
                         transparent={true}
                         alphaTest={0.1}
@@ -999,7 +1000,7 @@ const DoorSection = ({
                 {/* Baseboard (Listwa) Left side of door */}
                 <mesh position={[wallOffsetX - 1.4, -CORRIDOR_HEIGHT / 2 + 0.075, 0.02]}>
                     <planeGeometry args={[doorBoardWidth, 0.15]} />
-                    <meshBasicMaterial color="#e0e0e0"
+                    <meshBasicMaterial color={SCENE_PALETTE.paper}
                         map={doorBbTexLeft}
                         roughness={0.8}
                         side={THREE.DoubleSide}
@@ -1009,7 +1010,7 @@ const DoorSection = ({
                 {/* Baseboard (Listwa) Right side of door */}
                 <mesh position={[wallOffsetX + 1.4, -CORRIDOR_HEIGHT / 2 + 0.075, 0.02]}>
                     <planeGeometry args={[doorBoardWidth, 0.15]} />
-                    <meshBasicMaterial color="#e0e0e0"
+                    <meshBasicMaterial color={SCENE_PALETTE.paper}
                         map={doorBbTexRight}
                         roughness={0.8}
                         side={THREE.DoubleSide}
@@ -1034,7 +1035,7 @@ const DoorSection = ({
                             rotation={[-Math.PI / 2, 0, 0]}
                         >
                             <planeGeometry args={[THRESH_W, THRESH_D]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={SCENE_PALETTE.paper}
                                 map={threshTex}
                                 roughness={0.9}
                                 metalness={0}
@@ -1056,7 +1057,7 @@ const DoorSection = ({
                         <mesh>
                             {/* Adjusted size for the signs - assuming rectangular aspect ratio */}
                             <planeGeometry args={[1.3, 0.65]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={SCENE_PALETTE.paper}
                                 map={signTexture}
                                 transparent={true}
                                 alphaTest={0.1}
@@ -1084,7 +1085,7 @@ const DoorSection = ({
                                 <Text
                                     font="/fonts/CabinSketch-Bold.ttf"
                                     fontSize={0.25}
-                                    color="#111111"
+                                    color={color}
                                     anchorX="center"
                                     anchorY="top"
                                     position={[0, +0.02, 0]}
@@ -1098,7 +1099,7 @@ const DoorSection = ({
                             <Text
                                 font="/fonts/CabinSketch-Bold.ttf"
                                 fontSize={0.30}
-                                color="#111111"
+                                color={color}
                                 anchorX="center"
                                 anchorY="middle"
                                 position={[0, 0, 0.01]}
@@ -1110,7 +1111,7 @@ const DoorSection = ({
                             <Text
                                 font="/fonts/CabinSketch-Bold.ttf"
                                 fontSize={0.25}
-                                color="#111111"
+                                color={color}
                                 anchorX="center"
                                 anchorY="middle"
                                 position={[0, 0, 0.01]}
@@ -1124,7 +1125,7 @@ const DoorSection = ({
                     {/* Moved to Z = 0.04 to sit in front of baseboards (Z=0.02), hiding the hole edges */}
                     <mesh position={[0, -0.1, 0.04]} scale={[side === 'right' ? -1 : 1, 1, 1]}>
                         <planeGeometry args={[frameWidth, frameHeight]} />
-                        <meshBasicMaterial color="#e0e0e0"
+                        <meshBasicMaterial color={SCENE_PALETTE.paper}
                             map={frameTexture}
                             transparent={true}
                             alphaTest={0.1}
@@ -1152,7 +1153,7 @@ const DoorSection = ({
                             onPointerLeave={handlePointerLeave}
                         >
                             <planeGeometry args={[doorWidth, doorHeight]} />
-                            <meshBasicMaterial color="#e0e0e0" transparent={true} opacity={0} depthWrite={false} />
+                            <meshBasicMaterial color={SCENE_PALETTE.paper} transparent={true} opacity={0} depthWrite={false} />
                         </mesh>
 
                         {/* Painted layer (behind sketch) - hidden after 2 frames to precompile shader */}
@@ -1162,7 +1163,7 @@ const DoorSection = ({
                             scale={[side === 'right' ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[doorWidth, doorHeight]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={SCENE_PALETTE.paper}
                                 map={doorPaintedTexture}
                                 transparent={true}
                                 alphaTest={0.5}
@@ -1176,7 +1177,7 @@ const DoorSection = ({
                             scale={[side === 'right' ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[doorWidth, doorHeight]} />
-                            <revealMaterial color="#e0e0e0"
+                            <revealMaterial color={SCENE_PALETTE.paper}
                                 ref={doorMaterialRef}
                                 map={doorTexture}
                                 transparent={true}
@@ -1193,7 +1194,7 @@ const DoorSection = ({
                             scale={[side === 'right' ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[doorWidth, doorHeight]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={SCENE_PALETTE.paper}
                                 map={doorBackTexture}
                                 transparent={true}
                                 alphaTest={0.1}
@@ -1207,7 +1208,7 @@ const DoorSection = ({
                             {/* Painted handle (behind) - hidden after 2 frames */}
                             <mesh ref={handlePaintedRef} position={[side === 'left' ? -0.50 : 0.50, 0.14, -0.001]} scale={[side === 'right' ? -1 : 1, 1, 1]}>
                                 <planeGeometry args={[doorWidth, doorHeight]} />
-                                <meshBasicMaterial color="#e0e0e0"
+                                <meshBasicMaterial color={SCENE_PALETTE.paper}
                                     map={handlePaintedTexture}
                                     transparent={true}
                                     alphaTest={0.5}
@@ -1217,7 +1218,7 @@ const DoorSection = ({
                             {/* Sketch handle overlay (front) */}
                             <mesh position={[side === 'left' ? -0.50 : 0.50, 0.14, 0]} scale={[side === 'right' ? -1 : 1, 1, 1]}>
                                 <planeGeometry args={[doorWidth, doorHeight]} />
-                                <revealMaterial color="#e0e0e0"
+                                <revealMaterial color={SCENE_PALETTE.paper}
                                     ref={handleMaterialRef}
                                     map={handleTexture}
                                     transparent={true}
