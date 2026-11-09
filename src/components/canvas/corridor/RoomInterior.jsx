@@ -1,4 +1,5 @@
 import { useMemo, memo, Suspense, useEffect } from 'react';
+import { useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
@@ -33,6 +34,25 @@ const NATURAL_TILE_W = (1582 / 94) * 0.15;
  * Contains corridor + giant room at the end.
  */
 const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
+    const scene = useThree((state) => state.scene);
+    const skyBackground = useMemo(() => new THREE.Color('#A9DDF7'), []);
+
+    // Use the renderer's actual scene background instead of relying on a sky dome
+    // that can be hidden behind the room's opaque walls and set pieces.
+    useEffect(() => {
+        const isSkyRoom = ['THE GALLERY', 'THE ABOUT', "LET'S CONNECT"].includes(label);
+        if (!showRoom || !isSkyRoom) return;
+
+        const previousBackground = scene.background;
+        scene.background = skyBackground;
+
+        return () => {
+            if (scene.background === skyBackground) {
+                scene.background = previousBackground;
+            }
+        };
+    }, [scene, skyBackground, showRoom, label]);
+
     const { corridorWidth, corridorHeight, corridorDepth, roomWidth, roomHeight, roomDepth } = ROOM_CONFIG;
     const halfDepth = corridorDepth / 2;
     const roomZ = -corridorDepth - roomDepth / 2;
