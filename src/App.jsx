@@ -173,8 +173,8 @@ function AppContent() {
               dpr={settings.dpr}
               shadows={settings.shadows}
             >
-              <color attach="background" args={['#fafafa']} />
-              <fog attach="fog" args={['#fafafa', 15, 50]} />
+              <color attach="background" args={['#edf2f8']} />
+              <fog attach="fog" args={['#e8eef7', 15, 50]} />
 
               {/* Scale performance down if fps drops */}
               <PerformanceMonitor
@@ -218,7 +218,6 @@ function AppContent() {
   );
 }
 
-import { AchievementsProvider } from './context/AchievementsContext';
 
 export default function App() {
   // Preload browser-based images (for standard <img> tags) immediately upon mounting App
@@ -234,9 +233,7 @@ export default function App() {
 
   return (
     <PerformanceProvider>
-      <AchievementsProvider>
-        <AppContent />
-      </AchievementsProvider>
+      <AppContent />
     </PerformanceProvider>
   );
 }
