@@ -80,7 +80,7 @@
         width: 22px;
         height: 22px;
         fill: none;
-        stroke: #354A45;
+        stroke: #B88957;
         stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -167,7 +167,7 @@
             display: block;
             height: 2px;
             width: 100%;
-            background: #354A45;
+            background: #B88957;
             border-radius: 2px;
         }
     }
@@ -245,7 +245,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #354A45;
+            color: #B88957;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -265,7 +265,7 @@
                 width: 18px;
                 height: 18px;
                 fill: none;
-                stroke: #354A45;
+                stroke: #B88957;
                 stroke-width: 2.5;
                 stroke-linecap: round;
             }
@@ -359,7 +359,7 @@
         font-family: 'Cabin Sketch', cursive, sans-serif;
         font-size: 1.2rem;
         font-weight: 700;
-        color: #354A45;
+        color: #B88957;
         pointer-events: none;
         z-index: 4;
         text-transform: uppercase;
@@ -376,19 +376,19 @@
         &.about {
             top: 28%;
             left: 26%;
-            color: #D9A94E;
+            color: #B88957;
         }
 
         &.gallery {
             top: 94%;
             left: 26%;
-            color: #5F8E88;
+            color: #B88957;
         }
 
         &.contact {
             top: 14%;
             left: 76%;
-            color: #C97D66;
+            color: #B88957;
         }
 
 
@@ -515,7 +515,7 @@
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            color: #354A45;
+            color: #B88957;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -534,7 +534,7 @@
             svg {
                 width: 14px;
                 height: 14px;
-                stroke: #354A45;
+                stroke: #B88957;
                 stroke-width: 2.5;
                 fill: none;
                 stroke-linecap: round;
@@ -568,7 +568,7 @@
                 justify-content: space-between;
                 font-family: 'Patrick Hand', cursive, sans-serif;
                 font-size: 14px;
-                color: #354A45;
+                color: #B88957;
                 font-weight: 600;
             }
 
@@ -586,7 +586,7 @@
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
-                    background: #354A45;
+                    background: #B88957;
                     cursor: pointer;
                     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
                 }
@@ -595,7 +595,7 @@
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
-                    background: #354A45;
+                    background: #B88957;
                     cursor: pointer;
                     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
                     border: none;
@@ -636,11 +636,11 @@
     gap: 24px;
     padding: 16px 24px;
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #354A45;
+    border: 2px solid #B88957;
     border-radius: 12px;
-    box-shadow: 3px 3px 0 #354A45;
+    box-shadow: 3px 3px 0 #B88957;
     font-size: 14px;
-    color: #354A45;
+    color: #B88957;
     pointer-events: auto;
     animation: hintFadeIn 0.5s ease-out;
 
@@ -661,11 +661,11 @@
     gap: 24px;
     padding: 16px 24px;
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #354A45;
+    border: 2px solid #B88957;
     border-radius: 12px;
-    box-shadow: 3px 3px 0 #354A45;
+    box-shadow: 3px 3px 0 #B88957;
     font-size: 14px;
-    color: #354A45;
+    color: #B88957;
     pointer-events: auto;
     animation: corridorHintFadeIn 0.5s ease-out, corridorHintFadeOut 0.5s ease-out 3.5s forwards;
 
@@ -765,7 +765,7 @@
     border: 1px solid rgba(95, 142, 136, 0.42);
     border-radius: 999px;
     background: rgba(255, 253, 247, 0.96);
-    color: #354A45;
+    color: #B88957;
     box-shadow: 0 12px 34px rgba(53, 74, 69, 0.16);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -782,7 +782,7 @@
         height: 0.42rem;
         flex: 0 0 auto;
         border-radius: 50%;
-        background: #D9A94E;
+        background: #B88957;
         box-shadow: 0 0 12px rgba(217, 169, 78, 0.45);
     }
 
