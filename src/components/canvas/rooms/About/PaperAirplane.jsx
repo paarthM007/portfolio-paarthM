@@ -1,15 +1,13 @@
 import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { Edges } from '@react-three/drei';
-import { SCENE_PALETTE } from '../../../../config/scenePalette';
-
 /**
  * PaperAirplane Component
  * 
  * A low-poly origami-style paper airplane.
  * Built with BufferGeometry for full control over the shape.
  */
-const PaperAirplane = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, color = SCENE_PALETTE.chalk }) => {
+const PaperAirplane = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, color = #FFFDF7 }) => {
     const meshRef = useRef();
 
     // Create paper airplane geometry
@@ -100,7 +98,7 @@ const PaperAirplane = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, 
                 <Edges
                     linewidth={2}
                     threshold={15}
-                    color={SCENE_PALETTE.teal}
+                    color={#5F8E88}
                 />
             </mesh>
 
