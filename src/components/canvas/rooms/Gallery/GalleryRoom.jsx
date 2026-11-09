@@ -575,7 +575,7 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 {/* Skybox/Environment */}
                 <mesh position={[0, 5, -20]}>
                     <sphereGeometry args={[40, 32, 32]} />
-                    <meshBasicMaterial color="#f0f0f0" side={THREE.BackSide} transparent opacity={0.5} onBeforeCompile={onBeforeCompile} />
+                    <meshBasicMaterial color="#A9DDF7" side={THREE.BackSide} onBeforeCompile={onBeforeCompile} />
                 </mesh>
             </group>
         </group>
