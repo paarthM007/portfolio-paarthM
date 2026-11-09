@@ -90,7 +90,7 @@ const PHASE = {
 };
 
 const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
-    const { camera } = useThree();
+    const { camera, scene } = useThree();
     const { isTeleporting } = useScene();
     const { globalVolume, isMuted } = useAudio();
     const effectiveVolume = isMuted ? 0 : AUDIO_SETTINGS.volume * globalVolume;
@@ -279,6 +279,11 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     // Frame Loop
     useFrame((state, delta) => {
+        // Keep the visible sky background blue while this room is active.
+        // This runs after other scene updates that may otherwise restore a beige background.
+        if (showRoom && !isWarmup) {
+            scene.background = new THREE.Color('#A9DDF7');
+        }
         // Update room origin for paint shader
         updateRoomOrigin(groupRef);
 
@@ -348,18 +353,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     return (
         <group ref={groupRef} position={[0, -0.7, -5]}>
-
-            {/* Full-scene light-blue sky dome; rendered behind all Contact room objects */}
-            <mesh position={[0, 0, 0]} renderOrder={-1000} frustumCulled={false}>
-                <sphereGeometry args={[80, 48, 32]} />
-                <meshBasicMaterial
-                    color="#A9DDF7"
-                    side={THREE.BackSide}
-                    toneMapped={false}
-                    depthWrite={false}
-                depthTest={false}
-                />
-            </mesh>
 
             {/* ☁️ CLOUDS */}
             <GalleryClouds count={45} seed={88} rotationOffset={[0, 1, 0]} />
