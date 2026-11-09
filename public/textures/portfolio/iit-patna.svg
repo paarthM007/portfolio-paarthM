@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<defs><linearGradient id="paper" x2="1" y2="1"><stop stop-color="#fffdf7"/><stop offset="1" stop-color="#e7f0f4"/></linearGradient><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#8da2aa" stroke-opacity=".18"/></pattern></defs>
+<rect width="900" height="560" fill="url(#paper)"/><rect width="900" height="560" fill="url(#grid)"/>
+<rect x="40" y="40" width="820" height="480" rx="6" fill="none" stroke="#4d7c91" stroke-width="5"/>
+<circle cx="450" cy="235" r="116" fill="#4d7c91" opacity=".10"/><circle cx="450" cy="235" r="84" fill="none" stroke="#4d7c91" stroke-width="4" opacity=".55"/>
+<path d="M450 137v196M352 235h196M381 166l138 138M519 166 381 304" stroke="#4d7c91" stroke-width="3" opacity=".45"/>
+<text x="450" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="40" fill="#25363c">IIT PATNA</text>
+<text x="450" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" letter-spacing="2" fill="#4d7c91">B.TECH · MECHANICAL ENGINEERING · 2024–2028</text>
+<text x="450" y="485" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" letter-spacing="4" fill="#6c7a7e">PAARTH MANDELIA</text>
+</svg>
