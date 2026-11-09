@@ -336,7 +336,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/RubikScribble-Regular.ttf"
             >
-                TOMASZ SZMAJDA
+                PAARTH MANDELIA
             </Text>
 
             {/* Subtitle - Brand (spreads right) */}
@@ -349,7 +349,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/CabinSketch-Regular.ttf"
             >
-                (ITOM)
+                (IIT PATNA)
             </Text>
 
             {/* Motto - Line 1 (spreads right) */}
@@ -363,7 +363,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 font="/fonts/CabinSketch-Regular.ttf"
                 fontStyle="italic"
             >
-                "Crafting digital experiences
+                "Engineering ideas into systems
             </Text>
 
             {/* Motto - Line 2 (spreads left) */}
@@ -377,7 +377,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 font="/fonts/CabinSketch-Regular.ttf"
                 fontStyle="italic"
             >
-                that push creative boundaries"
+                from algorithms to real-world tools"
             </Text>
         </group>
     );
