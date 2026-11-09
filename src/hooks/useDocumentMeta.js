@@ -25,11 +25,6 @@ const ROOM_META = {
         title: 'Gallery & Projects — ITom Portfolio',
         description: 'Browse the interactive 3D gallery of web development projects by ITom. Each project is displayed as a hand-drawn card you can flip and explore.',
     },
-    flight: {
-        path: '/flight',
-        title: 'Flight Deck — ITom Portfolio',
-        description: 'Take a flight through the clouds in an interactive 3D aeroplane experience.',
-    },
     contact: {
         path: '/contact',
         title: 'Contact — ITom Portfolio',
@@ -42,7 +37,6 @@ const PATH_TO_ROOM = {
     '/': null,
     '/about': 'about',
     '/gallery': 'gallery',
-    '/flight': 'flight',
     '/contact': 'contact',
 };
 
