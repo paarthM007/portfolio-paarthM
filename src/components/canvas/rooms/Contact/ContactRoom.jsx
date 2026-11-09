@@ -7,7 +7,6 @@ import MessagePaper from './MessagePaper';
 import SocialBarrel from './SocialBarrel';
 import { useScene } from '../../../../context/SceneContext';
 import GalleryClouds from '../Gallery/GalleryClouds';
-import { useAchievements } from '../../../../context/AchievementsContext';
 import { useAudio } from '../../../../context/AudioManager';
 
 // ============================================
@@ -94,7 +93,6 @@ const PHASE = {
 const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const { camera } = useThree();
     const { isTeleporting } = useScene();
-    const { showTutorial, unlockAchievement, hidePopup } = useAchievements();
     const { globalVolume, isMuted } = useAudio();
     const effectiveVolume = isMuted ? 0 : AUDIO_SETTINGS.volume * globalVolume;
 
@@ -104,12 +102,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             audioRef.current.setVolume(effectiveVolume);
         }
     }, [effectiveVolume]);
-
-    useEffect(() => {
-        if (isExiting || isTeleporting) {
-            hidePopup();
-        }
-    }, [isExiting, isTeleporting, hidePopup]);
 
     // Load Sea Texture
     const seaTexture = useTexture("/textures/contact/faletopdown.webp");
@@ -296,7 +288,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             if (frameCount.current >= FRAMES_TO_WAIT) {
                 hasSignaledReady.current = true;
                 onReady?.();
-                if (!isWarmup) setTimeout(() => showTutorial('contact_submit'), 2000);
             }
         }
 
@@ -504,10 +495,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             <group visible={!showSelection}>
                 <MessagePaper
                     position={[0, 0.07, 2]}
-                    onSend={(data) => {
-                        // console.log('📬 Contact form submitted:', data);
-                        unlockAchievement('contact_submit');
-                    }}
                 />
             </group>
 
