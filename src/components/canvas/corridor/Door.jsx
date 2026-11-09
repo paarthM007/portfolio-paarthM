@@ -195,7 +195,7 @@ const Door = ({
                 <Text
                     position={[0, -0.2, 0.01]}
                     fontSize={0.15}
-                    color="#39FF14"
+                    color="#B88957"
                     anchorX="center"
                     renderOrder={3}
                     depthOffset={-1}
