@@ -1,6 +1,6 @@
 import { useRef, useState, useMemo, useEffect, forwardRef, useImperativeHandle, memo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, useTexture, Float, PositionalAudio } from '@react-three/drei';
+import { Text, useTexture, Float } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { Observer } from 'gsap/all';
@@ -9,7 +9,6 @@ import { useScene } from '../../../../context/SceneContext';
 gsap.registerPlugin(Observer);
 import PaperMaterial from './PaperMaterial';
 import GalleryClouds from './GalleryClouds';
-import { useAudio } from '../../../../context/AudioManager';
 import { usePaintMaterial } from './usePaintMaterial';
 import { useGalleryProjects } from '../../../../hooks/useSanityData';
 
@@ -430,16 +429,7 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     return (
         <group ref={groupRef}>
             {!isWarmup && (
-                <PositionalAudio
-                    ref={audioRef}
-                    url="/sounds/szummiasta.mp3"
-                    distanceModel="exponential"
-                    refDistance={AUDIO_SETTINGS.distance}
-                    rolloffFactor={AUDIO_SETTINGS.rolloff}
-                    loop
-                    autoplay
-                    volume={effectiveVolume}
-                />
+                
             )}
             <group position={[0, -0.7, -2]}>
                 {/* Floor */}
@@ -1280,14 +1270,7 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                     {project.title}
                 </Text>
 
-                <PositionalAudio
-                    ref={paperAudioRef}
-                    url="/sounds/papersound.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={GALLERY_INTERACTION_AUDIO_SETTINGS.rolloff}
-                    refDistance={GALLERY_INTERACTION_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
+                
             </group>
         </group>
     );
