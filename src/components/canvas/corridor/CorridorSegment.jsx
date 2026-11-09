@@ -46,7 +46,7 @@ const CorridorSegment = ({
                 id: `gallery-${segmentIndex}`,
                 roomId: 'gallery',
                 relativeZ: -18,
-                side: 'left',
+                side: 'right',
                 label: 'THE GALLERY',
                 icon: '◈',
                 color: '#B88957'
