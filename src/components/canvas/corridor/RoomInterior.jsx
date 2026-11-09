@@ -44,7 +44,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         if (!showRoom || !isSkyRoom) return;
         scene.background = skyBackground;
         if (scene.fog) scene.fog.color.copy(skyBackground);
-    }, 100);
+    }, -1);
 
     const { corridorWidth, corridorHeight, corridorDepth, roomWidth, roomHeight, roomDepth } = ROOM_CONFIG;
     const halfDepth = corridorDepth / 2;
