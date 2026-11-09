@@ -125,13 +125,23 @@ const NavigationUI = () => {
 
         const hint = ROOM_HINTS[currentRoom];
         const storageKey = `portfolio_room_hint_${currentRoom}`;
-        if (!hint || localStorage.getItem(storageKey)) {
-            setRoomHint(null);
-            return;
+
+        // Storage can be unavailable in private/restricted browsing contexts.
+        // Keep the hint functional even when persistence is blocked.
+        try {
+            if (!hint || window.localStorage.getItem(storageKey)) {
+                setRoomHint(null);
+                return;
+            }
+            window.localStorage.setItem(storageKey, 'seen');
+        } catch {
+            if (!hint) {
+                setRoomHint(null);
+                return;
+            }
         }
 
         setRoomHint(hint);
-        localStorage.setItem(storageKey, 'seen');
         const timeout = window.setTimeout(() => setRoomHint(null), 4200);
         return () => window.clearTimeout(timeout);
     }, [currentRoom, isInRoom]);
