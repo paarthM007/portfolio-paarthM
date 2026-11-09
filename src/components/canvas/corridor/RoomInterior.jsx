@@ -223,7 +223,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
                             {/* Floor grid */}
                             <gridHelper
-                                args={[Math.min(roomWidth, roomDepth), 20, #5F8E88, #A7B99E]}
+                                args={[Math.min(roomWidth, roomDepth), 20, '#5F8E88', '#A7B99E']}
                                 position={[0, -roomHeight / 2 + 0.01, 0]}
                             />
 
