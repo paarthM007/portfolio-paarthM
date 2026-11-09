@@ -40,6 +40,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/anomalyshield.svg',
         url: 'https://github.com/paarthM007/WAFproject',
         description: 'A multi-tenant machine-learning Web Application Firewall. Go middleware extracts request telemetry and enforces a 25 ms evaluation timeout with fail-open circuit breakers. A FastAPI engine runs tenant-specific Isolation Forest models, backed by a thread-safe LRU cache, asynchronous batch logging and background retraining. Stack: Go, fasthttp, FastAPI, scikit-learn, Isolation Forest, Next.js, Prisma.'
+        techStack: [],
     },
     {
         id: 'scdo',
@@ -48,6 +49,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/scdo.svg',
         url: 'https://github.com/paarthM007/SCDO',
         description: 'An asynchronous, multimodal logistics intelligence engine. Custom Dijkstra routing balances cost, time and risk across 1,100+ hubs; weather, crowdsourced signals and Gemini-based news sentiment feed a risk-fusion engine; Monte Carlo discrete-event simulations estimate probabilistic ETAs. Built with a four-member cross-functional team. Stack: Python, Flask, Flutter, Firestore, Gemini, Monte Carlo.'
+        techStack: [],
     },
     {
         id: 'heat-conduction',
@@ -56,6 +58,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/heat-conduction.svg',
         url: 'https://hmt-project-paarth-mandelia.vercel.app',
         description: 'A full-stack numerical-computing application that solves steady-state heat conduction on a 2D grid. A C++ finite-difference solver uses Successive Over-Relaxation to handle grids up to one million cells; a Node.js orchestrator adds validation and concurrency guards; a React dashboard renders heat maps, contours, probes and CSV/PNG exports. Stack: C++, FDM, SOR, Node.js, React, Canvas API.'
+        techStack: [],
     },
     {
         id: 'sms-optimizer',
@@ -64,6 +67,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/sms-optimizer.svg',
         url: 'https://github.com/paarthM007/steel-plant-sms-optimizer',
         description: 'A steel-melt-shop simulation and scheduling engine modelling BOF → LRF → VD → CCM. SimPy discrete-event simulation is coupled with a PuLP mixed-integer linear program to pace tapping schedules and reduce queues and ladle thermal losses. The repository reports a 96.6% reduction in average queue delay in its model scenario. Stack: Python, SimPy, PuLP, Streamlit, Plotly.'
+        techStack: [],
     },
     {
         id: 'spares-optimizer',
@@ -72,6 +76,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/spares-optimizer.svg',
         url: 'https://github.com/paarthM007/sail_spares_optimizer',
         description: 'An industrial spare-parts and working-capital decision engine. It combines ABC × FSN × VED classification with dynamic safety stock, Economic Order Quantity and reorder-point calculations, then prioritizes excess-inventory liquidation. Includes a Streamlit and Plotly dashboard with filters and exportable action plans. Stack: Python, pandas, NumPy, Streamlit, Plotly.'
+        techStack: [],
     },
     {
         id: 'system-design',
@@ -80,6 +85,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/system-design.svg',
         url: 'https://github.com/paarthM007/system-design-notes',
         description: 'A structured, visual learning repository covering scaling, back-of-the-envelope estimation, rate limiters, consistent hashing, key-value stores, unique-ID generation, URL shorteners, web crawlers and notification systems. A growing reference for distributed systems and backend architecture.'
+        techStack: [],
     },
     {
         id: 'companywiseq',
@@ -88,6 +94,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/companywiseq.svg',
         url: 'https://github.com/paarthM007/CompanyWiseQ',
         description: 'A company-wise interview-preparation dataset repository. Organizes coding-question CSVs by company and time windows such as six months, one year, two years and all-time, helping structure targeted DSA practice.'
+        techStack: [],
     },
     {
         id: 'password-generator',
@@ -96,6 +103,7 @@ const FALLBACK_PROJECTS = [
         painted: '/textures/portfolio/password-generator.svg',
         url: 'https://github.com/paarthM007/Password-Generator',
         description: 'An early frontend micro-project: a lightweight password generator built with HTML, CSS and JavaScript. A foundational exercise in turning core web technologies into a usable interactive tool.'
+        techStack: [],
     },
 ];
 
