@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { useTexture, Text } from '@react-three/drei';
 import * as THREE from 'three';
+import { SCENE_PALETTE } from '../../../config/scenePalette';
 import { useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 import '../shaders/RevealMaterial';
@@ -60,7 +61,7 @@ const PictureContent = ({ imagePath, imagePaintedPath, width, height, isPainted 
             {imagePaintedPath && (
                 <mesh position={[0, 0, -0.001]}>
                     <planeGeometry args={[width, height]} />
-                    <meshBasicMaterial color="#e0e0e0"
+                    <meshBasicMaterial color={SCENE_PALETTE.paper}
                         map={paintedTexture}
                         transparent={true}
                         alphaTest={0.5}
@@ -471,11 +472,11 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
                             <boxGeometry args={[2.0, 0.06, 0.5]} />
 
                             {/* Short sides (Right/Left) */}
-                            <meshBasicMaterial attach="material-0" color="#e8e8e8" roughness={0.6} />
+                            <meshBasicMaterial attach="material-0" color={SCENE_PALETTE.sage} roughness={0.6} />
                             <meshBasicMaterial attach="material-1" color="#e8e8e8" roughness={0.6} />
 
                             {/* Top (Hidden) */}
-                            <meshBasicMaterial attach="material-2" color="#d0d0d0" roughness={0.8} />
+                            <meshBasicMaterial attach="material-2" color={SCENE_PALETTE.teal} roughness={0.8} />
 
                             {/* Bottom - Grille Texture 
                                 Używamy przezroczystości, żeby odsłonić wewnętrzne światło.
@@ -505,7 +506,7 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
                         >
                             <planeGeometry args={[1.9, 0.4]} />
                             <meshBasicMaterial
-                                color="#ffffff"
+                                color={SCENE_PALETTE.chalk}
                                 toneMapped={false}
                                 side={THREE.DoubleSide}
                             />
