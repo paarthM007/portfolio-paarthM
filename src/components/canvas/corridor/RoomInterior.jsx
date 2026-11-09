@@ -2,6 +2,7 @@ import { useMemo, memo, Suspense, useEffect } from 'react';
 import { Text } from '@react-three/drei';
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
+import { SCENE_PALETTE } from '../../../config/scenePalette';
 
 // Eagerly import room components - textures are preloaded during the preloader phase
 import GalleryRoom from '../rooms/Gallery/GalleryRoom';
@@ -85,7 +86,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         bbRight.repeat.set(corridorDepth / NATURAL_TILE_W, 1);
 
         return {
-            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: floorTex, side: THREE.DoubleSide }),
+            corridorFloor: new THREE.MeshBasicMaterial({ color: SCENE_PALETTE.paper,  map: floorTex, side: THREE.DoubleSide }),
             corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexL, side: THREE.DoubleSide }),
             corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexR, side: THREE.DoubleSide }),
             corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: ceilTex, side: THREE.DoubleSide }),
@@ -102,10 +103,10 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                 side: THREE.DoubleSide
             }),
             // Room materials (keep flat for rooms that have their own content)
-            roomFloor: new THREE.MeshBasicMaterial({ color: '#e5e5e5', side: THREE.DoubleSide }),
-            roomCeiling: new THREE.MeshBasicMaterial({ color: '#fafafa', side: THREE.DoubleSide }),
-            roomWall: new THREE.MeshBasicMaterial({ color: '#f0f0f0', side: THREE.DoubleSide }),
-            roomBackWall: new THREE.MeshBasicMaterial({ color: '#f5f5f5', side: THREE.DoubleSide }),
+            roomFloor: new THREE.MeshBasicMaterial({ color: SCENE_PALETTE.floor, side: THREE.DoubleSide }),
+            roomCeiling: new THREE.MeshBasicMaterial({ color: SCENE_PALETTE.chalk, side: THREE.DoubleSide }),
+            roomWall: new THREE.MeshBasicMaterial({ color: SCENE_PALETTE.sage, side: THREE.DoubleSide }),
+            roomBackWall: new THREE.MeshBasicMaterial({ color: SCENE_PALETTE.wall, side: THREE.DoubleSide }),
         };
     }, [floorTexSrc, wallTexSrc, ceilingTexSrc, bbTexSrc]);
 
@@ -233,7 +234,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
                             {/* Floor grid */}
                             <gridHelper
-                                args={[Math.min(roomWidth, roomDepth), 20, '#cccccc', '#dddddd']}
+                                args={[Math.min(roomWidth, roomDepth), 20, SCENE_PALETTE.teal, SCENE_PALETTE.sage]}
                                 position={[0, -roomHeight / 2 + 0.01, 0]}
                             />
 
