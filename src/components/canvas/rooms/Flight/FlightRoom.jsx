@@ -85,7 +85,7 @@ const FlightRoom = ({ showRoom, onReady, isExiting, isWarmup = false }) => {
         readySent.current = false;
     }, [showRoom]);
 
-    useFrame((state, delta) => {
+    useFrame((_, delta) => {
         if (!showRoom || isExiting) return;
 
         elapsed.current += Math.min(delta, 0.04);
@@ -132,12 +132,12 @@ const FlightRoom = ({ showRoom, onReady, isExiting, isWarmup = false }) => {
 
             {/* Distant horizon */}
             <mesh position={[0, -8, -58]}>
-                <sphereGeometry args={[48, 32, 16]} />
+                <sphereGeometry args={[92, 32, 16]} />
                 <meshBasicMaterial color="#a9c7df" side={THREE.BackSide} />
             </mesh>
 
             {CLOUD_LAYOUT.map((position, index) => (
-                <group key={index} ref={(node) => { cloudRefs.current[index] = node; }}>
+                <group key={index} position={position} ref={(node) => { cloudRefs.current[index] = node; }}>
                     <Cloud position={[0, 0, 0]} scale={0.9 + (index % 3) * 0.22} />
                 </group>
             ))}
