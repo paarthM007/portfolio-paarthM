@@ -65,7 +65,7 @@ const Experience = ({ isLoaded, onSceneReady, performanceTier }) => {
     return (
         <>
             {/* === ROOM WARM-UP (pre-renders all rooms off-screen during preloader) === */}
-            {/* RoomWarmup mounts all 4 rooms 500 units below, compiles shaders via gl.compile(), 
+            {/* RoomWarmup mounts all 3 rooms 500 units below, compiles shaders via gl.compile(), 
                 then self-destructs and signals onSceneReady. This ensures both corridor segments
                 AND room shaders are pre-compiled before the user starts interacting. */}
             <RoomWarmup onWarmupComplete={onSceneReady} isLowTier={isLowTier} />
