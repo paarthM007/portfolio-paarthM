@@ -43,7 +43,6 @@ const DOOR_TEXTURES = {
     'THE GALLERY': '/textures/corridor/doors/drzwiprojekty.webp',
     'THE ABOUT': '/textures/corridor/doors/drzwiabout.webp',
     "LET'S CONNECT": '/textures/corridor/doors/drzwikontakt.webp',
-    'THE FLIGHT DECK': '/textures/corridor/doors/drzwiabout.webp',
 };
 
 // Painted (colored) variants for brush-stroke reveal on hover
@@ -51,7 +50,6 @@ const DOOR_PAINTED_TEXTURES = {
     'THE GALLERY': '/textures/corridor/doors/drzwiprojekty_painted.webp',
     'THE ABOUT': '/textures/corridor/doors/drzwiabout_painted.webp',
     "LET'S CONNECT": '/textures/corridor/doors/drzwikontakt_painted.webp',
-    'THE FLIGHT DECK': '/textures/corridor/doors/drzwiabout_painted.webp',
 };
 
 
@@ -630,7 +628,7 @@ const DoorSection = ({
         const aligned = doorAlignedState.current;
 
         // Store current rotation as starting point for exit
-        // This captures the "tilted" state if coming from About/Flight
+        // This captures the "tilted" state if coming from About
         const startRotation = {
             x: camera.rotation.x,
             y: camera.rotation.y,
