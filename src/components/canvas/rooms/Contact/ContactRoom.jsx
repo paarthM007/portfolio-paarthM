@@ -240,7 +240,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     const handleMailSelect = () => {
         // Awaryjne przekierowanie mailto:
-        window.location.href = 'mailto:tomszma12@gmail.com';
+        window.location.href = 'mailto:paarthmandelia1@gmail.com';
 
         /* 
         setShowSelection(false);
@@ -386,7 +386,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 rotation={[0, 0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="LINKEDIN"
-                onClick={() => window.open('https://www.linkedin.com/in/tomasz-szmajda-259337305/', '_blank')}
+                onClick={() => window.open('https://www.linkedin.com/in/paarth-mandelia/', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
@@ -395,7 +395,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 rotation={[0, -0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="GITHUB"
-                onClick={() => window.open('https://github.com/ITomPoland', '_blank')}
+                onClick={() => window.open('https://github.com/paarthM007', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
