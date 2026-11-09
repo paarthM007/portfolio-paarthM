@@ -1,10 +1,8 @@
 import { useRef, useState, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { useTexture, PositionalAudio } from '@react-three/drei';
+import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
-import { useAudio } from '../../../context/AudioManager';
-
 // Global settings for automatic segment doors audio
 const SEGMENT_DOOR_AUDIO_SETTINGS = {
     openVolume: 0.15, // Volume for "otwarciedrzwi"
@@ -400,22 +398,8 @@ const SegmentDoors = ({
             })()}
 
             {/* SPATIAL AUDIO NODES */}
-            <PositionalAudio
-                ref={openAudioRef}
-                url="/sounds/otwarciedrzwi.mp3"
-                distanceModel="exponential"
-                rolloffFactor={SEGMENT_DOOR_AUDIO_SETTINGS.rolloff}
-                refDistance={SEGMENT_DOOR_AUDIO_SETTINGS.distance}
-                loop={false}
-            />
-            <PositionalAudio
-                ref={closeAudioRef}
-                url="/sounds/zamknieciedrzwi.mp3"
-                distanceModel="exponential"
-                rolloffFactor={SEGMENT_DOOR_AUDIO_SETTINGS.rolloff}
-                refDistance={SEGMENT_DOOR_AUDIO_SETTINGS.distance}
-                loop={false}
-            />
+            
+            
         </group>
     );
 };
