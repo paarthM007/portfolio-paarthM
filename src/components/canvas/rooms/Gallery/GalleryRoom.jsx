@@ -429,9 +429,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     return (
         <group ref={groupRef}>
-            {!isWarmup && (
-                
-            )}
             <group position={[0, -0.7, -2]}>
                 {/* Floor */}
                 <mesh
