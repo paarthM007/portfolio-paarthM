@@ -415,7 +415,7 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             height: 2.5 / 1.785,
             y: 0.35,
             id: 'frame-4',
-            signature: "It always seems impossible\nuntil it’s done.\n\n— Nelson Mandela",
+            signature: "It is not enough to be busy;\nso are the ants. The question is:\nWhat are we busy about?\n\n— Henry David Thoreau",
             signatureX: 0,
             signatureY: 0,
             signatureSize: 0.12,
