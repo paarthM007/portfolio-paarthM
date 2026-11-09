@@ -1,4 +1,5 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
+import { useAudio } from '../../../../context/AudioManager';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import * as THREE from 'three';
