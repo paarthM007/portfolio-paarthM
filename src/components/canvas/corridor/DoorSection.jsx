@@ -66,7 +66,7 @@ const DoorSection = ({
     label,
     roomId, // Room ID used by the scene context
     icon,
-    color = '#5F8E88',
+    color = '#B88957',
     onEnter,
     autoCloseDelay = 3000,
     enterDistance = 8, // Default fly-through distance
