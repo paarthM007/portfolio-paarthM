@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Text, PositionalAudio } from '@react-three/drei';
 import * as THREE from 'three';
@@ -15,7 +15,7 @@ const CHUNK_LENGTH = 40;
 // ⚙️ AUDIO SETTINGS - TWEAK HERE
 // Edytuj te wartości, aby zmienić głośność i zasięg słyszalności szumu wiatru
 // ============================================
-export const AUDIO_SETTINGS = {
+const AUDIO_SETTINGS = {
     volume: 2.5,
     distance: 2,
     rolloff: 0.8
@@ -30,7 +30,7 @@ const STORY_MILESTONES = [
     { id: 'skills', position: [0, 0, -135], type: 'skills', title: 'SKILLS', subtitle: 'React • Three.js • GSAP • Creative Code' },
 ];
 
-const AboutRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
+const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
     const { camera } = useThree();
     const { isTeleporting, overlayContent } = useScene();
     const { globalVolume, isMuted } = useAudio();
@@ -161,7 +161,10 @@ const AboutRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             currentPitch.current = THREE.MathUtils.lerp(currentPitch.current, pitchAngle, lerpSpeed);
 
             // Apply to camera (base + effect)
+            // Three.js camera transforms are intentionally animated in the render loop.
+            // eslint-disable-next-line react-hooks/immutability
             camera.rotation.x = baseCameraRotation.current.x + currentPitch.current;
+            // eslint-disable-next-line react-hooks/immutability
             camera.rotation.z = baseCameraRotation.current.z + currentBank.current;
         } else {
             // Unconditionally keep these zero before flight active
