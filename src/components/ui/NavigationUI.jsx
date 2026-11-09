@@ -3,9 +3,6 @@ import gsap from 'gsap';
 import { useScene } from '../../context/SceneContext';
 import { useAudio } from '../../context/AudioManager';
 import { setMusicVolume, getMusicVolume } from '../../utils/audioManager';
-import { useAchievements } from '../../context/AchievementsContext';
-import AchievementPopup from './AchievementPopup';
-import AchievementsPanel from './AchievementsPanel';
 import '../../styles/NavigationUI.scss';
 
 // Room data for the map - positions are percentages on the map image
@@ -14,7 +11,7 @@ const ROOMS = [
     { id: 'about', label: 'About', x: 43, y: 38 },      // Paper airplane (left side)
     { id: 'gallery', label: 'Gallery', x: 43, y: 72 },  // City buildings (bottom left)
     { id: 'contact', label: 'Contact', x: 57, y: 25 },  // Pier/dock (top right)
-    { id: 'studio', label: 'Studio', x: 57, y: 55 },    // Monitors stack (right side)
+    { id: 'flight', label: 'Flight Deck', x: 57, y: 55 },
 ];
 
 // Pin starting position - the dashed circle at the bottom of the tower
@@ -23,14 +20,12 @@ const PIN_START_POSITION = { x: 50.5, y: 97 };
 const NavigationUI = () => {
     const { currentRoom, isInRoom, requestExit, hasEntered, teleportTo, isTeleporting } = useScene();
     const { isMuted, toggleMute, globalVolume, setGlobalVolume } = useAudio();
-    const { showTutorial, unlockAchievement } = useAchievements();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredRoom, setHoveredRoom] = useState(null);
     const [isExiting, setIsExiting] = useState(false); // Track when back button is clicked
 
     // Audio controls state
     const [isAudioMenuOpen, setIsAudioMenuOpen] = useState(false);
-    const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
     const [bgmVol, setBgmVol] = useState(0.3);
     const [isUIHidden, setIsUIHidden] = useState(false);
 
@@ -44,7 +39,7 @@ const NavigationUI = () => {
             if (e.detail) {
                 setIsMenuOpen(false);
                 setIsAudioMenuOpen(false);
-                setIsAchievementsOpen(false);
+
             }
         };
         window.addEventListener('inspectChange', handleInspectChange);
@@ -55,7 +50,6 @@ const NavigationUI = () => {
         about: useRef(),
         gallery: useRef(),
         contact: useRef(),
-        studio: useRef()
     };
 
     useEffect(() => {
@@ -95,17 +89,7 @@ const NavigationUI = () => {
             });
         }
 
-        // Studio (zone: right 15%, bottom 19%, width 25%, height 40%)
-        // -> X: 60% to 85% (since right=15% means left is 100-15-25=60%), Y: 41% to 81% (since bottom=19% means top is 100-19-40=41%)
-        if (paintedMapsRefs.studio.current) {
-            gsap.to(paintedMapsRefs.studio.current, {
-                clipPath: (hoveredRoom === 'studio' || currentRoom === 'studio')
-                    ? 'polygon(60% 41%, 85% 41%, 85% 81%, 60% 81%)'
-                    : 'polygon(85% 41%, 85% 41%, 85% 81%, 85% 81%)',
-                duration: 0.5,
-                ease: "power2.out"
-            });
-        }
+
     }, [hoveredRoom, currentRoom]);
 
     useEffect(() => {
@@ -124,21 +108,13 @@ const NavigationUI = () => {
         setMusicVolume(val);
     };
 
-    // Show entrance hint before entering, and explore hint when user enters
-    useEffect(() => {
-        if (!hasEntered && !isTeleporting) {
-            showTutorial('corridor_enter');
-        } else if (hasEntered && !isTeleporting && !isInRoom) {
-            showTutorial('corridor_explore');
-        }
-    }, [hasEntered, isTeleporting, isInRoom, showTutorial]);
 
     // Close menu when entering a room or starting teleport
     useEffect(() => {
         if (isInRoom || isTeleporting) {
             setIsMenuOpen(false);
             setIsAudioMenuOpen(false);
-            setIsAchievementsOpen(false);
+
             setIsExiting(false);
         }
     }, [isInRoom, isTeleporting]);
@@ -164,12 +140,12 @@ const NavigationUI = () => {
             if (e.key === 'Escape') {
                 if (isMenuOpen) setIsMenuOpen(false);
                 if (isAudioMenuOpen) setIsAudioMenuOpen(false);
-                if (isAchievementsOpen) setIsAchievementsOpen(false);
+
             }
         };
         window.addEventListener('keydown', handleEscape);
         return () => window.removeEventListener('keydown', handleEscape);
-    }, [isMenuOpen, isAudioMenuOpen, isAchievementsOpen]);
+    }, [isMenuOpen, isAudioMenuOpen]);
 
     // Focus trap handler for map panel
     const handleMapKeyDown = (e) => {
@@ -205,7 +181,7 @@ const NavigationUI = () => {
         // Close map first, then start teleport
         setIsMenuOpen(false);
         setIsAudioMenuOpen(false);
-        setIsAchievementsOpen(false);
+
         teleportTo(roomId);
     };
 
@@ -217,8 +193,6 @@ const NavigationUI = () => {
 
     return (
         <div className="navigation-ui">
-            {/* Global Achievement Popup */}
-            <AchievementPopup />
 
             {/* Back Button - Only visible in rooms, hides up when clicked */}
             {hasEntered && isInRoom && (
@@ -270,19 +244,7 @@ const NavigationUI = () => {
                             </svg>
                         )}
                     </button>
-                    {/* Achievements Toggle Button */}
-                    <button
-                        className={`nav-btn achievements-btn ${isAchievementsOpen ? 'open' : ''}`}
-                        onClick={() => setIsAchievementsOpen(!isAchievementsOpen)}
-                        aria-label="Achievements"
-                        aria-expanded={isAchievementsOpen}
-                    >
-                        <svg viewBox="0 0 24 24" className="icon-trophy">
-                            <path d="M8 21h8M12 17v4M7 4h10M5 4h14v5a7 7 0 0 1-7 7 7 7 0 0 1-7-7z" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M5 9H3V6h2" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M19 9h2V6h-2" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </button>
+
                 </div>
             )}
 
@@ -337,7 +299,6 @@ const NavigationUI = () => {
                             <img ref={paintedMapsRefs.about} src="/images/map_about_painted.webp" alt="" className="painted-map-layer" style={{ clipPath: 'polygon(10% 20%, 10% 20%, 10% 55%, 10% 55%)' }} />
                             <img ref={paintedMapsRefs.gallery} src="/images/map_gallery_painted.webp" alt="" className="painted-map-layer" style={{ clipPath: 'polygon(10% 57%, 10% 57%, 10% 92%, 10% 92%)' }} />
                             <img ref={paintedMapsRefs.contact} src="/images/map_contact_painted.webp" alt="" className="painted-map-layer" style={{ clipPath: 'polygon(95% 10%, 95% 10%, 95% 35%, 95% 35%)' }} />
-                            <img ref={paintedMapsRefs.studio} src="/images/map_studio_painted.webp" alt="" className="painted-map-layer" style={{ clipPath: 'polygon(85% 41%, 85% 41%, 85% 81%, 85% 81%)' }} />
 
                             {/* Hover Zones — 4 quadrants covering the map */}
                             <button
@@ -370,22 +331,12 @@ const NavigationUI = () => {
                                 onClick={() => handleRoomClick('contact')}
                                 aria-label="Teleport to Contact room"
                             />
-                            <button
-                                type="button"
-                                className="map-hover-zone zone-studio"
-                                onMouseEnter={() => setHoveredRoom('studio')}
-                                onMouseLeave={() => setHoveredRoom(null)}
-                                onFocus={() => setHoveredRoom('studio')}
-                                onBlur={() => setHoveredRoom(null)}
-                                onClick={() => handleRoomClick('studio')}
-                                aria-label="Teleport to Studio room"
-                            />
+
 
                             {/* Permanent Map Text Labels */}
                             <div className="map-room-label about">ABOUT</div>
                             <div className="map-room-label gallery">THE<br />GALLERY</div>
                             <div className="map-room-label contact">CONTACT</div>
-                            <div className="map-room-label studio">THE<br />STUDIO</div>
 
                             {/* Pin slot markers - 4 locations */}
                             {ROOMS.map((room) => (
@@ -479,20 +430,14 @@ const NavigationUI = () => {
                 </div>
             )}
 
-            {/* Achievements Panel */}
-            <AchievementsPanel
-                isOpen={isAchievementsOpen}
-                onClose={() => setIsAchievementsOpen(false)}
-            />
-
             {/* Overlay to close menus */}
-            {(isMenuOpen || isAudioMenuOpen || isAchievementsOpen) && (
+            {(isMenuOpen || isAudioMenuOpen) && (
                 <div
                     className="menu-overlay"
                     onClick={() => {
                         setIsMenuOpen(false);
                         setIsAudioMenuOpen(false);
-                        setIsAchievementsOpen(false);
+
                     }}
                 />
             )}
