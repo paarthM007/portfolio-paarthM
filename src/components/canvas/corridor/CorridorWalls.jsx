@@ -130,7 +130,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
         const endZ = effectiveStart - effectiveLength;
 
         // Sort doors by relativeZ descending (closest to start first) if needed
-        // relativeZ is negative (-18, -32...). -18 > -32.
+        // relativeZ values are negative and sorted from the corridor entrance toward the far end.
         const sideDoors = doorPositions
             .filter(d => d.side === side)
             .sort((a, b) => b.relativeZ - a.relativeZ);
