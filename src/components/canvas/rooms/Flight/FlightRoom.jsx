@@ -37,7 +37,7 @@ function Aircraft() {
                 <meshStandardMaterial color="#cbd9ec" metalness={0.35} roughness={0.42} />
             </mesh>
             {/* Nose */}
-            <mesh position={[0, 0, -2.55]} rotation={[Math.PI / 2, 0, 0]}>
+            <mesh position={[0, 0, -2.55]} rotation={[-Math.PI / 2, 0, 0]}>
                 <coneGeometry args={[0.2, 0.65, 16]} />
                 <meshStandardMaterial color="#7fc8dc" metalness={0.3} roughness={0.35} />
             </mesh>
