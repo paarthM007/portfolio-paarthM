@@ -471,7 +471,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             {/* Baseboard (Listwa przypodłogowa) - przycięta przy drzwiach */}
                             <mesh position={[bbOffsetX, -corridorHeight / 2 + 0.075, 0.01]}>
                                 <planeGeometry args={[bbWidth, 0.15]} />
-                                <meshBasicMaterial color={'#A7B99E'}
+                                <meshBasicMaterial color={'#B88957'}
                                     map={bbTexture}
                                     roughness={0.8}
                                     side={THREE.DoubleSide}
