@@ -7,7 +7,7 @@ import { Edges } from '@react-three/drei';
  * A low-poly origami-style paper airplane.
  * Built with BufferGeometry for full control over the shape.
  */
-const PaperAirplane = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, color = #FFFDF7 }) => {
+const PaperAirplane = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, color = '#FFFDF7' }) => {
     const meshRef = useRef();
 
     // Create paper airplane geometry
