@@ -110,11 +110,11 @@ const CorridorSegment = ({
             <group position={[0, -1.72, zOffset - SEGMENT_LENGTH / 2]}>
                 <mesh position={[-1.42, 0, 0]}>
                     <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
-                    <meshBasicMaterial color={#5F8E88} transparent opacity={0.72} />
+                    <meshBasicMaterial color={'#5F8E88'} transparent opacity={0.72} />
                 </mesh>
                 <mesh position={[1.42, 0, 0]}>
                     <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
-                    <meshBasicMaterial color={#D9A94E} transparent opacity={0.68} />
+                    <meshBasicMaterial color={'#D9A94E'} transparent opacity={0.68} />
                 </mesh>
             </group>
 
@@ -134,7 +134,7 @@ const CorridorSegment = ({
                 <Text
                     position={[1.7, 1.4, 0.3]}
                     fontSize={0.12}
-                    color={#354A45}
+                    color={'#354A45'}
                     anchorX="center"
                 >
                     #{segmentIndex}
