@@ -352,15 +352,7 @@
         margin-right: 5%;
     }
 
-    .zone-flight {
-        bottom: 0;
-        right: 0;
-        width: 25%;
-        height: 40%;
-        //background: rgba(255, 165, 0, 0.25); // DEBUG orange
-        margin-bottom: 19%;
-        margin-right: 15%;
-    }
+
 
     .map-room-label {
         position: absolute;
@@ -396,10 +388,7 @@
             left: 76%;
         }
 
-        &.flight {
-            top: 75%;
-            left: 72%;
-        }
+
     }
 
     .pin-slot {
