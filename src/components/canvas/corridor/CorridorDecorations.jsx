@@ -471,11 +471,11 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
                             <boxGeometry args={[2.0, 0.06, 0.5]} />
 
                             {/* Short sides (Right/Left) */}
-                            <meshBasicMaterial attach="material-0" color={'#A7B99E'} roughness={0.6} />
+                            <meshBasicMaterial attach="material-0" color={'#B88957'} roughness={0.6} />
                             <meshBasicMaterial attach="material-1" color="#e8e8e8" roughness={0.6} />
 
                             {/* Top (Hidden) */}
-                            <meshBasicMaterial attach="material-2" color={'#5F8E88'} roughness={0.8} />
+                            <meshBasicMaterial attach="material-2" color={'#B88957'} roughness={0.8} />
 
                             {/* Bottom - Grille Texture 
                                 Używamy przezroczystości, żeby odsłonić wewnętrzne światło.
