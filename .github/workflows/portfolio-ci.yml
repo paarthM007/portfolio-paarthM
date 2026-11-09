@@ -27,11 +27,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # The repository-wide ESLint command currently reports 224 pre-existing
-      # errors across legacy files. Keep this PR's new Flight Deck component
-      # linted while the existing lint backlog is handled separately.
-      - name: Lint new Flight Deck component
-        run: npx eslint src/components/canvas/rooms/Flight/FlightRoom.jsx
+      # The repository-wide ESLint command still has a pre-existing legacy backlog.
+      # Lint the restored About room airplane and its component directly.
+      - name: Lint About room airplane
+        run: npx eslint src/components/canvas/rooms/About/AboutRoom.jsx src/components/canvas/rooms/About/PaperAirplane.jsx
 
       - name: Build production bundle
         run: npm run build
