@@ -64,7 +64,7 @@ export function loadSanityData() {
                         techStack
                     }
                 `),
-                // 3. Awards (Certyfikaty w About)
+                // 2. Awards (certificates in About)
                 sanityClient.fetch(`
                     *[_type == "awardCertificate"] {
                         title,
@@ -108,7 +108,7 @@ export function loadSanityData() {
                         layout: 'certificate_grid',
                         title: 'Site of the Day Awards',
                         items: mapItems(awardsData.filter(a => a.category === 'sotd')),
-                        platformConfig: { label: 'ACHIEVEMENT', color: '#1a1a1a', icon: '🏆' }
+                        platformConfig: { label: 'AWARD', color: '#1a1a1a', icon: '🏆' }
                     },
                     sotm: {
                         id: 'award-sotm',
@@ -144,7 +144,7 @@ export function loadSanityData() {
                 });
             }
 
-            // 3. Nagrody (certyfikaty w oknach 2D) - preload w przeglądarce
+            // 2. Awards (certificates in 2D overlays) - browser preload
             if (cache.awards) {
                 ['sotd', 'sotm', 'other'].forEach(category => {
                     cache.awards[category].items.forEach(item => {
