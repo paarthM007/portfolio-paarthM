@@ -29,6 +29,8 @@ This application is strictly optimized for cross-device operability, achieving z
 
 ## 🏗️ 3D Scene Architecture
 
+The customized room set is **Gallery**, **About**, **Contact**, and **Flight Deck**. The corridor uses a restrained futuristic palette with cool blue and violet accents. Studio, gamified achievements, and hidden Easter-egg systems are not part of this build.
+
 ```mermaid
 graph TD;
     A[App.jsx] --> B[SceneProvider Context];
@@ -40,12 +42,12 @@ graph TD;
     E --> G[Infinite Corridor Manager];
     
     G --> H[Gallery Room];
-    G --> I[Studio Room];
     G --> J[Contact Room];
     G --> K[About Room];
+    G --> L[Flight Deck];
     
-    H -.-> L{useTexture & useGLTF};
-    L -.-> M(GPU Memory);
+    H -.-> M{useTexture & useGLTF};
+    M -.-> N(GPU Memory);
 ```
 
 ---
