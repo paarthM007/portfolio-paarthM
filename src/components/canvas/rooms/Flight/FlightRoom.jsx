@@ -114,8 +114,6 @@ const FlightRoom = ({ showRoom, onReady, isExiting, isWarmup = false }) => {
 
     return (
         <group>
-            <color attach="background" args={['#b9d4ec']} />
-            <fog attach="fog" args={['#c8dcef', 22, 105]} />
             <ambientLight intensity={1.25} color="#e5efff" />
             <directionalLight position={[8, 12, 5]} intensity={1.7} color="#fff2dc" />
             <pointLight position={[0, 4, -12]} intensity={0.7} color="#83cce0" distance={32} />
@@ -124,6 +122,12 @@ const FlightRoom = ({ showRoom, onReady, isExiting, isWarmup = false }) => {
             <mesh position={[-13, 9, -70]}>
                 <sphereGeometry args={[3.2, 24, 20]} />
                 <meshBasicMaterial color="#f8e8c8" />
+            </mesh>
+
+            {/* Cool blue sky dome */}
+            <mesh position={[0, 0, -40]}>
+                <sphereGeometry args={[112, 32, 20]} />
+                <meshBasicMaterial color="#b9d4ec" side={THREE.BackSide} />
             </mesh>
 
             {/* Distant horizon */}
