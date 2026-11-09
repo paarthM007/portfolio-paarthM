@@ -54,20 +54,23 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
     // Pre-allocate Vector3 to avoid per-frame garbage collection
     const worldPosVec = useRef(new THREE.Vector3());
 
-    // Letter positions for ITOM split effect
+    // Letter positions for Paarth's name reveal
     const letters = useMemo(() => [
-        { char: 'I', baseX: -0.95, splitDir: -1.6, delay: 0 },
-        { char: 'T', baseX: -0.43, splitDir: -0.6, delay: 0 },
-        { char: 'O', baseX: 0.23, splitDir: 0.6, delay: 0 },
-        { char: 'M', baseX: 0.95, splitDir: 1.8, delay: 0 },
+        { char: 'P', baseX: -1.35, splitDir: -1.8, delay: 0 },
+        { char: 'A', baseX: -0.81, splitDir: -1.1, delay: 0 },
+        { char: 'A', baseX: -0.27, splitDir: -0.4, delay: 0 },
+        { char: 'R', baseX: 0.27, splitDir: 0.4, delay: 0 },
+        { char: 'T', baseX: 0.81, splitDir: 1.1, delay: 0 },
+        { char: 'H', baseX: 1.35, splitDir: 1.8, delay: 0 },
     ], []);
 
     // Tagline words for split effect
     const taglineWords = useMemo(() => [
-        { text: '<', baseX: -0.85, splitDir: -1.5, delay: 0 },
-        { text: 'creative', baseX: -0.4, splitDir: -0.8, delay: 0 },
-        { text: 'developer', baseX: 0.4, splitDir: 0.8, delay: 0 },
-        { text: '/>', baseX: 0.85, splitDir: 1.5, delay: 0 },
+        { text: '<', baseX: -1.12, splitDir: -1.5, delay: 0 },
+        { text: 'engineer', baseX: -0.58, splitDir: -0.8, delay: 0 },
+        { text: '•', baseX: 0.02, splitDir: 0, delay: 0 },
+        { text: 'builder', baseX: 0.58, splitDir: 0.8, delay: 0 },
+        { text: '/>', baseX: 1.12, splitDir: 1.5, delay: 0 },
     ], []);
 
     // Animation loop
@@ -97,7 +100,7 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
 
         splitAmount.current = THREE.MathUtils.lerp(splitAmount.current, targetSplit.current, 0.08);
 
-        // Apply split to each letter of ITOM
+        // Apply split to each letter of PAARTH
         letterRefs.current.forEach((ref, i) => {
             if (ref) {
                 // Ensure opacity is 1
@@ -131,13 +134,13 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
 
     return (
         <group ref={groupRef} position={position} scale={[scale, scale, 1]}>
-            {/* ITOM Letters - Rubik Scribble font with fade-in animation */}
+            {/* PAARTH Letters - Rubik Scribble font with fade-in animation */}
             {letters.map((letter, i) => (
                 <Text
                     key={letter.char}
                     ref={(el) => (letterRefs.current[i] = el)}
                     position={[letter.baseX, 0.2, 0]}
-                    fontSize={0.9}
+                    fontSize={0.76}
                     font={RUBIK_SCRIBBLE_URL}
                     color="#ffffff"
                     outlineWidth={0.012}
