@@ -339,7 +339,7 @@ const NavigationUI = () => {
                             <img ref={paintedMapsRefs.gallery} src="/images/map_gallery_painted.webp" alt="" className="painted-map-layer" style={{ clipPath: 'polygon(10% 57%, 10% 57%, 10% 92%, 10% 92%)' }} />
                             <img ref={paintedMapsRefs.contact} src="/images/map_contact_painted.webp" alt="" className="painted-map-layer" style={{ clipPath: 'polygon(95% 10%, 95% 10%, 95% 35%, 95% 35%)' }} />
 
-                            {/* Hover Zones — 4 quadrants covering the map */}
+                            {/* Hover Zones — three active room regions */}
                             <button
                                 type="button"
                                 className="map-hover-zone zone-about"
