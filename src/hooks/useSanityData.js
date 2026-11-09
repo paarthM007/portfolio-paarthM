@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { sanityClient, urlFor, getProxyUrl } from '../config/sanity';
 import { useTexture } from '@react-three/drei';
-import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
 
 // Flaga bezpieczeństwa: Jeśli użytkownik nie wpisał jeszcze Project ID, 
 // hooki zwrócą null, co pozwoli na załadowanie danych hardcodowanych (fallback).
@@ -11,7 +9,6 @@ export const isSanityConfigured = sanityClient.config().projectId !== 'YOUR_PROJ
 // Globalny cache dla danych z Sanity
 const cache = {
     projects: null,
-    content: null,
     awards: null,
     loading: false,
     loaded: false,
@@ -54,7 +51,7 @@ export function loadSanityData() {
 
     fetchPromise = (async () => {
         try {
-            const [projectsData, contentData, awardsData] = await Promise.all([
+            const [projectsData, awardsData] = await Promise.all([
                 // 1. Projects (Galeria)
                 sanityClient.fetch(`
                     *[_type == "galleryProject"] {
@@ -66,22 +63,6 @@ export function loadSanityData() {
                         paintedImage,
                         techStack
                     }
-                `),
-                // 2. Studio Content
-                sanityClient.fetch(`
-                    *[_type == "studioItem"] {
-                        title,
-                        platform,
-                        description,
-                        url,
-                        frontTexture,
-                        paintedFrontTexture,
-                        date,
-                        views,
-                        likes,
-                        duration,
-                        readTime
-                    } | order(date desc)
                 `),
                 // 3. Awards (Certyfikaty w About)
                 sanityClient.fetch(`
@@ -105,20 +86,6 @@ export function loadSanityData() {
                         front: frontUrl,
                         painted: paintedUrl,
                         techStack: p.techStack ? p.techStack.map(t => '/textures/gallery/' + t) : []
-                    };
-                });
-            }
-
-            // Mapowanie danych studio, przypisanie id oraz optymalizacja obrazków z Sanity
-            if (contentData && contentData.length > 0) {
-                cache.content = contentData.map((item, index) => {
-                    const frontTextureUrl = item.frontTexture ? getProxyUrl(urlFor(item.frontTexture).width(1024).quality(80).auto('format')) : null;
-                    const paintedFrontTextureUrl = item.paintedFrontTexture ? getProxyUrl(urlFor(item.paintedFrontTexture).width(1024).quality(80).auto('format')) : null;
-                    return {
-                        ...item,
-                        id: item.platform + '-' + index,
-                        frontTexture: frontTextureUrl,
-                        paintedFrontTexture: paintedFrontTextureUrl
                     };
                 });
             }
@@ -177,21 +144,6 @@ export function loadSanityData() {
                 });
             }
 
-            // 2. Studio
-            if (cache.content) {
-                cache.content.forEach(c => {
-                    if (c.frontTexture) {
-                        useLoader.preload(TextureLoader, c.frontTexture);
-                        preloadBrowserImage(c.frontTexture);
-                    }
-                    // Optymalizacja mobilna: Ładujemy malowane wersje TYLKO dla komputerów (z myszką/hover)
-                    if (c.paintedFrontTexture && supportsHover) {
-                        useLoader.preload(TextureLoader, c.paintedFrontTexture);
-                        preloadBrowserImage(c.paintedFrontTexture);
-                    }
-                });
-            }
-
             // 3. Nagrody (certyfikaty w oknach 2D) - preload w przeglądarce
             if (cache.awards) {
                 ['sotd', 'sotm', 'other'].forEach(category => {
@@ -244,27 +196,6 @@ export function useGalleryProjects() {
     }, []);
 
     return projects;
-}
-
-export function useStudioContent() {
-    const [content, setContent] = useState(cache.content);
-
-    useEffect(() => {
-        loadSanityData();
-
-        if (cache.loaded) {
-            setContent(cache.content);
-            return;
-        }
-
-        const handleUpdate = () => {
-            setContent(cache.content);
-        };
-
-        return subscribe(handleUpdate);
-    }, []);
-
-    return content;
 }
 
 export function useAwards() {
