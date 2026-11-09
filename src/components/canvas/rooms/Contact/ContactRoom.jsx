@@ -351,12 +351,13 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
             {/* Full-scene light-blue sky dome; rendered behind all Contact room objects */}
             <mesh position={[0, 0, 0]} renderOrder={-1000} frustumCulled={false}>
-                <sphereGeometry args={[500, 48, 32]} />
+                <sphereGeometry args={[80, 48, 32]} />
                 <meshBasicMaterial
                     color="#A9DDF7"
                     side={THREE.BackSide}
                     toneMapped={false}
                     depthWrite={false}
+                depthTest={false}
                 />
             </mesh>
 
