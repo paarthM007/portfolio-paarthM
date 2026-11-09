@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import CorridorWalls from './CorridorWalls';
 import DoorSection from './DoorSection';
 import SegmentDoors from './SegmentDoors';
-import Avatar from './Avatar';
 import HeroText from './HeroText';
 import Doodles from './Doodles';
 import CorridorDecorations from './CorridorDecorations';
@@ -122,10 +121,6 @@ const CorridorSegment = ({
             <group position={[0, 0, zOffset - 2]}>
                 {/* ITOM Text - centered (ITOM letters adjusted internally) */}
                 <HeroText position={[0, -0.1, -0.5]} />
-
-                {/* Avatar - center */}
-                <Avatar position={[0, -0.61, -0.3]} />
-
 
                 {/* Doodles around avatar */}
                 <Doodles />
