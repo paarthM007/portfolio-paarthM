@@ -116,7 +116,7 @@ const StoryMilestone = ({
                     titleColor: '#2a2a2a',
                     subtitleSize: 0.35,
                     subtitleColor: '#666666',
-                    decorColor: '#ffd700'
+                    decorColor: '#B88957'
                 };
             case 'journey':
                 return {
@@ -124,7 +124,7 @@ const StoryMilestone = ({
                     titleColor: '#2a2a2a',
                     subtitleSize: 0.35,
                     subtitleColor: '#666666',
-                    decorColor: '#87CEEB'
+                    decorColor: '#B88957'
                 };
             case 'skills':
                 return {
@@ -132,7 +132,7 @@ const StoryMilestone = ({
                     titleColor: '#2a2a2a',
                     subtitleSize: 0.35,
                     subtitleColor: '#666666',
-                    decorColor: '#90EE90'
+                    decorColor: '#B88957'
                 };
             default:
                 return {
