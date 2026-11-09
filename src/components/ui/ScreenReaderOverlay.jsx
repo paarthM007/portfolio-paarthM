@@ -51,11 +51,6 @@ const ScreenReaderOverlay = () => {
                                     Contact — Get in touch with me
                                 </button>
                             </li>
-                            <li>
-                                <button onClick={() => teleportTo('flight')} type="button">
-                                    Flight Deck — Take a flight above the clouds
-                                </button>
-                            </li>
                         </ul>
                     </>
                 )}
@@ -66,7 +61,7 @@ const ScreenReaderOverlay = () => {
                             You are in the {currentRoom === 'about' ? 'About' :
                                 currentRoom === 'gallery' ? 'Gallery' :
                                     currentRoom === 'contact' ? 'Contact' :
-                                        currentRoom === 'flight' ? 'Flight Deck' : currentRoom} room.
+                                        currentRoom} room.
                         </p>
                         <button onClick={requestExit} type="button">
                             Go back to corridor
@@ -120,12 +115,6 @@ const ScreenReaderOverlay = () => {
                                 <p>Find my social media links displayed as floating barrels. Click to visit my profiles on LinkedIn, GitHub, and other platforms.</p>
                             </div>
                         )}
-                        {currentRoom === 'flight' && (
-                            <div aria-label="Flight Deck room content">
-                                <h3>Flight Deck</h3>
-                                <p>Enjoy an interactive aeroplane ride through animated clouds.</p>
-                            </div>
-                        )}
 
                         {/* Quick navigation to other rooms */}
                         <h3>Quick Navigation</h3>
@@ -138,9 +127,6 @@ const ScreenReaderOverlay = () => {
                             )}
                             {currentRoom !== 'contact' && (
                                 <li><button onClick={() => teleportTo('contact')} type="button">Go to Contact</button></li>
-                            )}
-                            {currentRoom !== 'flight' && (
-                                <li><button onClick={() => teleportTo('flight')} type="button">Go to Flight Deck</button></li>
                             )}
                         </ul>
                     </>
