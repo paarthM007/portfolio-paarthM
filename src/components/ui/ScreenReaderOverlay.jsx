@@ -1,5 +1,5 @@
 import { useScene } from '../../context/SceneContext';
-import { useGalleryProjects, useStudioContent, useAwards } from '../../hooks/useSanityData';
+import { useGalleryProjects, useAwards } from '../../hooks/useSanityData';
 import '../../styles/ScreenReaderOverlay.scss';
 
 /**
@@ -14,7 +14,6 @@ const ScreenReaderOverlay = () => {
     
     // Pobieranie danych do wygenerowania niewidocznego HTML-a dla SEO / robotów
     const projects = useGalleryProjects();
-    const studio = useStudioContent();
     const awards = useAwards();
 
     return (
@@ -53,8 +52,8 @@ const ScreenReaderOverlay = () => {
                                 </button>
                             </li>
                             <li>
-                                <button onClick={() => teleportTo('studio')} type="button">
-                                    The Studio — Technologies and experience
+                                <button onClick={() => teleportTo('flight')} type="button">
+                                    Flight Deck — Take a flight above the clouds
                                 </button>
                             </li>
                         </ul>
@@ -67,7 +66,7 @@ const ScreenReaderOverlay = () => {
                             You are in the {currentRoom === 'about' ? 'About' :
                                 currentRoom === 'gallery' ? 'Gallery' :
                                     currentRoom === 'contact' ? 'Contact' :
-                                        currentRoom === 'studio' ? 'Studio' : currentRoom} room.
+                                        currentRoom === 'flight' ? 'Flight Deck' : currentRoom} room.
                         </p>
                         <button onClick={requestExit} type="button">
                             Go back to corridor
@@ -121,22 +120,10 @@ const ScreenReaderOverlay = () => {
                                 <p>Find my social media links displayed as floating barrels. Click to visit my profiles on LinkedIn, GitHub, and other platforms.</p>
                             </div>
                         )}
-                        {currentRoom === 'studio' && (
-                            <div aria-label="Studio room content">
-                                <h3>The Studio</h3>
-                                <p>Explore my experience and skills on rotating monitors. Click a monitor to read detailed information about my work.</p>
-
-                                {studio && studio.length > 0 && (
-                                    <ul>
-                                        {studio.map((s, i) => (
-                                            <li key={i}>
-                                                <h4>{s.title} ({s.platform})</h4>
-                                                <p>{s.description}</p>
-                                                {s.url && <a href={s.url}>View content</a>}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                        {currentRoom === 'flight' && (
+                            <div aria-label="Flight Deck room content">
+                                <h3>Flight Deck</h3>
+                                <p>Enjoy an interactive aeroplane ride through animated clouds.</p>
                             </div>
                         )}
 
@@ -152,8 +139,8 @@ const ScreenReaderOverlay = () => {
                             {currentRoom !== 'contact' && (
                                 <li><button onClick={() => teleportTo('contact')} type="button">Go to Contact</button></li>
                             )}
-                            {currentRoom !== 'studio' && (
-                                <li><button onClick={() => teleportTo('studio')} type="button">Go to Studio</button></li>
+                            {currentRoom !== 'flight' && (
+                                <li><button onClick={() => teleportTo('flight')} type="button">Go to Flight Deck</button></li>
                             )}
                         </ul>
                     </>
