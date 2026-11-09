@@ -2,8 +2,6 @@ import { useState, Suspense, useEffect, useCallback, useLayoutEffect, lazy } fro
 import { Canvas, useThree, useFrame, useLoader } from '@react-three/fiber';
 import { Preload, useTexture, Text, PerformanceMonitor } from '@react-three/drei';
 import * as THREE from 'three';
-import { SCENE_PALETTE } from './config/scenePalette';
-
 import Preloader from './components/dom/Preloader';
 import PaperTransition from './components/dom/PaperTransition';
 import { AudioProvider, useAudio } from './context/AudioManager';
@@ -174,8 +172,8 @@ function AppContent() {
               dpr={settings.dpr}
               shadows={settings.shadows}
             >
-              <color attach="background" args={[SCENE_PALETTE.paper]} />
-              <fog attach="fog" args={[SCENE_PALETTE.wall, 15, 50]} />
+              <color attach="background" args={[#F6F0E5]} />
+              <fog attach="fog" args={[#E9E7D8, 15, 50]} />
 
               {/* Scale performance down if fps drops */}
               <PerformanceMonitor
