@@ -3,7 +3,6 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { Text, PositionalAudio } from '@react-three/drei';
 import * as THREE from 'three';
 import PaperAirplane from './PaperAirplane';
-import { SCENE_PALETTE } from '../../../../config/scenePalette';
 import InfiniteSkyManager from './InfiniteSkyManager';
 import StoryMilestone from './StoryMilestone';
 import { useScene } from '../../../../context/SceneContext';
@@ -240,7 +239,7 @@ const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
 
             {/* === PAPER AIRPLANE (follows camera manoeuvres) === */}
             <group ref={airplaneGroupRef} position={[0, -0.3, 1]}>
-                <PaperAirplane scale={0.8} color={SCENE_PALETTE.chalk} />
+                <PaperAirplane scale={0.8} color={#FFFDF7} />
             </group>
 
             {/* === INFINITE SKY WITH CLOUDS + STORY MILESTONES === */}
