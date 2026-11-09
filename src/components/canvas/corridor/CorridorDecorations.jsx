@@ -415,7 +415,7 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             height: 2.5 / 1.785,
             y: 0.35,
             id: 'frame-4',
-            signature: "The difference between genius\nand stupidity is that genius\nhas its limits.\n\n— Commonly attributed to Einstein",
+            signature: "It always seems impossible\nuntil it’s done.\n\n— Nelson Mandela",
             signatureX: 0,
             signatureY: 0,
             signatureSize: 0.12,
