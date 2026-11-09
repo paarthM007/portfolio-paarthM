@@ -75,6 +75,12 @@ export function useDocumentMeta() {
         const ogDesc = document.querySelector('meta[property="og:description"]');
         if (ogDesc) ogDesc.setAttribute('content', meta.description);
 
+        const ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) ogImage.setAttribute('content', `${window.location.origin}/og-image.svg`);
+
+        const twitterImage = document.querySelector('meta[name="twitter:image"]');
+        if (twitterImage) twitterImage.setAttribute('content', `${window.location.origin}/og-image.svg`);
+
         const ogUrl = document.querySelector('meta[property="og:url"]');
         if (ogUrl) ogUrl.setAttribute('content', `${window.location.origin}${meta.path}`);
 
