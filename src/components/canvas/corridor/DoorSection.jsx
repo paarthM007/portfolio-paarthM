@@ -69,6 +69,7 @@ const DoorSection = ({
     label,
     roomId, // Room ID used by the scene context
     icon,
+    color = '#5F8E88',
     onEnter,
     autoCloseDelay = 3000,
     enterDistance = 8, // Default fly-through distance
@@ -947,7 +948,7 @@ const DoorSection = ({
             <group ref={groupRef}>
                 {/* Wall segment with door hole */}
                 <mesh position={[wallOffsetX, 0, 0]} geometry={wallWithHoleGeometry}>
-                    <meshBasicMaterial color="#e0e0e0" map={wallTexture} roughness={1} metalness={0} side={THREE.DoubleSide} />
+                    <meshBasicMaterial color="#F6F0E5" map={wallTexture} roughness={1} metalness={0} side={THREE.DoubleSide} />
                 </mesh>
 
                 {/* === ARROW DECORATION === */}
@@ -1064,6 +1065,10 @@ const DoorSection = ({
                                 roughness={0.8}
                             />
                         </mesh>
+                        <mesh position={[0, -0.275, 0.015]}>
+                            <planeGeometry args={[0.72, 0.035]} />
+                            <meshBasicMaterial color={color} toneMapped={false} />
+                        </mesh>
 
                         {/* === DYNAMIC TEXT FOR SIGNS === */}
                         {label === 'THE GALLERY' && (
@@ -1071,7 +1076,7 @@ const DoorSection = ({
                                 <Text
                                     font="/fonts/CabinSketch-Bold.ttf"
                                     fontSize={0.25}
-                                    color="#111111"
+                                    color={color}
                                     anchorX="center"
                                     anchorY="bottom"
                                     position={[0, -0.02, 0]}
@@ -1113,18 +1118,6 @@ const DoorSection = ({
                                 position={[0, 0, 0.01]}
                             >
                                 CONTACT
-                            </Text>
-                        )}
-                        {label === 'THE FLIGHT DECK' && (
-                            <Text
-                                font="/fonts/CabinSketch-Bold.ttf"
-                                fontSize={0.22}
-                                color="#28445f"
-                                anchorX="center"
-                                anchorY="middle"
-                                position={[0, 0, 0.01]}
-                            >
-                                FLIGHT DECK
                             </Text>
                         )}
                     </group>
