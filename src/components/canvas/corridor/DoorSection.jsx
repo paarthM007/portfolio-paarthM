@@ -1115,6 +1115,18 @@ const DoorSection = ({
                                 CONTACT
                             </Text>
                         )}
+                        {label === 'THE FLIGHT DECK' && (
+                            <Text
+                                font="/fonts/CabinSketch-Bold.ttf"
+                                fontSize={0.22}
+                                color="#28445f"
+                                anchorX="center"
+                                anchorY="middle"
+                                position={[0, 0, 0.01]}
+                            >
+                                FLIGHT DECK
+                            </Text>
+                        )}
                     </group>
 
                     {/* === DOOR FRAME (textured) === */}
