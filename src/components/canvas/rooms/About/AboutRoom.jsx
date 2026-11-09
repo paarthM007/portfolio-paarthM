@@ -1,13 +1,11 @@
 import { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, PositionalAudio } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import PaperAirplane from './PaperAirplane';
 import InfiniteSkyManager from './InfiniteSkyManager';
 import StoryMilestone from './StoryMilestone';
 import { useScene } from '../../../../context/SceneContext';
-import { useAudio } from '../../../../context/AudioManager';
-
 // Chunk length for looping flight effect (matches SkyChunk)
 const CHUNK_LENGTH = 40;
 
@@ -224,16 +222,7 @@ const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
     return (
         <group ref={roomRef} position={[0, 0, -25]}>
             {!isWarmup && (
-                <PositionalAudio
-                    ref={audioRef}
-                    url="/sounds/szumwiatru.mp3"
-                    distanceModel="exponential"
-                    refDistance={AUDIO_SETTINGS.distance}
-                    rolloffFactor={AUDIO_SETTINGS.rolloff}
-                    loop
-                    autoplay
-                    volume={effectiveVolume}
-                />
+                
             )}
 
 
