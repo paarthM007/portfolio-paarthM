@@ -757,3 +757,58 @@
         width: 100%;
     }
 }
+
+// First-visit room guidance, kept separate from the removed achievement system.
+.room-hint {
+    position: fixed;
+    left: 50%;
+    bottom: clamp(5rem, 10vh, 7rem);
+    z-index: 70;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    max-width: min(90vw, 34rem);
+    padding: 0.8rem 1.15rem;
+    transform: translateX(-50%);
+    border: 1px solid rgba(113, 201, 223, 0.34);
+    border-radius: 999px;
+    background: rgba(15, 27, 43, 0.82);
+    color: #edf5ff;
+    box-shadow: 0 12px 34px rgba(22, 40, 65, 0.16);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.015em;
+    text-align: center;
+    pointer-events: none;
+    animation: roomHintIn 0.35s ease both;
+
+    &__indicator {
+        width: 0.42rem;
+        height: 0.42rem;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: #71c9df;
+        box-shadow: 0 0 12px rgba(113, 201, 223, 0.55);
+    }
+
+    @media (max-width: 600px) {
+        bottom: 5.5rem;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.7rem;
+        border-radius: 1rem;
+    }
+}
+
+@keyframes roomHintIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 8px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
