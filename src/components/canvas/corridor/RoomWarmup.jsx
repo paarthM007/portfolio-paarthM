@@ -5,13 +5,12 @@ import { useFrame, useThree } from '@react-three/fiber';
 import GalleryRoom from '../rooms/Gallery/GalleryRoom';
 import AboutRoom from '../rooms/About/AboutRoom';
 import ContactRoom from '../rooms/Contact/ContactRoom';
-import FlightRoom from '../rooms/Flight/FlightRoom';
 import { isSanityDataLoaded } from '../../../hooks/useSanityData';
 
 /**
  * RoomWarmup Component
  * 
- * Mounts all 4 portfolio experiences off-screen during the preloader phase to force
+ * Mounts all 3 portfolio experiences off-screen during the preloader phase to force
  * shader compilation and texture upload to GPU. After a few frames,
  * it unmounts the rooms to free memory. This ensures the first room
  * entry has zero shader compilation stutter.
@@ -89,11 +88,6 @@ const RoomWarmup = ({ onWarmupComplete, isLowTier }) => {
             <Suspense fallback={null}>
                 <group position={[-20, 0, 0]}>
                     <GalleryRoom showRoom={true} onReady={noop} isExiting={false} isWarmup={true} />
-                </group>
-            </Suspense>
-            <Suspense fallback={null}>
-                <group position={[20, 0, 0]}>
-                    <FlightRoom showRoom={true} onReady={noop} isExiting={false} isWarmup={true} />
                 </group>
             </Suspense>
             <Suspense fallback={null}>
