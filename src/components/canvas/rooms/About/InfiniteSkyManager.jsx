@@ -1,6 +1,6 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
-import { Text, PositionalAudio } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import SkyChunk, { CHUNK_LENGTH, ROOM_Z } from './SkyChunk';
@@ -19,8 +19,6 @@ const _tempVec3 = new THREE.Vector3();
  * World group moves with scroll, chunks stay at fixed positions relative to group.
  * Includes Story Milestones that loop with the content!
  */
-
-import { useAudio } from '../../../../context/AudioManager';
 
 export const BALLOON_AUDIO_SETTINGS = {
     volume: 1.0,
@@ -1318,14 +1316,7 @@ const SkillBalloon = ({ config, revealFactorRef, spreadFactorRef, timeRef }) => 
                     </Text>
                 )}
 
-                <PositionalAudio
-                    ref={balloonAudioRef}
-                    url="/sounds/baloonpoop.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={BALLOON_AUDIO_SETTINGS.rolloff}
-                    refDistance={BALLOON_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
+                
             </group>
         </group>
     );
