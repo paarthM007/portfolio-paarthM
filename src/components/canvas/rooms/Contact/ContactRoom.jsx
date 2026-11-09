@@ -1,14 +1,12 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, PositionalAudio } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import MessagePaper from './MessagePaper';
 import SocialBarrel from './SocialBarrel';
 import { useScene } from '../../../../context/SceneContext';
 import GalleryClouds from '../Gallery/GalleryClouds';
-import { useAudio } from '../../../../context/AudioManager';
-
 // ============================================
 // ============================================
 // 🌊 CONTACT ROOM v2 - MESSAGE IN A BOTTLE
@@ -350,16 +348,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     return (
         <group ref={groupRef} position={[0, -0.7, -5]}>
             {!isWarmup && (
-                <PositionalAudio
-                    ref={audioRef}
-                    url="/sounds/szummorza.mp3"
-                    distanceModel="exponential"
-                    refDistance={AUDIO_SETTINGS.distance}
-                    rolloffFactor={AUDIO_SETTINGS.rolloff}
-                    loop
-                    autoplay
-                    volume={effectiveVolume}
-                />
+                
             )}
 
             {/* Light-blue sky backdrop behind the clouds and lighthouse */}
@@ -431,7 +420,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 <planeGeometry args={[2.5, 7]} />
                 <meshBasicMaterial
                     map={moloTexture}
-                    color="#e0e0e0"
+                    color="#B88957"
                     roughness={0.8}
                     side={THREE.DoubleSide}
                     transparent
