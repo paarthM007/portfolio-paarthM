@@ -233,7 +233,7 @@ const SegmentDoors = ({
             {/* Warm sage-and-teal header trim makes the corridor end doors part of the same palette. */}
             <mesh position={[0, frameCenterY + frameHeight / 2 - 0.045, 0.105]}>
                 <boxGeometry args={[frameWidth, 0.055, 0.035]} />
-                <meshBasicMaterial color={'#5F8E88'} />
+                <meshBasicMaterial color={'#B88957'} />
             </mesh>
 
             {/* === LEFT DOOR === */}
@@ -329,7 +329,7 @@ const SegmentDoors = ({
             {/* <pointLight
                 position={[0, doorBottomY + doorHeight * 0.5, 1]}
                 intensity={0.6}
-                color={'#D9A94E'}
+                color={'#B88957'}
                 distance={6}
                 decay={2}
             /> */}
