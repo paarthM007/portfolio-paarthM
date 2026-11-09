@@ -50,7 +50,7 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE GALLERY',
                 icon: '◈',
-                color: #5F8E88
+                color: '#5F8E88'
             },
             {
                 id: `about-${segmentIndex}`,
@@ -59,7 +59,7 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE ABOUT',
                 icon: '★',
-                color: #D9A94E,
+                color: '#D9A94E',
                 enterDistance: 25 // Enter deep into the room (clouds are far back)
             },
             {
@@ -69,7 +69,7 @@ const CorridorSegment = ({
                 side: 'right',
                 label: "LET'S CONNECT",
                 icon: '✉',
-                color: #C97D66
+                color: '#C97D66'
             },
         ];
 
