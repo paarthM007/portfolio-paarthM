@@ -350,8 +350,8 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         <group ref={groupRef} position={[0, -0.7, -5]}>
 
             {/* Full-scene light-blue sky dome; rendered behind all Contact room objects */}
-            <mesh position={[0, 0, 0]} renderOrder={-1000}>
-                <sphereGeometry args={[180, 32, 24]} />
+            <mesh position={[0, 0, 0]} renderOrder={-1000} frustumCulled={false}>
+                <sphereGeometry args={[500, 48, 32]} />
                 <meshBasicMaterial
                     color="#A9DDF7"
                     side={THREE.BackSide}
