@@ -17,6 +17,13 @@ const ROOMS = [
 // Pin starting position - the dashed circle at the bottom of the tower
 const PIN_START_POSITION = { x: 50.5, y: 97 };
 
+const ROOM_HINTS = {
+    about: 'Scroll to fly through my story',
+    gallery: 'Scroll to browse projects · Click a card to inspect',
+    contact: 'Choose a contact method to get in touch',
+    flight: 'Settle in and enjoy the flight above the clouds',
+};
+
 const NavigationUI = () => {
     const { currentRoom, isInRoom, requestExit, hasEntered, teleportTo, isTeleporting } = useScene();
     const { isMuted, globalVolume, setGlobalVolume } = useAudio();
@@ -28,6 +35,7 @@ const NavigationUI = () => {
     const [isAudioMenuOpen, setIsAudioMenuOpen] = useState(false);
     const [bgmVol, setBgmVol] = useState(0.3);
     const [isUIHidden, setIsUIHidden] = useState(false);
+    const [roomHint, setRoomHint] = useState(null);
 
     // Refs for focus management
     const mapPanelRef = useRef();
@@ -107,6 +115,23 @@ const NavigationUI = () => {
         setMusicVolume(val);
     };
 
+
+    // Keep lightweight first-visit room guidance without the removed achievement system.
+    useEffect(() => {
+        if (!isInRoom || !currentRoom) {
+            setRoomHint(null);
+            return;
+        }
+
+        const hint = ROOM_HINTS[currentRoom];
+        const storageKey = `portfolio_room_hint_${currentRoom}`;
+        if (!hint || localStorage.getItem(storageKey)) return;
+
+        setRoomHint(hint);
+        localStorage.setItem(storageKey, 'seen');
+        const timeout = window.setTimeout(() => setRoomHint(null), 4200);
+        return () => window.clearTimeout(timeout);
+    }, [currentRoom, isInRoom]);
 
     // Close menu when entering a room or starting teleport
     useEffect(() => {
@@ -190,6 +215,12 @@ const NavigationUI = () => {
 
     return (
         <div className="navigation-ui">
+            {roomHint && (
+                <div className="room-hint" role="status">
+                    <span className="room-hint__indicator" aria-hidden="true" />
+                    {roomHint}
+                </div>
+            )}
 
             {/* Back Button - Only visible in rooms, hides up when clicked */}
             {hasEntered && isInRoom && (
