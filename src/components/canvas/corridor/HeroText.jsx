@@ -13,8 +13,7 @@ let hasPlayedDrawAnimation = false;
 /**
  * HeroText Component - Hand-drawn Style with Sketch Fonts
  * 
- * WOW Effects for Awwwards SOTD:
- * - ITOM in Rubik Scribble font (splits into letters during scroll)
+ * Hand-drawn Paarth wordmark with split-letter animation
  * - Creative developer in Cabin Sketch font (also splits)
  * - Floating micro-animations
  * - Parallax split effect
