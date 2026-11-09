@@ -330,9 +330,7 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
     const frameTexture = useTexture('/textures/corridor/ramkanazdjecieduza.webp');
     const framePaintedTexture = useTexture('/textures/corridor/ramkanazdjecieduza_painted.webp');
     const standingFrameTexture = useTexture('/textures/corridor/ramkanazdjeciemala.webp');
-    const treeTexture = useTexture('/textures/corridor/drzewkowdoniczce.webp');
     const grateTexture = useTexture('/textures/corridor/kratkawentylacyjna.webp');
-    const flowerTexture = useTexture('/textures/corridor/kwiatekwdoniczce.webp');
 
     // --- Ceiling Lights (punkty światła) ---
     // Tekstury lamp
@@ -534,35 +532,49 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
                 ].map((pos, i) => (
                     <mesh key={`leg-${i}`} position={[pos[0], tableConfig.height / 2, pos[1]]}>
                         <boxGeometry args={[tableConfig.legRadius * 2, tableConfig.height, tableConfig.legRadius * 2]} />
-                        <meshBasicMaterial color={'#F6F0E5'} map={legTexture} roughness={0.8} />
+                        <meshBasicMaterial color={'#8B5738'} map={legTexture} roughness={0.8} />
                     </mesh>
                 ))}
 
                 {/* Blat stolika */}
                 <mesh position={[0, tableConfig.height + tableConfig.topThickness / 2, 0]}>
                     <boxGeometry args={[tableConfig.width, tableConfig.topThickness, tableConfig.depth]} />
-                    <meshBasicMaterial color={'#F6F0E5'} attach="material-0" map={woodTexture} /> {/* Right */}
-                    <meshBasicMaterial color={'#F6F0E5'} attach="material-1" map={woodTexture} /> {/* Left */}
-                    <meshBasicMaterial color={'#F6F0E5'} attach="material-2" map={tableTopTexture} roughness={0.5} /> {/* Top */}
+                    <meshBasicMaterial color={'#A46B43'} attach="material-0" map={woodTexture} /> {/* Right */}
+                    <meshBasicMaterial color={'#A46B43'} attach="material-1" map={woodTexture} /> {/* Left */}
+                    <meshBasicMaterial color={'#C78D59'} attach="material-2" map={tableTopTexture} roughness={0.5} /> {/* Top */}
                     <meshBasicMaterial attach="material-3" color={'#F6F0E5'} />   {/* Bottom */}
-                    <meshBasicMaterial color={'#F6F0E5'} attach="material-4" map={woodTexture} /> {/* Front */}
-                    <meshBasicMaterial color={'#F6F0E5'} attach="material-5" map={woodTexture} /> {/* Back */}
+                    <meshBasicMaterial color={'#A46B43'} attach="material-4" map={woodTexture} /> {/* Front */}
+                    <meshBasicMaterial color={'#A46B43'} attach="material-5" map={woodTexture} /> {/* Back */}
                 </mesh>
 
-                {/* KWIATEK NA STOLE */}
-                <mesh
-                    position={[0, tableConfig.height + tableConfig.topThickness + 0.2, 0]} // Na blacie
-                    rotation={[0, -Math.PI / 4, 0]} // Lekki obrót
-                >
-                    <planeGeometry args={[0.3, 0.3 / 0.758]} />
-                    <meshBasicMaterial color={'#F6F0E5'}
-                        map={flowerTexture}
-                        transparent={true}
-                        alphaTest={0.1}
-                        side={THREE.DoubleSide}
-                        roughness={0.8}
-                    />
-                </mesh>
+                {/* Small three-dimensional flowering plant */}
+                <group position={[0, tableConfig.height + tableConfig.topThickness, 0]}>
+                    <mesh position={[0, 0.11, 0]}>
+                        <cylinderGeometry args={[0.105, 0.08, 0.22, 10]} />
+                        <meshStandardMaterial color="#A65E3E" roughness={0.9} />
+                    </mesh>
+                    <mesh position={[0, 0.225, 0]}>
+                        <cylinderGeometry args={[0.088, 0.088, 0.015, 10]} />
+                        <meshStandardMaterial color="#453025" roughness={1} />
+                    </mesh>
+                    <mesh position={[0, 0.36, 0]}>
+                        <cylinderGeometry args={[0.012, 0.012, 0.28, 6]} />
+                        <meshStandardMaterial color="#397D43" />
+                    </mesh>
+                    {Array.from({ length: 6 }, (_, i) => {
+                        const angle = i * Math.PI / 3;
+                        return (
+                            <mesh key={i} position={[Math.cos(angle) * 0.095, 0.33 + (i % 2) * 0.07, Math.sin(angle) * 0.095]} rotation={[0, -angle, -0.45]} scale={[0.12, 0.035, 0.055]}>
+                                <sphereGeometry args={[1, 8, 6]} />
+                                <meshStandardMaterial color={i % 2 ? '#4C9D54' : '#70B95E'} roughness={0.9} />
+                            </mesh>
+                        );
+                    })}
+                    <mesh position={[0, 0.52, 0]} scale={[0.07, 0.07, 0.07]}>
+                        <sphereGeometry args={[1, 10, 8]} />
+                        <meshStandardMaterial color="#E5A1B5" />
+                    </mesh>
+                </group>
             </group>
 
             {/* =============================================
@@ -630,21 +642,34 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             </mesh>
 
 
-            {/* === DRZEWKO W DONICZCE (POTTED TREE) === */}
-            {/* Kolo drzwi Contact (Right -62). Ustawiamy na -58, ODWROTNIE (Left). */}
-            <mesh
-                position={[-wallX + 0.8, floorY + 1.5, zOffset - 58]} // Left side
-                rotation={[0, Math.PI / 4, 0]} // Obrócone w stronę korytarza (z lewej)
-            >
-                <planeGeometry args={[1.8, 1.8 / 0.602]} />
-                <meshBasicMaterial color={'#F6F0E5'}
-                    map={treeTexture}
-                    transparent={true}
-                    alphaTest={0.1}
-                    side={THREE.DoubleSide}
-                    roughness={0.8}
-                />
-            </mesh>
+            {/* Three-dimensional potted tree: terracotta pot, dark soil, brown trunk and green foliage */}
+            <group position={[-wallX + 0.8, floorY, zOffset - 58]}>
+                <mesh position={[0, 0.34, 0]}>
+                    <cylinderGeometry args={[0.34, 0.25, 0.68, 12]} />
+                    <meshStandardMaterial color="#A65E3E" roughness={0.95} />
+                </mesh>
+                <mesh position={[0, 0.69, 0]}>
+                    <cylinderGeometry args={[0.32, 0.32, 0.035, 12]} />
+                    <meshStandardMaterial color="#493025" roughness={1} />
+                </mesh>
+                <mesh position={[0, 1.18, 0]}>
+                    <cylinderGeometry args={[0.075, 0.095, 1.05, 9]} />
+                    <meshStandardMaterial color="#65412D" roughness={1} />
+                </mesh>
+                {[
+                    [0, 1.65, 0, 0.56, '#3F8E4C'],
+                    [-0.34, 1.53, 0.08, 0.43, '#58A85A'],
+                    [0.33, 1.57, -0.1, 0.44, '#4D9C50'],
+                    [0, 2.03, 0.02, 0.47, '#6BB966'],
+                    [-0.17, 1.9, -0.28, 0.34, '#367C43'],
+                    [0.21, 1.89, 0.27, 0.36, '#76BF68']
+                ].map(([x, y, z, radius, color], i) => (
+                    <mesh key={i} position={[x, y, z]} scale={[1, 0.82, 0.85]}>
+                        <icosahedronGeometry args={[radius, 1]} />
+                        <meshStandardMaterial color={color} roughness={0.95} flatShading />
+                    </mesh>
+                ))}
+            </group>
 
             {/* === KRATKI WENTYLACYJNE (VENTILATION GRATES) === */}
             {/* Generujemy kratkę na przeciwległej ścianie dla każdego obrazu */}
