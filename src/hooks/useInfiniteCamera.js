@@ -9,7 +9,6 @@ import * as THREE from 'three';
 // Door positions for auto-glance
 const DOOR_POSITIONS = [
     { z: -18, side: 'left' },
-    { z: -32, side: 'right' },
     { z: -48, side: 'left' },
     { z: -62, side: 'right' },
 ];
