@@ -125,7 +125,10 @@ const NavigationUI = () => {
 
         const hint = ROOM_HINTS[currentRoom];
         const storageKey = `portfolio_room_hint_${currentRoom}`;
-        if (!hint || localStorage.getItem(storageKey)) return;
+        if (!hint || localStorage.getItem(storageKey)) {
+            setRoomHint(null);
+            return;
+        }
 
         setRoomHint(hint);
         localStorage.setItem(storageKey, 'seen');
