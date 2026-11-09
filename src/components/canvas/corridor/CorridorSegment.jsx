@@ -54,15 +54,6 @@ const CorridorSegment = ({
                 color: '#dce9fb'
             },
             {
-                id: `flight-${segmentIndex}`,
-                roomId: 'flight',
-                relativeZ: -32,
-                side: 'right',
-                label: 'THE FLIGHT DECK',
-                icon: '✈',
-                color: '#dcecff'
-            },
-            {
                 id: `about-${segmentIndex}`,
                 roomId: 'about',
                 relativeZ: -48,
