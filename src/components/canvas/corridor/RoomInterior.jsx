@@ -101,7 +101,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
             // Room materials (keep flat for rooms that have their own content)
             roomFloor: new THREE.MeshBasicMaterial({ color: '#B88957', side: THREE.DoubleSide }),
             roomCeiling: new THREE.MeshBasicMaterial({ color: '#FFFDF7', side: THREE.DoubleSide }),
-            roomWall: new THREE.MeshBasicMaterial({ color: '#A7B99E', side: THREE.DoubleSide }),
+            roomWall: new THREE.MeshBasicMaterial({ color: '#B88957', side: THREE.DoubleSide }),
             roomBackWall: new THREE.MeshBasicMaterial({ color: '#E9E7D8', side: THREE.DoubleSide }),
         };
     }, [floorTexSrc, wallTexSrc, ceilingTexSrc, bbTexSrc]);
@@ -223,7 +223,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
                             {/* Floor grid */}
                             <gridHelper
-                                args={[Math.min(roomWidth, roomDepth), 20, '#5F8E88', '#A7B99E']}
+                                args={[Math.min(roomWidth, roomDepth), 20, '#B88957', '#B88957']}
                                 position={[0, -roomHeight / 2 + 0.01, 0]}
                             />
 
