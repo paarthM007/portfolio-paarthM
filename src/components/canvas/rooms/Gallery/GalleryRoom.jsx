@@ -11,7 +11,6 @@ gsap.registerPlugin(Observer);
 import PaperMaterial from './PaperMaterial';
 import GalleryClouds from './GalleryClouds';
 import { usePaintMaterial } from './usePaintMaterial';
-import { useGalleryProjects } from '../../../../hooks/useSanityData';
 
 // Reusable Vector3 to avoid allocations in useFrame
 const _tempScale = new THREE.Vector3();
@@ -35,40 +34,68 @@ export const GALLERY_INTERACTION_AUDIO_SETTINGS = {
 // Define the unique projects and their textures
 const FALLBACK_PROJECTS = [
     {
-        id: 'monetune',
-        title: 'MONETUNE',
-        front: '/textures/gallery/monetuneprzod.webp',
-        painted: '/textures/gallery/monetuneprzod_painted.webp',
-        url: 'https://monetune.pl',
-        description: 'MoneTune is a step-by-step blueprint that teaches beginners how to generate passive income using AI-created music. Without any musical skills, you will learn how to easily produce professional tracks, publish them on platforms like Spotify, and monetize your digital assets.',
-        techStack: ['/textures/gallery/wordpresslogo.webp', '/textures/gallery/elementorlogo.webp', '/textures/gallery/phplogo.webp', '/textures/gallery/csslogo.webp']
+        id: 'anomalyshield',
+        title: 'ANOMALYSHIELD',
+        front: '/textures/portfolio/anomalyshield.svg',
+        painted: '/textures/portfolio/anomalyshield.svg',
+        url: 'https://github.com/paarthM007/WAFproject',
+        description: 'A multi-tenant machine-learning Web Application Firewall. Go middleware extracts request telemetry and enforces a 25 ms evaluation timeout with fail-open circuit breakers. A FastAPI engine runs tenant-specific Isolation Forest models, backed by a thread-safe LRU cache, asynchronous batch logging and background retraining. Stack: Go, fasthttp, FastAPI, scikit-learn, Isolation Forest, Next.js, Prisma.'
     },
     {
-        id: 'timber',
-        title: 'TIMBERKITTY',
-        front: '/textures/gallery/timberkittyprzod.webp',
-        painted: '/textures/gallery/timberkittyprzod_painted.webp',
-        url: 'https://timberkitty.netlify.app',
-        description: 'TimberKitty is an addictive, free-to-play browser arcade game built in pure JavaScript. Players control a lumberjack cat to chop wood, save birds, complete daily missions, and compete on global leaderboards.',
-        techStack: ['/textures/gallery/jslogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/firebaselogo.webp']
+        id: 'scdo',
+        title: 'SUPPLY CHAIN DISRUPTION ORACLE',
+        front: '/textures/portfolio/scdo.svg',
+        painted: '/textures/portfolio/scdo.svg',
+        url: 'https://github.com/paarthM007/SCDO',
+        description: 'An asynchronous, multimodal logistics intelligence engine. Custom Dijkstra routing balances cost, time and risk across 1,100+ hubs; weather, crowdsourced signals and Gemini-based news sentiment feed a risk-fusion engine; Monte Carlo discrete-event simulations estimate probabilistic ETAs. Built with a four-member cross-functional team. Stack: Python, Flask, Flutter, Firestore, Gemini, Monte Carlo.'
     },
     {
-        id: 'young',
-        title: 'YOUNG MULTI',
-        front: '/textures/gallery/youngmultiprzod.webp',
-        painted: '/textures/gallery/youngmultiprzod_painted.webp',
-        url: 'https://young-multi-strona.netlify.app',
-        description: 'A sleek, modern concept website dedicated to the Polish rapper and creator Young Multi. It serves as a promotional landing page designed to highlight his personal brand, music, and online presence.',
-        techStack: ['/textures/gallery/reactlogo.webp', '/textures/gallery/tailwindlogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/netlifylogo.webp']
+        id: 'heat-conduction',
+        title: '2D HEAT CONDUCTION SOLVER',
+        front: '/textures/portfolio/heat-conduction.svg',
+        painted: '/textures/portfolio/heat-conduction.svg',
+        url: 'https://hmt-project-paarth-mandelia.vercel.app',
+        description: 'A full-stack numerical-computing application that solves steady-state heat conduction on a 2D grid. A C++ finite-difference solver uses Successive Over-Relaxation to handle grids up to one million cells; a Node.js orchestrator adds validation and concurrency guards; a React dashboard renders heat maps, contours, probes and CSV/PNG exports. Stack: C++, FDM, SOR, Node.js, React, Canvas API.'
     },
     {
-        id: 'bio',
-        title: 'BIO',
-        front: '/textures/gallery/bioprzod.webp',
-        painted: '/textures/gallery/bioprzod_painted.webp',
-        url: 'https://tomkingbio.netlify.app',
-        description: 'A fast, modern personal bio page serving as a central hub for my digital footprint. It showcases my latest coding projects, web development services, YouTube videos, and recommended music artists.',
-        techStack: ['/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/jslogo.webp', '/textures/gallery/netlifylogo.webp']
+        id: 'sms-optimizer',
+        title: 'SAIL SMS-II OPTIMIZER',
+        front: '/textures/portfolio/sms-optimizer.svg',
+        painted: '/textures/portfolio/sms-optimizer.svg',
+        url: 'https://github.com/paarthM007/steel-plant-sms-optimizer',
+        description: 'A steel-melt-shop simulation and scheduling engine modelling BOF → LRF → VD → CCM. SimPy discrete-event simulation is coupled with a PuLP mixed-integer linear program to pace tapping schedules and reduce queues and ladle thermal losses. The repository reports a 96.6% reduction in average queue delay in its model scenario. Stack: Python, SimPy, PuLP, Streamlit, Plotly.'
+    },
+    {
+        id: 'spares-optimizer',
+        title: 'SAIL SPARES OPTIMIZER',
+        front: '/textures/portfolio/spares-optimizer.svg',
+        painted: '/textures/portfolio/spares-optimizer.svg',
+        url: 'https://github.com/paarthM007/sail_spares_optimizer',
+        description: 'An industrial spare-parts and working-capital decision engine. It combines ABC × FSN × VED classification with dynamic safety stock, Economic Order Quantity and reorder-point calculations, then prioritizes excess-inventory liquidation. Includes a Streamlit and Plotly dashboard with filters and exportable action plans. Stack: Python, pandas, NumPy, Streamlit, Plotly.'
+    },
+    {
+        id: 'system-design',
+        title: 'SYSTEM DESIGN NOTES',
+        front: '/textures/portfolio/system-design.svg',
+        painted: '/textures/portfolio/system-design.svg',
+        url: 'https://github.com/paarthM007/system-design-notes',
+        description: 'A structured, visual learning repository covering scaling, back-of-the-envelope estimation, rate limiters, consistent hashing, key-value stores, unique-ID generation, URL shorteners, web crawlers and notification systems. A growing reference for distributed systems and backend architecture.'
+    },
+    {
+        id: 'companywiseq',
+        title: 'COMPANYWISEQ',
+        front: '/textures/portfolio/companywiseq.svg',
+        painted: '/textures/portfolio/companywiseq.svg',
+        url: 'https://github.com/paarthM007/CompanyWiseQ',
+        description: 'A company-wise interview-preparation dataset repository. Organizes coding-question CSVs by company and time windows such as six months, one year, two years and all-time, helping structure targeted DSA practice.'
+    },
+    {
+        id: 'password-generator',
+        title: 'PASSWORD GENERATOR',
+        front: '/textures/portfolio/password-generator.svg',
+        painted: '/textures/portfolio/password-generator.svg',
+        url: 'https://github.com/paarthM007/Password-Generator',
+        description: 'An early frontend micro-project: a lightweight password generator built with HTML, CSS and JavaScript. A foundational exercise in turning core web technologies into a usable interactive tool.'
     },
 ];
 
@@ -193,9 +220,9 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     // We use matchMedia('(hover: hover)') to detect devices with a cursor/hover capability
     const [canHover, setCanHover] = useState(() => typeof window !== 'undefined' ? window.matchMedia('(hover: hover)').matches : true);
 
-    // Pobieranie danych z Sanity.io (fallback do starych danych)
-    const sanityProjects = useGalleryProjects();
-    const activeProjects = sanityProjects || FALLBACK_PROJECTS;
+    // Portfolio projects are sourced from Paarth's public repositories.
+    // This prevents the original demo owner's Sanity dataset from leaking into the gallery.
+    const activeProjects = FALLBACK_PROJECTS;
 
     useEffect(() => {
         const mq = window.matchMedia('(hover: hover)');
