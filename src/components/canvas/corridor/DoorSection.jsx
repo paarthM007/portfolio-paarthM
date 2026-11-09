@@ -1,12 +1,11 @@
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, useTexture, PositionalAudio } from '@react-three/drei';
+import { Text, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import RoomInterior from './RoomInterior';
 import '../shaders/RevealMaterial'; // Registers alpha-discard reveal shader
 import { useScene } from '../../../context/SceneContext';
-import { useAudio } from '../../../context/AudioManager';
 import { isTouchDevice } from '../../../utils/deviceDetect';
 // Constants from CorridorSegment
 const WALL_X_OUTER = 3.5;
@@ -1230,30 +1229,9 @@ const DoorSection = ({
                 </group>
 
                 {/* SPATIAL AUDIO NODES (Attached slightly in front of the door) */}
-                <PositionalAudio
-                    ref={hoverAudioRef}
-                    url="/sounds/uchyleniedrzwi.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={DOOR_AUDIO_SETTINGS.rolloff}
-                    refDistance={DOOR_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
-                <PositionalAudio
-                    ref={openAudioRef}
-                    url="/sounds/otwarciedrzwi.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={DOOR_AUDIO_SETTINGS.rolloff}
-                    refDistance={DOOR_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
-                <PositionalAudio
-                    ref={closeAudioRef}
-                    url="/sounds/zamknieciedrzwi.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={DOOR_AUDIO_SETTINGS.rolloff}
-                    refDistance={DOOR_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
+                
+                
+                
             </group>
         </group >
     );
