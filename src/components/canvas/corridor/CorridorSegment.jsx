@@ -51,16 +51,16 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE GALLERY',
                 icon: '◈',
-                color: '#f5efe6'
+                color: '#dce9fb'
             },
             {
-                id: `studio-${segmentIndex}`,
-                roomId: 'studio',
+                id: `flight-${segmentIndex}`,
+                roomId: 'flight',
                 relativeZ: -32,
                 side: 'right',
-                label: 'THE STUDIO',
-                icon: '▶',
-                color: '#e6f5ef'
+                label: 'THE FLIGHT DECK',
+                icon: '✈',
+                color: '#dcecff'
             },
             {
                 id: `about-${segmentIndex}`,
@@ -69,7 +69,7 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE ABOUT',
                 icon: '★',
-                color: '#efe6f5',
+                color: '#e8e3fb',
                 enterDistance: 25 // Enter deep into the room (clouds are far back)
             },
             {
@@ -79,7 +79,7 @@ const CorridorSegment = ({
                 side: 'right',
                 label: "LET'S CONNECT",
                 icon: '✉',
-                color: '#f5e6e6'
+                color: '#dff1ef'
             },
         ];
 
@@ -115,6 +115,18 @@ const CorridorSegment = ({
                 doorPositions={doors}
                 zClip={zClip}
             />
+
+            {/* Subtle cyan/violet guide strips add a restrained futuristic finish. */}
+            <group position={[0, -1.72, zOffset - SEGMENT_LENGTH / 2]}>
+                <mesh position={[-1.42, 0, 0]}>
+                    <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
+                    <meshBasicMaterial color="#71c9df" transparent opacity={0.62} />
+                </mesh>
+                <mesh position={[1.42, 0, 0]}>
+                    <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
+                    <meshBasicMaterial color="#a99be3" transparent opacity={0.56} />
+                </mesh>
+            </group>
 
             {/* === WELCOME AREA (Start of segment) - MOVED CLOSER === */}
             <group position={[0, 0, zOffset - 2]}>
