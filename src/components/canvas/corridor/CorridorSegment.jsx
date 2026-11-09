@@ -1,8 +1,6 @@
 import { useMemo, memo } from 'react';
 import { Text } from '@react-three/drei';
 import * as THREE from 'three';
-import { SCENE_PALETTE } from '../../../config/scenePalette';
-
 import CorridorWalls from './CorridorWalls';
 import DoorSection from './DoorSection';
 import SegmentDoors from './SegmentDoors';
@@ -52,7 +50,7 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE GALLERY',
                 icon: '◈',
-                color: SCENE_PALETTE.teal
+                color: #5F8E88
             },
             {
                 id: `about-${segmentIndex}`,
@@ -61,7 +59,7 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE ABOUT',
                 icon: '★',
-                color: SCENE_PALETTE.mustard,
+                color: #D9A94E,
                 enterDistance: 25 // Enter deep into the room (clouds are far back)
             },
             {
@@ -71,7 +69,7 @@ const CorridorSegment = ({
                 side: 'right',
                 label: "LET'S CONNECT",
                 icon: '✉',
-                color: SCENE_PALETTE.terracotta
+                color: #C97D66
             },
         ];
 
@@ -112,11 +110,11 @@ const CorridorSegment = ({
             <group position={[0, -1.72, zOffset - SEGMENT_LENGTH / 2]}>
                 <mesh position={[-1.42, 0, 0]}>
                     <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
-                    <meshBasicMaterial color={SCENE_PALETTE.teal} transparent opacity={0.72} />
+                    <meshBasicMaterial color={#5F8E88} transparent opacity={0.72} />
                 </mesh>
                 <mesh position={[1.42, 0, 0]}>
                     <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
-                    <meshBasicMaterial color={SCENE_PALETTE.mustard} transparent opacity={0.68} />
+                    <meshBasicMaterial color={#D9A94E} transparent opacity={0.68} />
                 </mesh>
             </group>
 
@@ -136,7 +134,7 @@ const CorridorSegment = ({
                 <Text
                     position={[1.7, 1.4, 0.3]}
                     fontSize={0.12}
-                    color={SCENE_PALETTE.ink}
+                    color={#354A45}
                     anchorX="center"
                 >
                     #{segmentIndex}
