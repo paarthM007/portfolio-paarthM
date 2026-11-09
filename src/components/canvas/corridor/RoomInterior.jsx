@@ -8,7 +8,6 @@ import { SCENE_PALETTE } from '../../../config/scenePalette';
 import GalleryRoom from '../rooms/Gallery/GalleryRoom';
 import AboutRoom from '../rooms/About/AboutRoom';
 import ContactRoom from '../rooms/Contact/ContactRoom';
-import FlightRoom from '../rooms/Flight/FlightRoom';
 
 // Room configurations
 const ROOM_CONFIG = {
@@ -24,7 +23,6 @@ const SUBTITLES = {
     'THE GALLERY': 'Explore my creative projects',
     'DEV DIARY': 'My development journey',
     "LET'S CONNECT": 'Get in touch with me',
-    'THE FLIGHT DECK': 'Take a flight above the clouds'
 };
 
 // Naturalny kafelek listwy: 1582x94px przy wysokości 0.15 → ~2.524 units szerokości
@@ -125,7 +123,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
     // Trigger onReady for generic rooms (which don't have their own component to do it)
     useEffect(() => {
-        if (showRoom && !['THE GALLERY', 'THE ABOUT', "LET'S CONNECT", 'THE FLIGHT DECK'].includes(label)) {
+        if (showRoom && !['THE GALLERY', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
             onReady?.();
         }
     }, [showRoom, label, onReady]);
@@ -198,13 +196,6 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                         <group position={[0, -0.5, -corridorDepth]}>
                             <Suspense fallback={null}>
                                 <GalleryRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
-                            </Suspense>
-                        </group>
-                    ) : label === 'THE FLIGHT DECK' ? (
-                        // === FLIGHT DECK EXPERIENCE ===
-                        <group position={[0, -0.5, -corridorDepth]}>
-                            <Suspense fallback={null}>
-                                <FlightRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
                             </Suspense>
                         </group>
                     ) : label === 'THE ABOUT' ? (
