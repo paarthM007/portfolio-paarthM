@@ -98,7 +98,7 @@ const PaperAirplane = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, 
                 <Edges
                     linewidth={2}
                     threshold={15}
-                    color={'#5F8E88'}
+                    color={'#B88957'}
                 />
             </mesh>
 
