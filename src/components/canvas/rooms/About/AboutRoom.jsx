@@ -222,9 +222,6 @@ const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
 
     return (
         <group ref={roomRef} position={[0, 0, -25]}>
-            {!isWarmup && (
-                
-            )}
 
 
             {/* === PAPER AIRPLANE (follows camera manoeuvres) === */}
