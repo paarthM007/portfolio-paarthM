@@ -12,23 +12,23 @@ import { useScene } from '../context/SceneContext';
 const ROOM_META = {
     null: {
         path: '/',
-        title: 'ITom — Creative 3D Portfolio',
-        description: 'Interactive 3D developer portfolio by Tomasz "ITom" Szmajda. Explore WebGL experiments, React projects & GSAP animations in a hand-drawn gallery.',
+        title: 'Paarth Mandelia — Interactive Portfolio',
+        description: 'Interactive portfolio of Paarth Mandelia, Mechanical Engineering undergraduate at IIT Patna. Explore machine learning, backend systems, optimization, competitive programming and engineering projects.',
     },
     about: {
         path: '/about',
-        title: 'About Me — ITom Portfolio',
-        description: 'Learn about Tomasz "ITom" Szmajda — a creative frontend developer specializing in 3D web experiences, React, Three.js, and GSAP animations.',
+        title: 'About — Paarth Mandelia',
+        description: 'Learn about Paarth Mandelia, an IIT Patna Mechanical Engineering undergraduate working across software engineering, machine learning, algorithms, numerical computing and systems design.',
     },
     gallery: {
         path: '/gallery',
-        title: 'Gallery & Projects — ITom Portfolio',
-        description: 'Browse the interactive 3D gallery of web development projects by ITom. Each project is displayed as a hand-drawn card you can flip and explore.',
+        title: 'Projects — Paarth Mandelia',
+        description: 'Explore Paarth Mandelia’s projects in machine learning security, supply-chain optimization, numerical computing, steel-plant operations research and system design.',
     },
     contact: {
         path: '/contact',
-        title: 'Contact — ITom Portfolio',
-        description: 'Get in touch with Tomasz "ITom" Szmajda. Find social media links and contact information in this interactive 3D contact room.',
+        title: 'Contact — Paarth Mandelia',
+        description: 'Get in touch with Paarth Mandelia through LinkedIn, GitHub or email.',
     },
 };
 
@@ -76,12 +76,12 @@ export function useDocumentMeta() {
         if (ogDesc) ogDesc.setAttribute('content', meta.description);
 
         const ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl) ogUrl.setAttribute('content', `https://itomdev.com${meta.path}`);
+        if (ogUrl) ogUrl.setAttribute('content', `${window.location.origin}${meta.path}`);
 
         // Update canonical link to ensure virtual routes are correctly indexable as separate pages
         const canonicalTag = document.querySelector('link[rel="canonical"]');
         if (canonicalTag) {
-            canonicalTag.setAttribute('href', `https://itomdev.com${meta.path}`);
+            canonicalTag.setAttribute('href', `${window.location.origin}${meta.path}`);
         }
 
         // Push to browser history (only if not handling a popstate event and room actually changed)
