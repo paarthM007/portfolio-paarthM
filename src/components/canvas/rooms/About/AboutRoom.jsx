@@ -233,8 +233,8 @@ const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
             <InfiniteSkyManager scrollProgressRef={scrollPosition} />
 
             {/* === FULL-SCENE LIGHT-BLUE SKY DOME === */}
-            <mesh position={[0, 0, 0]} renderOrder={-1000}>
-                <sphereGeometry args={[180, 32, 24]} />
+            <mesh position={[0, 0, 0]} renderOrder={-1000} frustumCulled={false}>
+                <sphereGeometry args={[1000, 48, 32]} />
                 <meshBasicMaterial
                     color="#A9DDF7"
                     side={THREE.BackSide}
