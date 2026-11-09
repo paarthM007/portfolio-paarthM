@@ -19,7 +19,7 @@ export const SceneProvider = ({ children }) => {
     const [currentRoom, setCurrentRoom] = useState(null); // null = corridor, 'about', 'portfolio', etc.
     const [hasEntered, setHasEntered] = useState(false);  // Has user clicked entrance doors?
     const [exitRequested, setExitRequested] = useState(false); // Signal to request exit from room
-    const [overlayContent, setOverlayContent] = useState(null); // Content for overlay (Studio monitor etc)
+    const [overlayContent, setOverlayContent] = useState(null); // Content for room-specific overlays
 
     // Teleportation states
     const [teleportTarget, setTeleportTarget] = useState(null); // Room ID to teleport to
