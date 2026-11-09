@@ -62,7 +62,7 @@ const DoorWallSegment = ({ position, baseRotationY, width, corridorHeight, wallT
     return (
         <mesh ref={meshRef} position={position}>
             <planeGeometry args={[width, corridorHeight]} />
-            <meshBasicMaterial color={'#BFDFF2'} map={segTexture} roughness={1} metalness={0} />
+            <meshBasicMaterial color={'#9FC9E4'} map={segTexture} roughness={1} metalness={0} />
         </mesh>
     );
 };
@@ -461,7 +461,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             {/* Main Wall Segment */}
                             <mesh>
                                 <planeGeometry args={[seg.width, corridorHeight]} />
-                                <meshBasicMaterial color={'#BFDFF2'}
+                                <meshBasicMaterial color={'#9FC9E4'}
                                     map={segTexture}
                                     roughness={1}
                                     metalness={0}
