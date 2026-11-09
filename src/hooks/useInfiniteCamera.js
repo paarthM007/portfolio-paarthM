@@ -5,7 +5,6 @@ import { Observer } from 'gsap/all';
 gsap.registerPlugin(Observer);
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useAchievements } from '../context/AchievementsContext';
 
 // Door positions for auto-glance
 const DOOR_POSITIONS = [
@@ -44,7 +43,6 @@ const useInfiniteCamera = ({
     const scrollEnabledRef = useRef(scrollEnabled);
     const parallaxEnabledRef = useRef(parallaxEnabled);
     const justEnabled = useRef(false);
-    const { unlockAchievement } = useAchievements();
 
     // Mobile touch tracking
     const touchStart = useRef({ x: 0, y: 0 });
@@ -124,8 +122,7 @@ const useInfiniteCamera = ({
         e.preventDefault();
         const delta = e.deltaY * scrollSpeed;
         targetZ.current -= delta;
-        unlockAchievement('corridor_explore');
-    }, [scrollSpeed, unlockAchievement]);
+    }, [scrollSpeed]);
 
     // Handle keyboard navigation (A1 accessibility)
     const handleKeyDown = useCallback((e) => {
@@ -147,7 +144,6 @@ const useInfiniteCamera = ({
         if (delta !== undefined) {
             e.preventDefault();
             targetZ.current -= delta * scrollSpeed;
-            unlockAchievement('corridor_explore');
         }
 
         // Arrow Left/Right → subtle camera glance
@@ -160,7 +156,7 @@ const useInfiniteCamera = ({
                 e.preventDefault();
             }
         }
-    }, [scrollSpeed, MAX_SWIPE_GLANCE, unlockAchievement]);
+    }, [scrollSpeed, MAX_SWIPE_GLANCE]);
 
     // Handle mouse parallax (desktop) - ALWAYS tracks mouse position
     // but only applies to targetParallax when enabled
@@ -193,7 +189,6 @@ const useInfiniteCamera = ({
         if (scrollEnabledRef.current) {
             const deltaY = (touchStart.current.y - currentY) * scrollSpeed * 1.5;
             targetZ.current -= deltaY;
-            unlockAchievement('corridor_explore');
         }
 
         // Horizontal swipe -> camera glance (works with parallax enabled)
@@ -239,8 +234,8 @@ const useInfiniteCamera = ({
                     useGyroscope.current = true;
                     window.addEventListener('deviceorientation', handleDeviceOrientation);
                 }
-            } catch (error) {
-                // console.log('Gyroscope permission denied');
+            } catch {
+                // Gyroscope permission was denied or is unavailable.
             }
         } else {
             // Non-iOS or older browsers - just add listener
