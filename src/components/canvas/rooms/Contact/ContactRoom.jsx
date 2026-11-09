@@ -362,6 +362,12 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 />
             )}
 
+            {/* Light-blue sky backdrop behind the clouds and lighthouse */}
+            <mesh position={[0, 8, -36]}>
+                <planeGeometry args={[180, 100]} />
+                <meshBasicMaterial color="#A9DDF7" side={THREE.DoubleSide} toneMapped={false} />
+            </mesh>
+
             {/* ☁️ CLOUDS */}
             <GalleryClouds count={45} seed={88} rotationOffset={[0, 1, 0]} />
 
@@ -388,10 +394,9 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 ))}
             </group>
 
-            {/* 🛢️ SOCIAL BARRELS (Floating in water) */}
-            {/* LINKEDIN */}
+            {/* 🛢️ SOCIAL BARRELS — three centered contact options */}
             <SocialBarrel
-                position={isMobile ? [-1.2, 0.5, -10] : [-3, 0.5, -10]}
+                position={isMobile ? [-1.2, 0.25, -9] : [-3, 0.35, -10]}
                 rotation={[0, 0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="LINKEDIN"
@@ -399,39 +404,17 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* GITHUB */}
             <SocialBarrel
-                position={isMobile ? [-1.5, -0.3, -7] : [-5, -0.3, -8]}
-                rotation={[0, 0.3, 0]}
+                position={isMobile ? [1.2, 0.25, -9] : [3, 0.35, -10]}
+                rotation={[0, -0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="GITHUB"
                 onClick={() => window.open('https://github.com/ITomPoland', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* FACEBOOK */}
             <SocialBarrel
-                position={isMobile ? [1.2, 0.5, -10] : [3, 0.5, -10]}
-                rotation={[0, -0.2, 0]}
-                texturePath="/textures/contact/beczka.webp"
-                label="FACEBOOK"
-                onClick={() => window.open('https://www.facebook.com/people/ITom/61586563487664/', '_blank')}
-                paintOnBeforeCompile={onBeforeCompile}
-                paintUniforms={uniformsData}
-            />
-            {/* INSTAGRAM */}
-            <SocialBarrel
-                position={isMobile ? [1.5, -0.3, -7] : [5, -0.3, -8]}
-                rotation={[0, -0.3, 0]}
-                texturePath="/textures/contact/beczka.webp"
-                label="INSTAGRAM"
-                onClick={() => window.open('https://www.instagram.com/itom.dev/', '_blank')}
-                paintOnBeforeCompile={onBeforeCompile}
-                paintUniforms={uniformsData}
-            />
-            {/* MAIL (Triggers animation) */}
-            <SocialBarrel
-                position={isMobile ? [0, -0.7, -6] : [0, -0.7, -7]}
+                position={isMobile ? [0, -0.65, -6.5] : [0, -0.65, -7]}
                 rotation={[0, 0, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="MESSAGE"
@@ -439,7 +422,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-
 
             {/* 🏖️ DOCK / MOLO */}
             <mesh
