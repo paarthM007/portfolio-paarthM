@@ -348,9 +348,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     return (
         <group ref={groupRef} position={[0, -0.7, -5]}>
-            {!isWarmup && (
-                
-            )}
 
             {/* Light-blue sky backdrop behind the clouds and lighthouse */}
             <mesh position={[0, 8, -36]}>
