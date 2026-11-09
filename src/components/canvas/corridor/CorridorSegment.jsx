@@ -12,7 +12,7 @@ import CorridorDecorations from './CorridorDecorations';
  * CorridorSegment Component
  * 
  * A single repeatable chunk of the infinite corridor.
- * Each segment contains: walls, avatar, ITOM text, doors, decorations.
+ * Each segment contains: walls, Paarth wordmark, doors and decorations.
  * 
  * Segment length: 80 units
  * Positioned based on segmentIndex * segmentLength
