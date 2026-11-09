@@ -6,7 +6,7 @@ import { setMusicVolume, getMusicVolume } from '../../utils/audioManager';
 import '../../styles/NavigationUI.scss';
 
 // Room data for the map - positions are percentages on the map image
-// These positions correspond to the four active portfolio experiences
+// These positions correspond to the three active portfolio experiences
 const ROOMS = [
     { id: 'about', label: 'About', x: 43, y: 38 },      // About story (left side)
     { id: 'gallery', label: 'Gallery', x: 43, y: 72 },  // City buildings (bottom left)
