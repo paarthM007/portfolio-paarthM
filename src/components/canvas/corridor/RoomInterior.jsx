@@ -5,9 +5,9 @@ import * as THREE from 'three';
 
 // Eagerly import room components - textures are preloaded during the preloader phase
 import GalleryRoom from '../rooms/Gallery/GalleryRoom';
-import StudioRoom from '../rooms/Studio/StudioRoom';
 import AboutRoom from '../rooms/About/AboutRoom';
 import ContactRoom from '../rooms/Contact/ContactRoom';
+import FlightRoom from '../rooms/Flight/FlightRoom';
 
 // Room configurations
 const ROOM_CONFIG = {
@@ -21,9 +21,9 @@ const ROOM_CONFIG = {
 
 const SUBTITLES = {
     'THE GALLERY': 'Explore my creative projects',
-    'THE STUDIO': 'Watch behind the scenes',
     'DEV DIARY': 'My development journey',
-    "LET'S CONNECT": 'Get in touch with me'
+    "LET'S CONNECT": 'Get in touch with me',
+    'THE FLIGHT DECK': 'Take a flight above the clouds'
 };
 
 // Naturalny kafelek listwy: 1582x94px przy wysokości 0.15 → ~2.524 units szerokości
@@ -124,7 +124,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
     // Trigger onReady for generic rooms (which don't have their own component to do it)
     useEffect(() => {
-        if (showRoom && !['THE GALLERY', 'THE STUDIO', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
+        if (showRoom && !['THE GALLERY', 'THE ABOUT', "LET'S CONNECT", 'THE FLIGHT DECK'].includes(label)) {
             onReady?.();
         }
     }, [showRoom, label, onReady]);
@@ -199,11 +199,11 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                                 <GalleryRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
                             </Suspense>
                         </group>
-                    ) : label === 'THE STUDIO' ? (
-                        // === NEW STUDIO ROOM ===
+                    ) : label === 'THE FLIGHT DECK' ? (
+                        // === FLIGHT DECK EXPERIENCE ===
                         <group position={[0, -0.5, -corridorDepth]}>
                             <Suspense fallback={null}>
-                                <StudioRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
+                                <FlightRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
                             </Suspense>
                         </group>
                     ) : label === 'THE ABOUT' ? (
