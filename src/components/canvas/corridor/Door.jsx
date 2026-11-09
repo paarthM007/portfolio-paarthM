@@ -3,9 +3,8 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { Text, Plane, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
-import { PositionalAudio } from '@react-three/drei';
+
 import '../shaders/RevealMaterial'; // Registers alpha-discard reveal shader
-import { useAudio } from '../../../../context/AudioManager';
 import { isTouchDevice } from '../../../../utils/deviceDetect';
 
 // Global settings for entrance doors audio
@@ -216,22 +215,8 @@ const Door = ({
             </mesh>
 
             {/* SPATIAL AUDIO NODES (Attached slightly in front of the door) */}
-            <PositionalAudio
-                ref={hoverAudioRef}
-                url="/sounds/uchyleniedrzwi.mp3"
-                distanceModel="exponential"
-                rolloffFactor={ENTRANCE_DOOR_AUDIO_SETTINGS.rolloff}
-                refDistance={ENTRANCE_DOOR_AUDIO_SETTINGS.distance}
-                loop={false}
-            />
-            <PositionalAudio
-                ref={openAudioRef}
-                url="/sounds/otwarciedrzwi.mp3"
-                distanceModel="exponential"
-                rolloffFactor={ENTRANCE_DOOR_AUDIO_SETTINGS.rolloff}
-                refDistance={ENTRANCE_DOOR_AUDIO_SETTINGS.distance}
-                loop={false}
-            />
+            
+            
 
             {/* Door Frame */}
             <group>
