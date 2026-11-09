@@ -2,6 +2,7 @@ import { useRef, useState, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useTexture, PositionalAudio } from '@react-three/drei';
 import * as THREE from 'three';
+import { SCENE_PALETTE } from '../../../config/scenePalette';
 import gsap from 'gsap';
 import { useAudio } from '../../../context/AudioManager';
 
@@ -158,7 +159,7 @@ const SegmentDoors = ({
             {/* === LEFT WALL PANEL (Brainstorming) === */}
             <mesh position={[-(doorOpeningWidth / 2 + sideWallWidth / 2), wallCenterY, 0]}>
                 <boxGeometry args={[sideWallWidth, corridorHeight, wallThickness]} />
-                <meshBasicMaterial color="#e5ebf5" map={wallTexture} roughness={0.95} />
+                <meshBasicMaterial color={SCENE_PALETTE.paper} map={wallTexture} roughness={0.95} />
             </mesh>
             {/* Decoration Left (Idea Process) */}
             {/* 
@@ -228,6 +229,12 @@ const SegmentDoors = ({
                     roughness={0.9}
                     depthWrite={false}
                 />
+            </mesh>
+
+            {/* Warm sage-and-teal header trim makes the corridor end doors part of the same palette. */}
+            <mesh position={[0, frameCenterY + frameHeight / 2 - 0.045, 0.105]}>
+                <boxGeometry args={[frameWidth, 0.055, 0.035]} />
+                <meshBasicMaterial color={SCENE_PALETTE.teal} />
             </mesh>
 
             {/* === LEFT DOOR === */}
@@ -323,7 +330,7 @@ const SegmentDoors = ({
             {/* <pointLight
                 position={[0, doorBottomY + doorHeight * 0.5, 1]}
                 intensity={0.6}
-                color="#fff8e8"
+                color={SCENE_PALETTE.mustard}
                 distance={6}
                 decay={2}
             /> */}
