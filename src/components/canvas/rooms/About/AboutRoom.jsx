@@ -248,7 +248,7 @@ const AboutRoom = ({ onReady, isExiting, isWarmup }) => {
             {/* === SKY BACKDROP === */}
             <mesh position={[0, 0, -200]}>
                 <planeGeometry args={[300, 150]} />
-                <meshBasicMaterial color="#87CEEB" side={THREE.DoubleSide} />
+                <meshBasicMaterial color="#B88957" side={THREE.DoubleSide} />
             </mesh>
         </group>
     );
