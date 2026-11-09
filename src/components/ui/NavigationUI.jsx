@@ -11,7 +11,6 @@ const ROOMS = [
     { id: 'about', label: 'About', x: 43, y: 38 },      // About story (left side)
     { id: 'gallery', label: 'Gallery', x: 43, y: 72 },  // City buildings (bottom left)
     { id: 'contact', label: 'Contact', x: 57, y: 25 },  // Pier/dock (top right)
-    { id: 'flight', label: 'Flight Deck', x: 57, y: 55 },
 ];
 
 // Pin starting position - the dashed circle at the bottom of the tower
@@ -21,7 +20,6 @@ const ROOM_HINTS = {
     about: 'Scroll to fly through my story',
     gallery: 'Scroll to browse projects · Click a card to inspect',
     contact: 'Choose a contact method to get in touch',
-    flight: 'Settle in and enjoy the flight above the clouds',
 };
 
 const NavigationUI = () => {
@@ -372,23 +370,12 @@ const NavigationUI = () => {
                                 onClick={() => handleRoomClick('contact')}
                                 aria-label="Teleport to Contact room"
                             />
-                            <button
-                                type="button"
-                                className="map-hover-zone zone-flight"
-                                onMouseEnter={() => setHoveredRoom('flight')}
-                                onMouseLeave={() => setHoveredRoom(null)}
-                                onFocus={() => setHoveredRoom('flight')}
-                                onBlur={() => setHoveredRoom(null)}
-                                onClick={() => handleRoomClick('flight')}
-                                aria-label="Teleport to Flight Deck"
-                            />
 
 
                             {/* Permanent Map Text Labels */}
                             <div className="map-room-label about">ABOUT</div>
                             <div className="map-room-label gallery">THE<br />GALLERY</div>
                             <div className="map-room-label contact">CONTACT</div>
-                            <div className="map-room-label flight">FLIGHT<br />DECK</div>
 
                             {/* Pin slot markers - 4 locations */}
                             {ROOMS.map((room) => (
