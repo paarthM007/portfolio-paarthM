@@ -257,8 +257,6 @@ const InfiniteSkyManager = ({ scrollProgressRef }) => {
  * Elements spread apart as they approach camera
  */
 const IntroMilestone = ({ z, scrollProgressRef }) => {
-    // Load avatar texture
-    const avatarTexture = useLoader(THREE.TextureLoader, '/textures/about/awatarnachmurce.webp');
     const { camera, viewport } = useThree();
     const isTouch = isTouchDevice();
 
@@ -266,18 +264,11 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
     const groupRef = useRef();
     const titleRef = useRef();
     const brandRef = useRef();
-    const avatarRef = useRef();
     const motto1Ref = useRef();
     const motto2Ref = useRef();
 
     // Base positions
     const baseY = 2;
-
-    // Calculate aspect ratio
-    // LEGACY FIX: Use original dimensions (2816x1536) to prevent stretching
-    const legacyAspectRatio = 2816 / 1536; 
-    const avatarWidth = 6; // Zwiększony rozmiar awatara na chmurce
-    const avatarHeight = avatarWidth / legacyAspectRatio;
 
     // Animation: floating + spread apart when close
     useFrame((state) => {
@@ -326,11 +317,6 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
         if (brandRef.current) {
             brandRef.current.position.x = spreadFactor * maxSpread * 0.6;
         }
-        if (avatarRef.current) {
-            // Avatar: floating + spread upward
-            avatarRef.current.position.y = baseY + Math.sin(time * 0.8) * 0.15 + spreadFactor * 3;
-            avatarRef.current.position.x = -spreadFactor * maxSpread * 0.3;
-        }
         if (motto1Ref.current) {
             motto1Ref.current.position.x = spreadFactor * maxSpread * 0.7;
         }
@@ -366,17 +352,6 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
             >
                 (ITOM)
             </Text>
-
-            {/* Avatar on cloud - floating + spreads up-left */}
-            <mesh ref={avatarRef} position={[0, baseY, 0]}>
-                <planeGeometry args={[avatarWidth, avatarHeight]} />
-                <meshBasicMaterial color="#e0e0e0"
-                    map={avatarTexture}
-                    transparent
-                    side={THREE.DoubleSide}
-                    depthWrite={false}
-                />
-            </mesh>
 
             {/* Motto - Line 1 (spreads right) */}
             <Text
