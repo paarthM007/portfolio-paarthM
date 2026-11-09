@@ -572,10 +572,15 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 {/* Clouds scattered above */}
                 <GalleryClouds count={65} seed={123} />
 
-                {/* Skybox/Environment */}
-                <mesh position={[0, 5, -20]}>
-                    <sphereGeometry args={[40, 32, 32]} />
-                    <meshBasicMaterial color="#A9DDF7" side={THREE.BackSide} onBeforeCompile={onBeforeCompile} />
+                {/* Full-scene light-blue sky dome; keep it independent of paint shaders */}
+                <mesh position={[0, 0, 0]} renderOrder={-1000}>
+                    <sphereGeometry args={[180, 32, 24]} />
+                    <meshBasicMaterial
+                        color="#A9DDF7"
+                        side={THREE.BackSide}
+                        toneMapped={false}
+                        depthWrite={false}
+                    />
                 </mesh>
             </group>
         </group>
