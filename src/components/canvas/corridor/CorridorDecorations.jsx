@@ -551,28 +551,28 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
                 <group position={[0, tableConfig.height + tableConfig.topThickness, 0]}>
                     <mesh position={[0, 0.11, 0]}>
                         <cylinderGeometry args={[0.105, 0.08, 0.22, 10]} />
-                        <meshStandardMaterial color="#A65E3E" roughness={0.9} />
+                        <meshBasicMaterial color="#A65E3E" roughness={0.9} />
                     </mesh>
                     <mesh position={[0, 0.225, 0]}>
                         <cylinderGeometry args={[0.088, 0.088, 0.015, 10]} />
-                        <meshStandardMaterial color="#453025" roughness={1} />
+                        <meshBasicMaterial color="#453025" roughness={1} />
                     </mesh>
                     <mesh position={[0, 0.36, 0]}>
                         <cylinderGeometry args={[0.012, 0.012, 0.28, 6]} />
-                        <meshStandardMaterial color="#397D43" />
+                        <meshBasicMaterial color="#397D43" />
                     </mesh>
                     {Array.from({ length: 6 }, (_, i) => {
                         const angle = i * Math.PI / 3;
                         return (
                             <mesh key={i} position={[Math.cos(angle) * 0.095, 0.33 + (i % 2) * 0.07, Math.sin(angle) * 0.095]} rotation={[0, -angle, -0.45]} scale={[0.12, 0.035, 0.055]}>
                                 <sphereGeometry args={[1, 8, 6]} />
-                                <meshStandardMaterial color={i % 2 ? '#4C9D54' : '#70B95E'} roughness={0.9} />
+                                <meshBasicMaterial color={i % 2 ? '#4C9D54' : '#70B95E'} roughness={0.9} />
                             </mesh>
                         );
                     })}
                     <mesh position={[0, 0.52, 0]} scale={[0.07, 0.07, 0.07]}>
                         <sphereGeometry args={[1, 10, 8]} />
-                        <meshStandardMaterial color="#E5A1B5" />
+                        <meshBasicMaterial color="#E5A1B5" />
                     </mesh>
                 </group>
             </group>
@@ -646,15 +646,15 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             <group position={[-wallX + 0.8, floorY, zOffset - 58]}>
                 <mesh position={[0, 0.34, 0]}>
                     <cylinderGeometry args={[0.34, 0.25, 0.68, 12]} />
-                    <meshStandardMaterial color="#A65E3E" roughness={0.95} />
+                    <meshBasicMaterial color="#A65E3E" roughness={0.95} />
                 </mesh>
                 <mesh position={[0, 0.69, 0]}>
                     <cylinderGeometry args={[0.32, 0.32, 0.035, 12]} />
-                    <meshStandardMaterial color="#493025" roughness={1} />
+                    <meshBasicMaterial color="#493025" roughness={1} />
                 </mesh>
                 <mesh position={[0, 1.18, 0]}>
                     <cylinderGeometry args={[0.075, 0.095, 1.05, 9]} />
-                    <meshStandardMaterial color="#65412D" roughness={1} />
+                    <meshBasicMaterial color="#65412D" roughness={1} />
                 </mesh>
                 {[
                     [0, 1.65, 0, 0.56, '#3F8E4C'],
@@ -666,7 +666,7 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
                 ].map(([x, y, z, radius, color], i) => (
                     <mesh key={i} position={[x, y, z]} scale={[1, 0.82, 0.85]}>
                         <icosahedronGeometry args={[radius, 1]} />
-                        <meshStandardMaterial color={color} roughness={0.95} flatShading />
+                        <meshBasicMaterial color={color} roughness={0.95} flatShading />
                     </mesh>
                 ))}
             </group>
