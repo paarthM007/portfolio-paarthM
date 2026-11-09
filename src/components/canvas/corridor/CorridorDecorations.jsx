@@ -378,9 +378,9 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             y: 0.3,                  // Wysokość na ścianie
             id: 'frame-1',
             // Custom setup for "rysuneknaobraz1.png"
-            image: '/textures/corridor/rysuneknaobraz1.webp',
-            imageWidth: 1.1,
-            imageHeight: 1.1,
+            image: '/textures/portfolio/anomalyshield.svg',
+            imageWidth: 1.35,
+            imageHeight: 0.84,
             offsetFromWall: 0.1, // Przesunięcie bliżej środka korytarza (0.1 unit)
         },
         {
@@ -390,9 +390,9 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             height: 2.5 / 1.785,
             y: 0.2,
             id: 'frame-2',
-            image: '/textures/corridor/rysuneknaobrazek3.webp',
-            imageWidth: 1.7,
-            imageHeight: 1,
+            image: '/textures/portfolio/scdo.svg',
+            imageWidth: 1.35,
+            imageHeight: 0.84,
             offsetFromWall: 0.1
         },
         {
