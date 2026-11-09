@@ -39,7 +39,6 @@ const NavigationUI = () => {
             if (e.detail) {
                 setIsMenuOpen(false);
                 setIsAudioMenuOpen(false);
-
             }
         };
         window.addEventListener('inspectChange', handleInspectChange);
@@ -114,7 +113,6 @@ const NavigationUI = () => {
         if (isInRoom || isTeleporting) {
             setIsMenuOpen(false);
             setIsAudioMenuOpen(false);
-
             setIsExiting(false);
         }
     }, [isInRoom, isTeleporting]);
@@ -140,7 +138,6 @@ const NavigationUI = () => {
             if (e.key === 'Escape') {
                 if (isMenuOpen) setIsMenuOpen(false);
                 if (isAudioMenuOpen) setIsAudioMenuOpen(false);
-
             }
         };
         window.addEventListener('keydown', handleEscape);
@@ -331,12 +328,23 @@ const NavigationUI = () => {
                                 onClick={() => handleRoomClick('contact')}
                                 aria-label="Teleport to Contact room"
                             />
+                            <button
+                                type="button"
+                                className="map-hover-zone zone-flight"
+                                onMouseEnter={() => setHoveredRoom('flight')}
+                                onMouseLeave={() => setHoveredRoom(null)}
+                                onFocus={() => setHoveredRoom('flight')}
+                                onBlur={() => setHoveredRoom(null)}
+                                onClick={() => handleRoomClick('flight')}
+                                aria-label="Teleport to Flight Deck"
+                            />
 
 
                             {/* Permanent Map Text Labels */}
                             <div className="map-room-label about">ABOUT</div>
                             <div className="map-room-label gallery">THE<br />GALLERY</div>
                             <div className="map-room-label contact">CONTACT</div>
+                            <div className="map-room-label flight">FLIGHT<br />DECK</div>
 
                             {/* Pin slot markers - 4 locations */}
                             {ROOMS.map((room) => (
@@ -437,7 +445,6 @@ const NavigationUI = () => {
                     onClick={() => {
                         setIsMenuOpen(false);
                         setIsAudioMenuOpen(false);
-
                     }}
                 />
             )}
