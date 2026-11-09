@@ -573,8 +573,8 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 <GalleryClouds count={65} seed={123} />
 
                 {/* Full-scene light-blue sky dome; keep it independent of paint shaders */}
-                <mesh position={[0, 0, 0]} renderOrder={-1000}>
-                    <sphereGeometry args={[180, 32, 24]} />
+                <mesh position={[0, 0, 0]} renderOrder={-1000} frustumCulled={false}>
+                    <sphereGeometry args={[500, 48, 32]} />
                     <meshBasicMaterial
                         color="#A9DDF7"
                         side={THREE.BackSide}
