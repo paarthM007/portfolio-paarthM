@@ -1,11 +1,10 @@
 import { useMemo, memo, Suspense, useEffect } from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
-
 // Eagerly import room components - textures are preloaded during the preloader phase
 import GalleryRoom from '../rooms/Gallery/GalleryRoom';
-import StudioRoom from '../rooms/Studio/StudioRoom';
 import AboutRoom from '../rooms/About/AboutRoom';
 import ContactRoom from '../rooms/Contact/ContactRoom';
 
@@ -21,9 +20,8 @@ const ROOM_CONFIG = {
 
 const SUBTITLES = {
     'THE GALLERY': 'Explore my creative projects',
-    'THE STUDIO': 'Watch behind the scenes',
     'DEV DIARY': 'My development journey',
-    "LET'S CONNECT": 'Get in touch with me'
+    "LET'S CONNECT": 'Get in touch with me',
 };
 
 // Naturalny kafelek listwy: 1582x94px przy wysokości 0.15 → ~2.524 units szerokości
@@ -36,6 +34,18 @@ const NATURAL_TILE_W = (1582 / 94) * 0.15;
  * Contains corridor + giant room at the end.
  */
 const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
+    const scene = useThree((state) => state.scene);
+    const skyBackground = useMemo(() => new THREE.Color('#A9DDF7'), []);
+    const isSkyRoom = ['THE GALLERY', 'THE ABOUT', "LET'S CONNECT"].includes(label);
+
+    // App-level paper background and cream fog are applied globally. Override both
+    // at the end of the frame whenever one of the immersive subpages is active.
+    useFrame(() => {
+        if (!showRoom || !isSkyRoom) return;
+        scene.background = skyBackground;
+        if (scene.fog) scene.fog.color.copy(skyBackground);
+    }, -1);
+
     const { corridorWidth, corridorHeight, corridorDepth, roomWidth, roomHeight, roomDepth } = ROOM_CONFIG;
     const halfDepth = corridorDepth / 2;
     const roomZ = -corridorDepth - roomDepth / 2;
@@ -85,9 +95,9 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         bbRight.repeat.set(corridorDepth / NATURAL_TILE_W, 1);
 
         return {
-            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: floorTex, side: THREE.DoubleSide }),
-            corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexL, side: THREE.DoubleSide }),
-            corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexR, side: THREE.DoubleSide }),
+            corridorFloor: new THREE.MeshBasicMaterial({ color: '#F6F0E5',  map: floorTex, side: THREE.DoubleSide }),
+            corridorWallL: new THREE.MeshBasicMaterial({ color: '#9FC9E4',  map: wallTexL, side: THREE.DoubleSide }),
+            corridorWallR: new THREE.MeshBasicMaterial({ color: '#9FC9E4',  map: wallTexR, side: THREE.DoubleSide }),
             corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: ceilTex, side: THREE.DoubleSide }),
             bbLeft: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: bbLeft, side: THREE.DoubleSide }),
             bbRight: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: bbRight, side: THREE.DoubleSide }),
@@ -102,10 +112,10 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                 side: THREE.DoubleSide
             }),
             // Room materials (keep flat for rooms that have their own content)
-            roomFloor: new THREE.MeshBasicMaterial({ color: '#e5e5e5', side: THREE.DoubleSide }),
-            roomCeiling: new THREE.MeshBasicMaterial({ color: '#fafafa', side: THREE.DoubleSide }),
-            roomWall: new THREE.MeshBasicMaterial({ color: '#f0f0f0', side: THREE.DoubleSide }),
-            roomBackWall: new THREE.MeshBasicMaterial({ color: '#f5f5f5', side: THREE.DoubleSide }),
+            roomFloor: new THREE.MeshBasicMaterial({ color: '#B88957', side: THREE.DoubleSide }),
+            roomCeiling: new THREE.MeshBasicMaterial({ color: '#FFFDF7', side: THREE.DoubleSide }),
+            roomWall: new THREE.MeshBasicMaterial({ color: '#B88957', side: THREE.DoubleSide }),
+            roomBackWall: new THREE.MeshBasicMaterial({ color: '#E9E7D8', side: THREE.DoubleSide }),
         };
     }, [floorTexSrc, wallTexSrc, ceilingTexSrc, bbTexSrc]);
 
@@ -124,7 +134,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
     // Trigger onReady for generic rooms (which don't have their own component to do it)
     useEffect(() => {
-        if (showRoom && !['THE GALLERY', 'THE STUDIO', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
+        if (showRoom && !['THE GALLERY', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
             onReady?.();
         }
     }, [showRoom, label, onReady]);
@@ -199,13 +209,6 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                                 <GalleryRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
                             </Suspense>
                         </group>
-                    ) : label === 'THE STUDIO' ? (
-                        // === NEW STUDIO ROOM ===
-                        <group position={[0, -0.5, -corridorDepth]}>
-                            <Suspense fallback={null}>
-                                <StudioRoom showRoom={showRoom} onReady={onReady} isExiting={isExiting} />
-                            </Suspense>
-                        </group>
                     ) : label === 'THE ABOUT' ? (
                         // === NEW ABOUT ROOM ===
                         <group position={[0, -0.5, -corridorDepth]}>
@@ -233,7 +236,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
 
                             {/* Floor grid */}
                             <gridHelper
-                                args={[Math.min(roomWidth, roomDepth), 20, '#cccccc', '#dddddd']}
+                                args={[Math.min(roomWidth, roomDepth), 20, '#B88957', '#B88957']}
                                 position={[0, -roomHeight / 2 + 0.01, 0]}
                             />
 

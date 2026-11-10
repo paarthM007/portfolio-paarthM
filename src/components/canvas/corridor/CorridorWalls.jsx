@@ -62,7 +62,7 @@ const DoorWallSegment = ({ position, baseRotationY, width, corridorHeight, wallT
     return (
         <mesh ref={meshRef} position={position}>
             <planeGeometry args={[width, corridorHeight]} />
-            <meshBasicMaterial color="#e0e0e0" map={segTexture} roughness={1} metalness={0} />
+            <meshBasicMaterial color={'#9FC9E4'} map={segTexture} roughness={1} metalness={0} />
         </mesh>
     );
 };
@@ -129,7 +129,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
         const endZ = effectiveStart - effectiveLength;
 
         // Sort doors by relativeZ descending (closest to start first) if needed
-        // relativeZ is negative (-18, -32...). -18 > -32.
+        // relativeZ values are negative and sorted from the corridor entrance toward the far end.
         const sideDoors = doorPositions
             .filter(d => d.side === side)
             .sort((a, b) => b.relativeZ - a.relativeZ);
@@ -317,7 +317,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             scale={[isMirrored ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[TILE_LENGTH, CENTER_WIDTH]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={'#B88957'}
                                 map={floorTexture}
                                 side={THREE.DoubleSide}
                                 roughness={1}
@@ -335,7 +335,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             scale={[isMirrored ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[TILE_LENGTH, SIDE_WIDTH]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={'#B88957'}
                                 map={leftSideTexture}
                                 side={THREE.DoubleSide}
                                 roughness={1}
@@ -353,7 +353,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             scale={[isMirrored ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[TILE_LENGTH, SIDE_WIDTH]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={'#B88957'}
                                 map={rightSideTexture}
                                 side={THREE.DoubleSide}
                                 roughness={1}
@@ -396,7 +396,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             scale={[isMirrored ? -1 : 1, 1, 1]}
                         >
                             <planeGeometry args={[tileWidth, tileLength]} />
-                            <meshBasicMaterial color="#e0e0e0"
+                            <meshBasicMaterial color={'#FFFDF7'}
                                 map={ceilingTexture}
                                 map-repeat={[tileWidth / 2, tileLength / 2]}
                                 side={THREE.DoubleSide}
@@ -461,7 +461,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             {/* Main Wall Segment */}
                             <mesh>
                                 <planeGeometry args={[seg.width, corridorHeight]} />
-                                <meshBasicMaterial color="#e0e0e0"
+                                <meshBasicMaterial color={'#9FC9E4'}
                                     map={segTexture}
                                     roughness={1}
                                     metalness={0}
@@ -471,7 +471,7 @@ const CorridorWalls = ({ zStart = 10, length = 80, doorPositions = [], zClip = 1
                             {/* Baseboard (Listwa przypodłogowa) - przycięta przy drzwiach */}
                             <mesh position={[bbOffsetX, -corridorHeight / 2 + 0.075, 0.01]}>
                                 <planeGeometry args={[bbWidth, 0.15]} />
-                                <meshBasicMaterial color="#e0e0e0"
+                                <meshBasicMaterial color={'#B88957'}
                                     map={bbTexture}
                                     roughness={0.8}
                                     side={THREE.DoubleSide}

@@ -1,18 +1,16 @@
 import { useRef, useState, useMemo, useEffect, forwardRef, useImperativeHandle, memo } from 'react';
+import { useAudio } from '../../../../context/AudioManager';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, useTexture, Float, PositionalAudio } from '@react-three/drei';
+import { Text, useTexture, Float } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { Observer } from 'gsap/all';
 import { useScene } from '../../../../context/SceneContext';
 
 gsap.registerPlugin(Observer);
-import { useAchievements } from '../../../../context/AchievementsContext';
 import PaperMaterial from './PaperMaterial';
 import GalleryClouds from './GalleryClouds';
-import { useAudio } from '../../../../context/AudioManager';
 import { usePaintMaterial } from './usePaintMaterial';
-import { useGalleryProjects } from '../../../../hooks/useSanityData';
 
 // Reusable Vector3 to avoid allocations in useFrame
 const _tempScale = new THREE.Vector3();
@@ -36,40 +34,58 @@ export const GALLERY_INTERACTION_AUDIO_SETTINGS = {
 // Define the unique projects and their textures
 const FALLBACK_PROJECTS = [
     {
-        id: 'monetune',
-        title: 'MONETUNE',
-        front: '/textures/gallery/monetuneprzod.webp',
-        painted: '/textures/gallery/monetuneprzod_painted.webp',
-        url: 'https://monetune.pl',
-        description: 'MoneTune is a step-by-step blueprint that teaches beginners how to generate passive income using AI-created music. Without any musical skills, you will learn how to easily produce professional tracks, publish them on platforms like Spotify, and monetize your digital assets.',
-        techStack: ['/textures/gallery/wordpresslogo.webp', '/textures/gallery/elementorlogo.webp', '/textures/gallery/phplogo.webp', '/textures/gallery/csslogo.webp']
+        id: 'anomalyshield',
+        title: 'ANOMALYSHIELD',
+        front: '/textures/portfolio/anomalyshield.webp',
+        painted: '/textures/portfolio/anomalyshield.webp',
+        url: 'https://github.com/paarthM007/WAFproject',
+        description: 'A multi-tenant machine-learning Web Application Firewall. Go middleware extracts request telemetry and enforces a 25 ms evaluation timeout with fail-open circuit breakers. A FastAPI engine runs tenant-specific Isolation Forest models, backed by a thread-safe LRU cache, asynchronous batch logging and background retraining. Stack: Go, fasthttp, FastAPI, scikit-learn, Isolation Forest, Next.js, Prisma.',
+        techStack: [],
     },
     {
-        id: 'timber',
-        title: 'TIMBERKITTY',
-        front: '/textures/gallery/timberkittyprzod.webp',
-        painted: '/textures/gallery/timberkittyprzod_painted.webp',
-        url: 'https://timberkitty.netlify.app',
-        description: 'TimberKitty is an addictive, free-to-play browser arcade game built in pure JavaScript. Players control a lumberjack cat to chop wood, save birds, complete daily missions, and compete on global leaderboards.',
-        techStack: ['/textures/gallery/jslogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/firebaselogo.webp']
+        id: 'scdo',
+        title: 'SUPPLY CHAIN DISRUPTION ORACLE',
+        front: '/textures/portfolio/scdo.webp',
+        painted: '/textures/portfolio/scdo.webp',
+        url: 'https://github.com/paarthM007/SCDO',
+        description: 'An asynchronous, multimodal logistics intelligence engine. Custom Dijkstra routing balances cost, time and risk across 1,100+ hubs; weather, crowdsourced signals and Gemini-based news sentiment feed a risk-fusion engine; Monte Carlo discrete-event simulations estimate probabilistic ETAs. Built with a four-member cross-functional team. Stack: Python, Flask, Flutter, Firestore, Gemini, Monte Carlo.',
+        techStack: [],
     },
     {
-        id: 'young',
-        title: 'YOUNG MULTI',
-        front: '/textures/gallery/youngmultiprzod.webp',
-        painted: '/textures/gallery/youngmultiprzod_painted.webp',
-        url: 'https://young-multi-strona.netlify.app',
-        description: 'A sleek, modern concept website dedicated to the Polish rapper and creator Young Multi. It serves as a promotional landing page designed to highlight his personal brand, music, and online presence.',
-        techStack: ['/textures/gallery/reactlogo.webp', '/textures/gallery/tailwindlogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/netlifylogo.webp']
+        id: 'heat-conduction',
+        title: '2D HEAT CONDUCTION SOLVER',
+        front: '/textures/portfolio/heat-conduction.webp',
+        painted: '/textures/portfolio/heat-conduction.webp',
+        url: 'https://hmt-project-paarth-mandelia.vercel.app',
+        description: 'A full-stack numerical-computing application that solves steady-state heat conduction on a 2D grid. A C++ finite-difference solver uses Successive Over-Relaxation to handle grids up to one million cells; a Node.js orchestrator adds validation and concurrency guards; a React dashboard renders heat maps, contours, probes and CSV/PNG exports. Stack: C++, FDM, SOR, Node.js, React, Canvas API.',
+        techStack: [],
     },
     {
-        id: 'bio',
-        title: 'BIO',
-        front: '/textures/gallery/bioprzod.webp',
-        painted: '/textures/gallery/bioprzod_painted.webp',
-        url: 'https://tomkingbio.netlify.app',
-        description: 'A fast, modern personal bio page serving as a central hub for my digital footprint. It showcases my latest coding projects, web development services, YouTube videos, and recommended music artists.',
-        techStack: ['/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/jslogo.webp', '/textures/gallery/netlifylogo.webp']
+        id: 'sms-optimizer',
+        title: 'SAIL SMS-II OPTIMIZER',
+        front: '/textures/portfolio/sms-optimizer.webp',
+        painted: '/textures/portfolio/sms-optimizer.webp',
+        url: 'https://github.com/paarthM007/steel-plant-sms-optimizer',
+        description: 'A steel-melt-shop simulation and scheduling engine modelling BOF → LRF → VD → CCM. SimPy discrete-event simulation is coupled with a PuLP mixed-integer linear program to pace tapping schedules and reduce queues and ladle thermal losses. The repository reports a 96.6% reduction in average queue delay in its model scenario. Stack: Python, SimPy, PuLP, Streamlit, Plotly.',
+        techStack: [],
+    },
+    {
+        id: 'spares-optimizer',
+        title: 'SAIL SPARES OPTIMIZER',
+        front: '/textures/portfolio/spares-optimizer.webp',
+        painted: '/textures/portfolio/spares-optimizer.webp',
+        url: 'https://github.com/paarthM007/sail_spares_optimizer',
+        description: 'An industrial spare-parts and working-capital decision engine. It combines ABC × FSN × VED classification with dynamic safety stock, Economic Order Quantity and reorder-point calculations, then prioritizes excess-inventory liquidation. Includes a Streamlit and Plotly dashboard with filters and exportable action plans. Stack: Python, pandas, NumPy, Streamlit, Plotly.',
+        techStack: [],
+    },
+    {
+        id: 'password-generator',
+        title: 'PASSWORD GENERATOR',
+        front: '/textures/portfolio/password-generator.webp',
+        painted: '/textures/portfolio/password-generator.webp',
+        url: 'https://github.com/paarthM007/Password-Generator',
+        description: 'An early frontend micro-project: a lightweight password generator built with HTML, CSS and JavaScript. A foundational exercise in turning core web technologies into a usable interactive tool.',
+        techStack: [],
     },
 ];
 
@@ -87,7 +103,6 @@ const RIGHT_CROP_AMOUNT = 0.2;
 
 const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const { openOverlay, isTeleporting } = useScene();
-    const { showTutorial, unlockAchievement, hidePopup } = useAchievements();
     const { globalVolume, isMuted } = useAudio();
     const effectiveVolume = isMuted ? 0 : AUDIO_SETTINGS.volume * globalVolume;
 
@@ -105,12 +120,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const [selectedCard, setSelectedCard] = useState(null);
     const [globalIsAnimating, setGlobalIsAnimating] = useState(false);
     const cardRefs = useRef([]);
-
-    useEffect(() => {
-        if (isExiting || isTeleporting) {
-            hidePopup();
-        }
-    }, [isExiting, isTeleporting, hidePopup]);
 
     // Setup Paint Transition
     const { onBeforeCompile, animatePaint, resetPaint, uniformsData, updateRoomOrigin } = usePaintMaterial();
@@ -152,9 +161,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const handleCardClick = async (clickedIndex) => {
         if (globalIsAnimating || isTransitioning) return;
 
-        // Unlock inspect achievement
-        unlockAchievement('gallery_inspect');
-
         if (selectedCard === clickedIndex) {
             setGlobalIsAnimating(true);
             await cardRefs.current[clickedIndex].closeCard();
@@ -191,10 +197,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             hasSignaledReady.current = true;
             onReady?.();
 
-            // Wait for the DoorSection 1.5s camera fly-in to finish before showing tutorial
-            setTimeout(() => {
-                if (!isWarmup) showTutorial('gallery_inspect');
-            }, 2000);
         }
     });
 
@@ -208,9 +210,9 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     // We use matchMedia('(hover: hover)') to detect devices with a cursor/hover capability
     const [canHover, setCanHover] = useState(() => typeof window !== 'undefined' ? window.matchMedia('(hover: hover)').matches : true);
 
-    // Pobieranie danych z Sanity.io (fallback do starych danych)
-    const sanityProjects = useGalleryProjects();
-    const activeProjects = sanityProjects || FALLBACK_PROJECTS;
+    // Portfolio projects are sourced from Paarth's public repositories.
+    // This prevents the original demo owner's Sanity dataset from leaking into the gallery.
+    const activeProjects = FALLBACK_PROJECTS;
 
     useEffect(() => {
         const mq = window.matchMedia('(hover: hover)');
@@ -444,18 +446,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     return (
         <group ref={groupRef}>
-            {!isWarmup && (
-                <PositionalAudio
-                    ref={audioRef}
-                    url="/sounds/szummiasta.mp3"
-                    distanceModel="exponential"
-                    refDistance={AUDIO_SETTINGS.distance}
-                    rolloffFactor={AUDIO_SETTINGS.rolloff}
-                    loop
-                    autoplay
-                    volume={effectiveVolume}
-                />
-            )}
             <group position={[0, -0.7, -2]}>
                 {/* Floor */}
                 <mesh
@@ -599,10 +589,16 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 {/* Clouds scattered above */}
                 <GalleryClouds count={65} seed={123} />
 
-                {/* Skybox/Environment */}
-                <mesh position={[0, 5, -20]}>
-                    <sphereGeometry args={[40, 32, 32]} />
-                    <meshBasicMaterial color="#f0f0f0" side={THREE.BackSide} transparent opacity={0.5} onBeforeCompile={onBeforeCompile} />
+                {/* Full-scene light-blue sky dome; keep it independent of paint shaders */}
+                <mesh position={[0, 0, 0]} renderOrder={-1000} frustumCulled={false}>
+                    <sphereGeometry args={[80, 48, 32]} />
+                    <meshBasicMaterial
+                        color="#A9DDF7"
+                        side={THREE.BackSide}
+                        toneMapped={false}
+                        depthWrite={false}
+                    depthTest={false}
+                    />
                 </mesh>
             </group>
         </group>
@@ -1285,7 +1281,10 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                 <Text
                     ref={textRef}
                     position={[0, 0.7, 0]} // Tylko dwa pierwsze parametry [X, Y] mają tutaj znaczenie
-                    fontSize={0.20}
+                    fontSize={0.12}
+                    maxWidth={1.25}
+                    lineHeight={1.15}
+                    textAlign="center"
                     color="#1c1c1c"
                     font="/fonts/CabinSketch-Bold.ttf"
                     anchorX="center"
@@ -1295,14 +1294,7 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
                     {project.title}
                 </Text>
 
-                <PositionalAudio
-                    ref={paperAudioRef}
-                    url="/sounds/papersound.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={GALLERY_INTERACTION_AUDIO_SETTINGS.rolloff}
-                    refDistance={GALLERY_INTERACTION_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
+                
             </group>
         </group>
     );

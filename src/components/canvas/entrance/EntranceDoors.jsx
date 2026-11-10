@@ -4,8 +4,6 @@ import { Text, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import '../shaders/RevealMaterial'; // Registers alpha-discard reveal shader
-import { playBackgroundMusic } from '../../../utils/audioManager';
-import { useAchievements } from '../../../context/AchievementsContext';
 import { isTouchDevice } from '../../../utils/deviceDetect';
 
 // Use same font as App.jsx preload (Inter) - works reliably
@@ -42,7 +40,6 @@ const EntranceDoors = ({
     const [isWindowHovered, setIsWindowHovered] = useState(false);
     const windowAvatarRef = useRef();
     const { camera } = useThree();
-    const { unlockAchievement } = useAchievements();
 
     const [isMobile, setIsMobile] = useState(false);
 
@@ -260,8 +257,7 @@ const EntranceDoors = ({
 
         setIsOpen(true);
         setIsAnimating(true);
-        playBackgroundMusic();
-        unlockAchievement('corridor_enter');
+        
 
         const tl = gsap.timeline({
             onComplete: () => {

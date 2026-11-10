@@ -2,11 +2,8 @@ import { useState, Suspense, useEffect, useCallback, useLayoutEffect, lazy } fro
 import { Canvas, useThree, useFrame, useLoader } from '@react-three/fiber';
 import { Preload, useTexture, Text, PerformanceMonitor } from '@react-three/drei';
 import * as THREE from 'three';
-
 import Preloader from './components/dom/Preloader';
 import PaperTransition from './components/dom/PaperTransition';
-import { AudioProvider, useAudio } from './context/AudioManager';
-import { initAudio } from './utils/audioManager';
 import { PerformanceProvider, usePerformance } from './context/PerformanceContext';
 import { SceneProvider, useScene } from './context/SceneContext';
 import NavigationUI from './components/ui/NavigationUI';
@@ -14,7 +11,6 @@ import GlobalOverlay from './components/ui/GlobalOverlay';
 import ScreenReaderOverlay from './components/ui/ScreenReaderOverlay';
 import { useDocumentMeta } from './hooks/useDocumentMeta';
 import posthog from 'posthog-js';
-import { loadSanityData } from './hooks/useSanityData';
 
 // Initialize PostHog
 posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
@@ -77,23 +73,6 @@ if (isLowEnd) {
 
 const FONT_URL = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff';
 
-// Helper component to handle global audio enable on interaction
-const GlobalAudioEnabler = () => {
-  const { enableAudio } = useAudio();
-  useEffect(() => {
-    const handleInteraction = () => enableAudio();
-    window.addEventListener('click', handleInteraction, { once: true });
-    window.addEventListener('touchstart', handleInteraction, { once: true });
-    window.addEventListener('keydown', handleInteraction, { once: true });
-    return () => {
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('touchstart', handleInteraction);
-      window.removeEventListener('keydown', handleInteraction);
-    };
-  }, [enableAudio]);
-  return null;
-};
-
 // Scene background using corridor wall texture (static, no animation)
 const PaperSceneBackground = () => {
   const { scene } = useThree();
@@ -137,11 +116,6 @@ function AppContent() {
   // Use Performance Context
   const { settings, downgradeTier, tier } = usePerformance();
 
-  // Force initialize audio in the background on mount
-  useEffect(() => {
-    initAudio();
-  }, []);
-
   const handleSceneReady = useCallback(() => {
     requestAnimationFrame(() => {
       setSceneReady(true);
@@ -149,10 +123,8 @@ function AppContent() {
   }, []);
 
   return (
-    <AudioProvider>
-      <SceneProvider>
+    <SceneProvider>
         <DocumentMetaBridge />
-        <GlobalAudioEnabler />
         <div className="app">
           {/* Full screen 3D Canvas */}
           <div className="canvas-wrapper">
@@ -173,8 +145,8 @@ function AppContent() {
               dpr={settings.dpr}
               shadows={settings.shadows}
             >
-              <color attach="background" args={['#fafafa']} />
-              <fog attach="fog" args={['#fafafa', 15, 50]} />
+              <color attach="background" args={['#F6F0E5']} />
+              <fog attach="fog" args={['#E9E7D8', 15, 50]} />
 
               {/* Scale performance down if fps drops */}
               <PerformanceMonitor
@@ -213,20 +185,15 @@ function AppContent() {
             onComplete={() => setIsLoaded(true)}
           />
         </div>
-      </SceneProvider>
-    </AudioProvider>
+    </SceneProvider>
   );
 }
 
-import { AchievementsProvider } from './context/AchievementsContext';
 
 export default function App() {
   // Preload browser-based images (for standard <img> tags) immediately upon mounting App
   // This ensures they are in the network waterfall during the initial loading phase.
   useEffect(() => {
-    // Eagerly preload Sanity CMS data and images
-    loadSanityData();
-
     const filteredImages = filterTexturesByDevice(IMAGE_ASSETS, supportsHover);
     // console.log(`[Preload] Triggering browser-level image preloads for ${filteredImages.length} assets.`);
     filteredImages.forEach(path => preloadBrowserImage(path));
@@ -234,9 +201,7 @@ export default function App() {
 
   return (
     <PerformanceProvider>
-      <AchievementsProvider>
-        <AppContent />
-      </AchievementsProvider>
+      <AppContent />
     </PerformanceProvider>
   );
 }

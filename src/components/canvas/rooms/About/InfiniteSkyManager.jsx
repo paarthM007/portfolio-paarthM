@@ -1,13 +1,13 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
+import { useAudio } from '../../../../context/AudioManager';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
-import { Text, PositionalAudio } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import SkyChunk, { CHUNK_LENGTH, ROOM_Z } from './SkyChunk';
 import { useScene } from '../../../../context/SceneContext';
 import '../../shaders/RevealBasicMaterial'; // Registers brush-stroke reveal for BasicMaterial
 import { isTouchDevice } from '../../../../utils/deviceDetect';
-import { useAwards } from '../../../../hooks/useSanityData';
 
 // Reusable Vector3 to avoid allocations in event handlers
 const _tempVec3 = new THREE.Vector3();
@@ -19,8 +19,6 @@ const _tempVec3 = new THREE.Vector3();
  * World group moves with scroll, chunks stay at fixed positions relative to group.
  * Includes Story Milestones that loop with the content!
  */
-
-import { useAudio } from '../../../../context/AudioManager';
 
 export const BALLOON_AUDIO_SETTINGS = {
     volume: 1.0,
@@ -258,8 +256,6 @@ const InfiniteSkyManager = ({ scrollProgressRef }) => {
  * Elements spread apart as they approach camera
  */
 const IntroMilestone = ({ z, scrollProgressRef }) => {
-    // Load avatar texture
-    const avatarTexture = useLoader(THREE.TextureLoader, '/textures/about/awatarnachmurce.webp');
     const { camera, viewport } = useThree();
     const isTouch = isTouchDevice();
 
@@ -267,18 +263,11 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
     const groupRef = useRef();
     const titleRef = useRef();
     const brandRef = useRef();
-    const avatarRef = useRef();
     const motto1Ref = useRef();
     const motto2Ref = useRef();
 
     // Base positions
     const baseY = 2;
-
-    // Calculate aspect ratio
-    // LEGACY FIX: Use original dimensions (2816x1536) to prevent stretching
-    const legacyAspectRatio = 2816 / 1536; 
-    const avatarWidth = 6; // Zwiększony rozmiar awatara na chmurce
-    const avatarHeight = avatarWidth / legacyAspectRatio;
 
     // Animation: floating + spread apart when close
     useFrame((state) => {
@@ -327,11 +316,6 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
         if (brandRef.current) {
             brandRef.current.position.x = spreadFactor * maxSpread * 0.6;
         }
-        if (avatarRef.current) {
-            // Avatar: floating + spread upward
-            avatarRef.current.position.y = baseY + Math.sin(time * 0.8) * 0.15 + spreadFactor * 3;
-            avatarRef.current.position.x = -spreadFactor * maxSpread * 0.3;
-        }
         if (motto1Ref.current) {
             motto1Ref.current.position.x = spreadFactor * maxSpread * 0.7;
         }
@@ -352,7 +336,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/RubikScribble-Regular.ttf"
             >
-                TOMASZ SZMAJDA
+                PAARTH MANDELIA
             </Text>
 
             {/* Subtitle - Brand (spreads right) */}
@@ -365,19 +349,8 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/CabinSketch-Regular.ttf"
             >
-                (ITOM)
+                (IIT PATNA)
             </Text>
-
-            {/* Avatar on cloud - floating + spreads up-left */}
-            <mesh ref={avatarRef} position={[0, baseY, 0]}>
-                <planeGeometry args={[avatarWidth, avatarHeight]} />
-                <meshBasicMaterial color="#e0e0e0"
-                    map={avatarTexture}
-                    transparent
-                    side={THREE.DoubleSide}
-                    depthWrite={false}
-                />
-            </mesh>
 
             {/* Motto - Line 1 (spreads right) */}
             <Text
@@ -390,7 +363,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 font="/fonts/CabinSketch-Regular.ttf"
                 fontStyle="italic"
             >
-                "Crafting digital experiences
+                "Engineering ideas into systems
             </Text>
 
             {/* Motto - Line 2 (spreads left) */}
@@ -404,7 +377,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 font="/fonts/CabinSketch-Regular.ttf"
                 fontStyle="italic"
             >
-                that push creative boundaries"
+                from algorithms to real-world tools"
             </Text>
         </group>
     );
@@ -415,58 +388,51 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
  */
 const AWARDS_DATA = {
     featured: {
-        id: 'award-featured',
+        id: 'p-projects',
         layout: 'certificate_grid',
-        title: 'Featured Projects Collection',
+        title: 'Selected Engineering Projects',
         items: [
-            { label: 'Featured - Awwwards', date: 'May 2025', image: '/textures/about/FEATURED.webp', url: 'https://awwwards.com' },
-            { label: 'Featured - CSS Design Awards', date: 'June 2025', image: '/textures/about/FEATURED.webp', url: 'https://cssdesignawards.com' },
-            { label: 'Featured - The FWA', date: 'July 2025', image: '/textures/about/FEATURED.webp', url: 'https://thefwa.com' },
-            { label: 'Featured - Behance', date: 'August 2025', image: '/textures/about/FEATURED.webp', url: 'https://behance.net' },
+            { label: 'AnomalyShield — Multi-Tenant ML WAF', date: '2026', image: '/textures/portfolio/anomalyshield.webp', url: 'https://github.com/paarthM007/WAFproject' },
+            { label: 'Supply Chain Disruption Oracle', date: '2026', image: '/textures/portfolio/scdo.webp', url: 'https://github.com/paarthM007/SCDO' },
+            { label: '2D Heat Conduction Solver', date: '2026', image: '/textures/portfolio/heat-conduction.webp', url: 'https://hmt-project-paarth-mandelia.vercel.app' },
         ],
-        platformConfig: {
-            label: 'HONOR',
-            color: '#1a1a1a',
-            icon: '⭐'
-        }
+        platformConfig: { label: 'PROJECTS', color: '#1a1a1a', icon: '⚙️' }
     },
     sotd: {
-        id: 'award-sotd',
+        id: 'p-competitive-programming',
         layout: 'certificate_grid',
-        title: 'Site of the Day Awards',
+        title: 'Competitive Programming',
         items: [
-            { label: 'SOTD - GSAP', date: 'February 13, 2026', image: '/textures/about/SOTDAYYOUNGMULTIGSAP.webp', url: 'https://www.linkedin.com/posts/greensock_site-of-the-day-young-multi-this-immersive-activity-7427567524940017664-zU2n?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3TV6UBqXoaJXUN5-1s3ij6SQJwTRAcbCM' },
-            { label: 'SOTD - CSS Winner', date: 'January 24, 2026', image: '/textures/about/SOTDAYYOUNGMULTICSSWINNER.webp', url: 'https://www.csswinner.com/details/young-multi-official-experience/19045' },
-            { label: 'SOTD - Orpetron', date: 'January 29, 2026', image: '/textures/about/SOTDAYYOUNGMULTIORPETRON.webp', url: 'https://orpetron.com/sites/young-multi/' },
-            { label: 'SOTD - Design Nominess', date: 'February 17, 2026', image: '/textures/about/SOTDAYYOUNGMULTIDESIGNNOMINESS.webp', url: 'https://www.designnominees.com/sites/young-multi' }
+            { label: 'LeetCode Knight — 1904 rating (Top 5%)', date: '2026', image: '/textures/portfolio/achievement-coding.webp' },
+            { label: 'Codeforces Specialist — maximum rating 1429', date: '2026', image: '/textures/portfolio/achievement-coding.webp', url: 'https://codeforces.com/profile/Paarth_Mandelia' },
+            { label: 'CodeChef 3-Star — 1775 rating', date: '2026', image: '/textures/portfolio/achievement-coding.webp' },
+            { label: '700+ problems solved across platforms', date: '2026', image: '/textures/portfolio/achievement-coding.webp' },
         ],
-        platformConfig: {
-            label: 'AWARD',
-            color: '#1a1a1a',
-            icon: '🏆'
-        }
+        platformConfig: { label: 'RATINGS', color: '#1a1a1a', icon: '⌘' }
     },
     sotm: {
-        id: 'award-sotm',
+        id: 'p-academics',
         layout: 'certificate_grid',
-        title: 'Site of the Month Awards',
-        items: [],
-        platformConfig: {
-            label: 'AWARD',
-            color: '#1a1a1a',
-            icon: '📅'
-        }
+        title: 'Academics & Entrance Examinations',
+        items: [
+            { label: 'B.Tech Mechanical Engineering — IIT Patna', date: '2024–2028', image: '/textures/portfolio/achievement-academic.webp' },
+            { label: 'Current CGPA — 8.67', date: 'IIT Patna', image: '/textures/portfolio/achievement-academic.webp' },
+            { label: 'JEE Advanced — CRL 9624', date: 'May 2024', image: '/textures/portfolio/achievement-academic.webp' },
+            { label: 'JEE Main — 98.63 percentile', date: 'April 2024', image: '/textures/portfolio/achievement-academic.webp' },
+        ],
+        platformConfig: { label: 'ACADEMICS', color: '#1a1a1a', icon: '🎓' }
     },
     other: {
-        id: 'award-other',
+        id: 'p-leadership',
         layout: 'certificate_grid',
-        title: 'Other Awards',
-        items: [],
-        platformConfig: {
-            label: 'PRESTIGE',
-            color: '#1a1a1a',
-            icon: '👑'
-        }
+        title: 'Leadership & Campus Contributions',
+        items: [
+            { label: 'Junior-Year Student Representative — DAPC, Mechanical Engineering; representing 90+ students', date: '2026', image: '/textures/portfolio/achievement-leadership.webp' },
+            { label: 'Web Developer — Student Technical Council; highest contributor (2026)', date: '2026', image: '/textures/portfolio/achievement-leadership.webp' },
+            { label: 'Sub-Coordinator — Market Division, Trading & Investment Club', date: 'IIT Patna', image: '/textures/portfolio/achievement-leadership.webp' },
+            { label: 'Sponsorship & Marketing contributions — E-Cell IIT Patna', date: 'IIT Patna', image: '/textures/portfolio/achievement-leadership.webp' },
+        ],
+        platformConfig: { label: 'LEADERSHIP', color: '#1a1a1a', icon: '🤝' }
     }
 };
 
@@ -475,9 +441,8 @@ const AWARDS_DATA = {
  * SOTY (center), SOTD, SOTM, Featured (behind)
  */
 const AwardsMilestone = ({ z, scrollProgressRef }) => {
-    // Pobieranie danych nagród z Sanity (z fallbackiem)
-    const sanityAwards = useAwards();
-    const awardsData = sanityAwards || AWARDS_DATA;
+    // Verified achievements and projects from Paarth's résumé and public profiles.
+    const awardsData = AWARDS_DATA;
 
     const { camera, viewport } = useThree();
     const isTouch = isTouchDevice();
@@ -499,12 +464,12 @@ const AwardsMilestone = ({ z, scrollProgressRef }) => {
     const sotyHideDelayRef = useRef();
 
     // Load textures
-    const sotyTexture = useLoader(THREE.TextureLoader, '/textures/about/SOTY.webp');
-    const sotdTexture = useLoader(THREE.TextureLoader, '/textures/about/SOTD.webp');
-    const sotmTexture = useLoader(THREE.TextureLoader, '/textures/about/SOTM.webp');
-    const sotyPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTY.webp' : '/textures/about/SOTY_painted.webp');
-    const sotdPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTD.webp' : '/textures/about/SOTD_painted.webp');
-    const sotmPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTM.webp' : '/textures/about/SOTM_painted.webp');
+    const sotyTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-leadership.webp');
+    const sotdTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-coding.webp');
+    const sotmTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/achievement-academic.webp');
+    const sotyPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTY.webp' : '/textures/portfolio/achievement-leadership.webp');
+    const sotdPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTD.webp' : '/textures/portfolio/achievement-coding.webp');
+    const sotmPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/SOTM.webp' : '/textures/portfolio/achievement-academic.webp');
     const buttonTexture = useLoader(THREE.TextureLoader, '/textures/about/button.webp');
     const buttonPaintedTexture = useLoader(THREE.TextureLoader, isTouch ? '/textures/about/button.webp' : '/textures/about/button_painted.webp');
 
@@ -623,9 +588,7 @@ const AwardsMilestone = ({ z, scrollProgressRef }) => {
                 anchorX="center"
                 anchorY="middle"
                 font="/fonts/RubikScribble-Regular.ttf"
-            >
-                AWARDS
-            </Text>
+            > ACHIEVEMENTS </Text>
 
             {/* === SOTD (behind SOTY, rendered second) === */}
             <group ref={sotdRef} position={[0, 0.5, -0.5]}>
@@ -672,9 +635,7 @@ const AwardsMilestone = ({ z, scrollProgressRef }) => {
                     anchorX="center"
                     anchorY="middle"
                     font="/fonts/CabinSketch-Bold.ttf"
-                >
-                    SOTD
-                </Text>
+                > CODING </Text>
                 {/* AWARD COUNT */}
                 <Text
                     position={[-0.05, 0, 0.01]}
@@ -733,9 +694,7 @@ const AwardsMilestone = ({ z, scrollProgressRef }) => {
                     anchorX="center"
                     anchorY="middle"
                     font="/fonts/CabinSketch-Bold.ttf"
-                >
-                    SOTM
-                </Text>
+                > ACADEMICS </Text>
                 {/* AWARD COUNT */}
                 <Text
                     position={[-0.05, 0, 0.01]}
@@ -793,9 +752,7 @@ const AwardsMilestone = ({ z, scrollProgressRef }) => {
                     anchorX="center"
                     anchorY="middle"
                     font="/fonts/CabinSketch-Bold.ttf"
-                >
-                    OTHER
-                </Text>
+                > LEADERSHIP </Text>
                 {/* AWARD COUNT */}
                 <Text
                     position={[-0.05, 0, 0.01]}
@@ -824,8 +781,8 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
     const freelanceRef = useRef();
 
     // Load textures
-    const uoTexture = useLoader(THREE.TextureLoader, '/textures/about/uowyspa.webp');
-    const freelanceTexture = useLoader(THREE.TextureLoader, '/textures/about/freelancewyspa.webp');
+    const uoTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/iit-patna.webp');
+    const freelanceTexture = useLoader(THREE.TextureLoader, '/textures/portfolio/engineering-journey.webp');
 
     // Texture settings
     uoTexture.colorSpace = THREE.SRGBColorSpace;
@@ -833,7 +790,7 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
 
     // Calculate aspect ratios to keep images 1:1 (not stretched)
     // LEGACY FIX: Use original dimensions (2816x1536)
-    const islandLegacyAspect = 2816 / 1536;
+    const islandLegacyAspect = 900 / 560;
     const uoAspect = islandLegacyAspect;
     const freelanceAspect = islandLegacyAspect;
 
@@ -937,7 +894,7 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
                     anchorY="middle"
                     font="/fonts/CabinSketch-Bold.ttf"
                 >
-                    2025-NOW
+                    2024–2028
                 </Text>
             </group>
 
@@ -960,7 +917,7 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
                     anchorY="middle"
                     font="/fonts/CabinSketch-Bold.ttf"
                 >
-                    2023-NOW
+                    BUILDING
                 </Text>
             </group>
         </group>
@@ -975,21 +932,21 @@ const JourneyMilestone = ({ z, scrollProgressRef }) => {
 // Balloon configuration: size category, texture path, position offset
 // === EDYTUJ WYSOKOŚĆ TUTAJ (zmień wartość 'y' dla każdego balona) ===
 const BALLOON_CONFIG = [
-    // Large balloons (main skills) - front and center
-    { texture: '/textures/about/reactduzybalon.webp', paintedTexture: '/textures/about/reactduzybalon_painted.webp', label: 'React', size: 'large', x: -2.5, y: 2, z: 0.3, phase: 0 },
-    { texture: '/textures/about/threejsduzybalon.webp', paintedTexture: '/textures/about/threejsduzybalon_painted.webp', label: 'Three.js', size: 'large', x: 2.5, y: 2.5, z: 0.2, phase: 1.5 },
-    { texture: '/textures/about/GSAPduzybalon.webp', paintedTexture: '/textures/about/GSAPduzybalon_painted.webp', label: 'GSAP', size: 'large', x: 0, y: 3, z: 0.5, phase: 3 },
+    // Core programming languages and implementation strengths
+    { texture: '/textures/portfolio/skills/cpp.webp', paintedTexture: '/textures/portfolio/skills/cpp.webp', label: 'C++ / C', size: 'large', x: -2.5, y: 2, z: 0.3, phase: 0 },
+    { texture: '/textures/portfolio/skills/python.webp', paintedTexture: '/textures/portfolio/skills/python.webp', label: 'Python / ML', size: 'large', x: 2.5, y: 2.5, z: 0.2, phase: 1.5 },
+    { texture: '/textures/portfolio/skills/go.webp', paintedTexture: '/textures/portfolio/skills/go.webp', label: 'Go / Backend', size: 'large', x: 0, y: 3, z: 0.5, phase: 3 },
 
-    // Medium balloons - scattered around
-    { texture: '/textures/about/JSSREDNIBALON.webp', paintedTexture: '/textures/about/JSSREDNIBALON_painted.webp', label: 'JavaScript', size: 'medium', x: -4, y: 1, z: -0.3, phase: 0.8 },
-    { texture: '/textures/about/csssrednibalon.webp', paintedTexture: '/textures/about/csssrednibalon_painted.webp', label: 'CSS', size: 'medium', x: 4, y: 1.5, z: -0.2, phase: 2.2 },
-    { texture: '/textures/about/nextjssrednibalon.webp', paintedTexture: '/textures/about/nextjssrednibalon_painted.webp', label: 'Next.js', size: 'medium', x: 0, y: 0.5, z: -0.4, phase: 4 },
+    // Frameworks, data and applied AI
+    { texture: '/textures/portfolio/skills/javascript.webp', paintedTexture: '/textures/portfolio/skills/javascript.webp', label: 'JavaScript / React', size: 'medium', x: -4, y: 1, z: -0.3, phase: 0.8 },
+    { texture: '/textures/portfolio/skills/data.webp', paintedTexture: '/textures/portfolio/skills/data.webp', label: 'SQL / NumPy / Pandas', size: 'medium', x: 4, y: 1.5, z: -0.2, phase: 2.2 },
+    { texture: '/textures/portfolio/skills/ai.webp', paintedTexture: '/textures/portfolio/skills/ai.webp', label: 'RAG / LangGraph', size: 'medium', x: 0, y: 0.5, z: -0.4, phase: 4 },
 
-    // Small balloons - background accents
-    { texture: '/textures/about/htmlmalybalon.webp', paintedTexture: '/textures/about/htmlmalybalon_painted.webp', label: 'HTML', size: 'small', x: -5.5, y: 2.5, z: -0.8, phase: 1.2 },
-    { texture: '/textures/about/gitmalybalon.webp', paintedTexture: '/textures/about/gitmalybalon_painted.webp', label: 'Git', size: 'small', x: 5.5, y: 3, z: -0.7, phase: 2.8 },
-    { texture: '/textures/about/figmamalybalon.webp', paintedTexture: '/textures/about/figmamalybalon_painted.webp', label: 'Figma', size: 'small', x: -3, y: 4.5, z: -0.5, phase: 3.5 },
-    { texture: '/textures/about/firebasemalybalon.webp', paintedTexture: '/textures/about/firebasemalybalon_painted.webp', label: 'Firebase', size: 'small', x: 3.5, y: 4, z: -0.6, phase: 4.5 },
+    // Infrastructure, systems and problem solving
+    { texture: '/textures/portfolio/skills/cloud.webp', paintedTexture: '/textures/portfolio/skills/cloud.webp', label: 'GCP / Docker', size: 'small', x: -5.5, y: 2.5, z: -0.8, phase: 1.2 },
+    { texture: '/textures/portfolio/skills/systems.webp', paintedTexture: '/textures/portfolio/skills/systems.webp', label: 'OS / Networks', size: 'small', x: 5.5, y: 3, z: -0.7, phase: 2.8 },
+    { texture: '/textures/portfolio/skills/flutter.webp', paintedTexture: '/textures/portfolio/skills/flutter.webp', label: 'Dart / Flutter', size: 'small', x: -3, y: 4.5, z: -0.5, phase: 3.5 },
+    { texture: '/textures/portfolio/skills/algorithms.webp', paintedTexture: '/textures/portfolio/skills/algorithms.webp', label: 'DSA / Algorithms', size: 'small', x: 3.5, y: 4, z: -0.6, phase: 4.5 },
 ];
 
 // Size multipliers for balloon categories
@@ -1044,7 +1001,7 @@ const SkillBalloon = ({ config, revealFactorRef, spreadFactorRef, timeRef }) => 
     };
     
     const filename = config.texture.split('/').pop();
-    const aspect = legacyAspects[filename] || legacyAspects['default_small_medium'];
+    const aspect = filename.endsWith('.webp') ? 1.0 : (legacyAspects[filename] || legacyAspects['default_small_medium']);
     const baseHeight = SIZE_MULTIPLIERS[config.size];
 
     const outerGroupRef = useRef();
@@ -1318,14 +1275,7 @@ const SkillBalloon = ({ config, revealFactorRef, spreadFactorRef, timeRef }) => 
                     </Text>
                 )}
 
-                <PositionalAudio
-                    ref={balloonAudioRef}
-                    url="/sounds/baloonpoop.mp3"
-                    distanceModel="exponential"
-                    rolloffFactor={BALLOON_AUDIO_SETTINGS.rolloff}
-                    refDistance={BALLOON_AUDIO_SETTINGS.distance}
-                    loop={false}
-                />
+                
             </group>
         </group>
     );

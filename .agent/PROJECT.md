@@ -4,16 +4,18 @@
 
 ## 📋 Project Overview
 
-This is an **immersive 3D portfolio website** built with React Three Fiber. The user navigates through an infinite corridor with doors leading to different "rooms" (sections). The entire visual style is **hand-drawn black/white sketch aesthetic**.
+This is an **immersive 3D portfolio website** built with React Three Fiber. The user navigates through an infinite corridor with doors leading to different "rooms" (sections). The visual style combines a hand-drawn sketch foundation with a **subtle futuristic college-campus palette**: cool blue-gray surfaces, restrained cyan/violet accents, and warm neutral highlights.
 
 ### Key Experience Flow
 1. **Entrance** → User enters through an animated door
 2. **Infinity Corridor** → Endless corridor with doors on both sides
 3. **Rooms** → Each door leads to a unique interactive section:
    - 🖼️ **Gallery** - Projects hanging on clothesline
-   - 💼 **Studio** - Infinite tower of content monitors
+   - ✈️ **Flight Deck** - A standalone aeroplane ride through animated clouds
    - 👤 **About** - Flying through clouds/sky
    - 📬 **Contact** - Dock/pier with message in a bottle
+
+The Studio room, achievement system, and hidden Easter-egg interactions have been removed from the customized portfolio.
 
 ---
 
@@ -42,7 +44,7 @@ src/
 │   │   │   ├── About/
 │   │   │   ├── Contact/  # ⭐ Message paper feature
 │   │   │   ├── Gallery/
-│   │   │   └── Studio/
+│   │   │   └── Flight/
 │   │   └── Experience.jsx  # Main 3D scene
 │   └── dom/              # 2D UI overlays
 ├── context/
@@ -58,7 +60,9 @@ src/
 
 ### Core Aesthetic
 - **Hand-drawn / Sketchy** - Everything looks like pencil drawings
-- **Black & White** with subtle gray tones
+- **Muted futuristic accents** over the original sketch textures
+- Cool blue-gray, soft cyan, and lavender details
+- **Black & White** remains the base sketch language
 - **Paper textures** - Crumpled, torn edges
 - **Fonts**: `CabinSketch-Regular.ttf`, `CabinSketch-Bold.ttf`
 
@@ -69,15 +73,16 @@ public/textures/
 ├── doors/         # Door frames, handles
 ├── entrance/      # Entry scene assets
 ├── gallery/       # Project cards
-├── studio/        # Monitor textures
-├── contact/       # Paper, button (NEW)
+├── contact/       # Paper, button
+
 └── paper-texture.webp  # General paper
 ```
 
 ### Colors Palette
 - Background: `#f0f0f0` (off-white)
 - Lines/Text: `#333333` (dark gray)
-- Accents: `#666666`, `#888888`
+- Accents: `#71C9DF` (soft cyan), `#A99BE3` (muted violet)
+- Surfaces: `#EAF0F8`
 
 ---
 

@@ -1,11 +1,11 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
+import { useAudio } from '../../../context/AudioManager';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Text, Plane, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
-import { PositionalAudio } from '@react-three/drei';
+
 import '../shaders/RevealMaterial'; // Registers alpha-discard reveal shader
-import { useAudio } from '../../../../context/AudioManager';
 import { isTouchDevice } from '../../../../utils/deviceDetect';
 
 // Global settings for entrance doors audio
@@ -195,7 +195,7 @@ const Door = ({
                 <Text
                     position={[0, -0.2, 0.01]}
                     fontSize={0.15}
-                    color="#39FF14"
+                    color="#B88957"
                     anchorX="center"
                     renderOrder={3}
                     depthOffset={-1}
@@ -216,22 +216,8 @@ const Door = ({
             </mesh>
 
             {/* SPATIAL AUDIO NODES (Attached slightly in front of the door) */}
-            <PositionalAudio
-                ref={hoverAudioRef}
-                url="/sounds/uchyleniedrzwi.mp3"
-                distanceModel="exponential"
-                rolloffFactor={ENTRANCE_DOOR_AUDIO_SETTINGS.rolloff}
-                refDistance={ENTRANCE_DOOR_AUDIO_SETTINGS.distance}
-                loop={false}
-            />
-            <PositionalAudio
-                ref={openAudioRef}
-                url="/sounds/otwarciedrzwi.mp3"
-                distanceModel="exponential"
-                rolloffFactor={ENTRANCE_DOOR_AUDIO_SETTINGS.rolloff}
-                refDistance={ENTRANCE_DOOR_AUDIO_SETTINGS.distance}
-                loop={false}
-            />
+            
+            
 
             {/* Door Frame */}
             <group>

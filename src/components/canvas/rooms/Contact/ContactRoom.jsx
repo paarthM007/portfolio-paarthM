@@ -1,15 +1,13 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { useAudio } from '../../../../context/AudioManager';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, PositionalAudio } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import MessagePaper from './MessagePaper';
 import SocialBarrel from './SocialBarrel';
 import { useScene } from '../../../../context/SceneContext';
 import GalleryClouds from '../Gallery/GalleryClouds';
-import { useAchievements } from '../../../../context/AchievementsContext';
-import { useAudio } from '../../../../context/AudioManager';
-
 // ============================================
 // ============================================
 // 🌊 CONTACT ROOM v2 - MESSAGE IN A BOTTLE
@@ -92,9 +90,8 @@ const PHASE = {
 };
 
 const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
-    const { camera } = useThree();
+    const { camera, scene } = useThree();
     const { isTeleporting } = useScene();
-    const { showTutorial, unlockAchievement, hidePopup } = useAchievements();
     const { globalVolume, isMuted } = useAudio();
     const effectiveVolume = isMuted ? 0 : AUDIO_SETTINGS.volume * globalVolume;
 
@@ -104,12 +101,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             audioRef.current.setVolume(effectiveVolume);
         }
     }, [effectiveVolume]);
-
-    useEffect(() => {
-        if (isExiting || isTeleporting) {
-            hidePopup();
-        }
-    }, [isExiting, isTeleporting, hidePopup]);
 
     // Load Sea Texture
     const seaTexture = useTexture("/textures/contact/faletopdown.webp");
@@ -249,7 +240,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     const handleMailSelect = () => {
         // Awaryjne przekierowanie mailto:
-        window.location.href = 'mailto:tomszma12@gmail.com';
+        window.location.href = 'mailto:paarthmandelia1@gmail.com';
 
         /* 
         setShowSelection(false);
@@ -288,6 +279,11 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     // Frame Loop
     useFrame((state, delta) => {
+        // Keep the visible sky background blue while this room is active.
+        // This runs after other scene updates that may otherwise restore a beige background.
+        if (showRoom && !isWarmup) {
+            scene.background = new THREE.Color('#A9DDF7');
+        }
         // Update room origin for paint shader
         updateRoomOrigin(groupRef);
 
@@ -296,7 +292,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             if (frameCount.current >= FRAMES_TO_WAIT) {
                 hasSignaledReady.current = true;
                 onReady?.();
-                if (!isWarmup) setTimeout(() => showTutorial('contact_submit'), 2000);
             }
         }
 
@@ -358,18 +353,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     return (
         <group ref={groupRef} position={[0, -0.7, -5]}>
-            {!isWarmup && (
-                <PositionalAudio
-                    ref={audioRef}
-                    url="/sounds/szummorza.mp3"
-                    distanceModel="exponential"
-                    refDistance={AUDIO_SETTINGS.distance}
-                    rolloffFactor={AUDIO_SETTINGS.rolloff}
-                    loop
-                    autoplay
-                    volume={effectiveVolume}
-                />
-            )}
 
             {/* ☁️ CLOUDS */}
             <GalleryClouds count={45} seed={88} rotationOffset={[0, 1, 0]} />
@@ -397,50 +380,27 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 ))}
             </group>
 
-            {/* 🛢️ SOCIAL BARRELS (Floating in water) */}
-            {/* LINKEDIN */}
+            {/* 🛢️ SOCIAL BARRELS — three centered contact options */}
             <SocialBarrel
-                position={isMobile ? [-1.2, 0.5, -10] : [-3, 0.5, -10]}
+                position={isMobile ? [-1.2, 0.25, -9] : [-3, 0.35, -10]}
                 rotation={[0, 0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="LINKEDIN"
-                onClick={() => window.open('https://www.linkedin.com/in/tomasz-szmajda-259337305/', '_blank')}
+                onClick={() => window.open('https://www.linkedin.com/in/paarth-mandelia/', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* GITHUB */}
             <SocialBarrel
-                position={isMobile ? [-1.5, -0.3, -7] : [-5, -0.3, -8]}
-                rotation={[0, 0.3, 0]}
-                texturePath="/textures/contact/beczka.webp"
-                label="GITHUB"
-                onClick={() => window.open('https://github.com/ITomPoland', '_blank')}
-                paintOnBeforeCompile={onBeforeCompile}
-                paintUniforms={uniformsData}
-            />
-            {/* FACEBOOK */}
-            <SocialBarrel
-                position={isMobile ? [1.2, 0.5, -10] : [3, 0.5, -10]}
+                position={isMobile ? [1.2, 0.25, -9] : [3, 0.35, -10]}
                 rotation={[0, -0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="FACEBOOK"
-                onClick={() => window.open('https://www.facebook.com/people/ITom/61586563487664/', '_blank')}
+                label="GITHUB"
+                onClick={() => window.open('https://github.com/paarthM007', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* INSTAGRAM */}
             <SocialBarrel
-                position={isMobile ? [1.5, -0.3, -7] : [5, -0.3, -8]}
-                rotation={[0, -0.3, 0]}
-                texturePath="/textures/contact/beczka.webp"
-                label="INSTAGRAM"
-                onClick={() => window.open('https://www.instagram.com/itom.dev/', '_blank')}
-                paintOnBeforeCompile={onBeforeCompile}
-                paintUniforms={uniformsData}
-            />
-            {/* MAIL (Triggers animation) */}
-            <SocialBarrel
-                position={isMobile ? [0, -0.7, -6] : [0, -0.7, -7]}
+                position={isMobile ? [0, -0.65, -6.5] : [0, -0.65, -7]}
                 rotation={[0, 0, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="MESSAGE"
@@ -448,7 +408,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-
 
             {/* 🏖️ DOCK / MOLO */}
             <mesh
@@ -458,7 +417,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 <planeGeometry args={[2.5, 7]} />
                 <meshBasicMaterial
                     map={moloTexture}
-                    color="#e0e0e0"
+                    color="#B88957"
                     roughness={0.8}
                     side={THREE.DoubleSide}
                     transparent
@@ -504,10 +463,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             <group visible={!showSelection}>
                 <MessagePaper
                     position={[0, 0.07, 2]}
-                    onSend={(data) => {
-                        // console.log('📬 Contact form submitted:', data);
-                        unlockAchievement('contact_submit');
-                    }}
                 />
             </group>
 

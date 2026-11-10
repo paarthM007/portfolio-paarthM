@@ -1,11 +1,9 @@
 import { useMemo, memo } from 'react';
 import { Text } from '@react-three/drei';
 import * as THREE from 'three';
-
 import CorridorWalls from './CorridorWalls';
 import DoorSection from './DoorSection';
 import SegmentDoors from './SegmentDoors';
-import Avatar from './Avatar';
 import HeroText from './HeroText';
 import Doodles from './Doodles';
 import CorridorDecorations from './CorridorDecorations';
@@ -14,7 +12,7 @@ import CorridorDecorations from './CorridorDecorations';
  * CorridorSegment Component
  * 
  * A single repeatable chunk of the infinite corridor.
- * Each segment contains: walls, avatar, ITOM text, doors, decorations.
+ * Each segment contains: walls, Paarth wordmark, doors and decorations.
  * 
  * Segment length: 80 units
  * Positioned based on segmentIndex * segmentLength
@@ -48,19 +46,11 @@ const CorridorSegment = ({
                 id: `gallery-${segmentIndex}`,
                 roomId: 'gallery',
                 relativeZ: -18,
-                side: 'left',
+                // DoorSection's side convention is mirrored from the viewer's approach direction.
+                side: 'right',
                 label: 'THE GALLERY',
                 icon: '◈',
-                color: '#f5efe6'
-            },
-            {
-                id: `studio-${segmentIndex}`,
-                roomId: 'studio',
-                relativeZ: -32,
-                side: 'right',
-                label: 'THE STUDIO',
-                icon: '▶',
-                color: '#e6f5ef'
+                color: '#B88957'
             },
             {
                 id: `about-${segmentIndex}`,
@@ -69,7 +59,7 @@ const CorridorSegment = ({
                 side: 'left',
                 label: 'THE ABOUT',
                 icon: '★',
-                color: '#efe6f5',
+                color: '#B88957',
                 enterDistance: 25 // Enter deep into the room (clouds are far back)
             },
             {
@@ -79,7 +69,7 @@ const CorridorSegment = ({
                 side: 'right',
                 label: "LET'S CONNECT",
                 icon: '✉',
-                color: '#f5e6e6'
+                color: '#B88957'
             },
         ];
 
@@ -116,14 +106,22 @@ const CorridorSegment = ({
                 zClip={zClip}
             />
 
+            {/* Subtle cyan/violet guide strips add a restrained futuristic finish. */}
+            <group position={[0, -1.72, zOffset - SEGMENT_LENGTH / 2]}>
+                <mesh position={[-1.42, 0, 0]}>
+                    <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
+                    <meshBasicMaterial color={'#B88957'} transparent opacity={0.72} />
+                </mesh>
+                <mesh position={[1.42, 0, 0]}>
+                    <boxGeometry args={[0.035, 0.012, SEGMENT_LENGTH - 2]} />
+                    <meshBasicMaterial color={'#B88957'} transparent opacity={0.68} />
+                </mesh>
+            </group>
+
             {/* === WELCOME AREA (Start of segment) - MOVED CLOSER === */}
             <group position={[0, 0, zOffset - 2]}>
                 {/* ITOM Text - centered (ITOM letters adjusted internally) */}
                 <HeroText position={[0, -0.1, -0.5]} />
-
-                {/* Avatar - center */}
-                <Avatar position={[0, -0.61, -0.3]} />
-
 
                 {/* Doodles around avatar */}
                 <Doodles />
@@ -132,7 +130,7 @@ const CorridorSegment = ({
                 <Text
                     position={[1.7, 1.4, 0.3]}
                     fontSize={0.12}
-                    color="#ccc"
+                    color={'#B88957'}
                     anchorX="center"
                 >
                     #{segmentIndex}
