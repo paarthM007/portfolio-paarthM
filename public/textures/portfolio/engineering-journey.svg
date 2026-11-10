@@ -4,7 +4,7 @@
 <rect x="40" y="40" width="820" height="480" rx="6" fill="none" stroke="#8a704f" stroke-width="5"/>
 <circle cx="450" cy="235" r="116" fill="#8a704f" opacity=".10"/><circle cx="450" cy="235" r="84" fill="none" stroke="#8a704f" stroke-width="4" opacity=".55"/>
 <path d="M450 137v196M352 235h196M381 166l138 138M519 166 381 304" stroke="#8a704f" stroke-width="3" opacity=".45"/>
-<text x="450" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="40" fill="#25363c">ENGINEERING & SOFTWARE</text>
+<text x="450" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="40" fill="#25363c">ENGINEERING &amp; SOFTWARE</text>
 <text x="450" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" letter-spacing="2" fill="#8a704f">FROM PHYSICAL SYSTEMS TO DISTRIBUTED SYSTEMS</text>
 <text x="450" y="485" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" letter-spacing="4" fill="#6c7a7e">PAARTH MANDELIA</text>
 </svg>
